@@ -1457,155 +1457,93 @@
   <!-- Progress Bar -->
   <div class="progress-bar" id="progressBar"></div>
 
-  <!-- Navigation Dots -->
-  <div class="nav-dots" id="navDots">
-    <button class="nav-dot active" data-slide="0"></button>
-    <button class="nav-dot" data-slide="1"></button>
-    <button class="nav-dot" data-slide="2"></button>
-    <button class="nav-dot" data-slide="3"></button>
-    <button class="nav-dot" data-slide="4"></button>
-    <button class="nav-dot" data-slide="5"></button>
-    <button class="nav-dot" data-slide="6"></button>
-    <button class="nav-dot" data-slide="7"></button>
-    <button class="nav-dot" data-slide="8"></button>
-    <button class="nav-dot" data-slide="9"></button>
-    <button class="nav-dot" data-slide="10"></button>
-  </div>
+  <!-- Sticky Header -->
+  <header class="site-header" id="siteHeader">
+    <div class="header-logo">SURGE</div>
+    <nav>
+      <ul class="header-nav">
+        <li><a href="#about">关于</a></li>
+        <li><a href="#team">团队</a></li>
+        <li><a href="#services">业务</a></li>
+        <li><a href="#compare">对比</a></li>
+        <li><a href="#contact">联系</a></li>
+      </ul>
+    </nav>
+  </header>
 
-  <!-- Slide Indicator -->
-  <div class="slide-indicator" id="slideIndicator">01 / 11</div>
-
-  <!-- Click Zone Hints -->
-  <div class="click-zone click-zone-left" id="clickZoneLeft">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-  </div>
-  <div class="click-zone click-zone-right" id="clickZoneRight">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
-  </div>
-
-  <!-- ═══════════════════════════════════════════ -->
-  <!-- Slide 0: Opening -->
-  <!-- ═══════════════════════════════════════════ -->
-  <section class="slide slide-opening active" data-index="0">
-    <div class="opening-content">
-      <div class="brand-title">
-        <div class="brand-cn">无限涌动</div>
-        <div class="brand-en">SURGE</div>
+  <!-- ╦╦ Hero ╦╦ -->
+  <section class="section section-dark section-hero" id="hero">
+    <div class="container" style="display:flex;align-items:center;justify-content:space-between;width:100%;">
+      <div class="hero-left" style="flex:0 0 55%;">
+        <h1 style="font-family:var(--serif);font-size:clamp(72px,10vw,140px);font-weight:400;line-height:0.9;letter-spacing:-0.02em;margin-bottom:16px;">SURGE</h1>
+        <p style="font-family:var(--sans);font-size:20px;color:var(--silver);font-weight:300;letter-spacing:0.15em;margin-bottom:12px;">无限涌动</p>
+        <div style="width:60px;height:1px;background:rgba(255,255,255,0.3);margin-bottom:32px;"></div>
+        <p style="font-family:var(--serif);font-size:clamp(20px,3vw,28px);font-weight:400;line-height:1.4;margin-bottom:48px;max-width:440px;">
+          让一个人，<br>拥有一支军团。
+        </p>
+        <a href="#about" class="hero-cta" style="display:inline-flex;align-items:center;gap:12px;font-family:var(--sans);font-size:14px;color:var(--white);letter-spacing:0.1em;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,0.2);transition:border-color 0.3s;text-decoration:none;">
+          开始探索 <span style="font-size:18px;">↓</span>
+        </a>
       </div>
-      <button class="enter-btn" id="enterBtn"><span>开始探索</span></button>
+      <div class="hero-right" style="flex:0 0 40%;">
+        <div style="width:100%;aspect-ratio:3/4;background:linear-gradient(135deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;color:var(--silver);font-size:13px;">
+          海报占位
+        </div>
+      </div>
+    </div>
+    <div class="scroll-hint" style="position:absolute;bottom:40px;left:50%;text-align:center;">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════════ -->
-  <!-- Slide 1: About -->
-  <!-- ═══════════════════════════════════════════ -->
-  <section class="slide slide-about" data-index="1">
-    <div class="about-inner">
-      <div class="about-left">
-        <div class="about-label animate-on-enter">About Us</div>
-        <h1 class="about-title animate-on-enter stagger-1">
-          碳基的理解<br>
-          <span class="thin">× 硅基的执行</span>
-        </h1>
-        <p class="about-tagline animate-on-enter stagger-2">
-          未来的高效组织，不是拥有一万名员工，<br>
-          而是拥有一位卓越的指挥官和一支永不疲倦的智能体军团。
+  <!-- ╦╦ 关于我们 ╦╦ -->
+  <section class="section section-near-black" id="about">
+    <div class="container-narrow">
+      <h2 class="animate-on-scroll" style="font-family:var(--serif);font-size:clamp(36px,5vw,56px);font-weight:400;line-height:1.15;margin-bottom:48px;">
+        碳基的理解<br>× 硅基的执行
+      </h2>
+      <div class="animate-on-scroll" style="margin-bottom:24px;">
+        <p style="font-family:var(--sans);font-size:16px;line-height:1.8;color:var(--light-gray);margin-bottom:20px;">
+          <strong style="color:var(--white);">无限涌动（SURGE）</strong> 是一家以AI智能体为核心驱动力的新型企业服务公司。我们相信：未来的高效组织，不是拥有一万名员工，而是拥有一位卓越的指挥官和一支永不疲倦的智能体军团。
+        </p>
+        <p style="font-family:var(--sans);font-size:16px;line-height:1.8;color:var(--light-gray);">
+          创始人刘冉（耳朵），11年影视广告导演背景，2年AI深度实战经验。从亲手搭建第一个智能体开始，到如今指挥6个AI智能体同时驱动三条业务线——我们不是在讨论AI的未来，我们已经在用AI做生意。
         </p>
       </div>
-      <div class="about-right">
-        <div class="about-section animate-on-enter stagger-2">
-          <div class="about-section-title">关于我们</div>
-          <p class="about-text">
-            <strong>无限涌动（SURGE）</strong>是一家以AI智能体为核心驱动力的新型企业服务公司。
-          </p>
-        </div>
-        <div class="about-section animate-on-enter stagger-3">
-          <p class="about-text">
-            创始人刘冉（耳朵），11年影视广告导演背景，2年AI深度实战经验。从亲手搭建第一个智能体开始，到如今指挥6个AI智能体同时驱动三条业务线——我们不是在讨论AI的未来，我们已经在用AI做生意。
-          </p>
-        </div>
-        <div class="about-highlight animate-on-enter stagger-4">
-          <p>碳基的理解 × 硅基的执行 = 无限涌动</p>
-        </div>
+      <div class="animate-on-scroll" style="margin-top:48px;padding:32px;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.02);">
+        <p style="font-family:var(--serif);font-size:22px;color:var(--white);">碳基的理解 × 硅基的执行 = 无限涌动 SURGE</p>
       </div>
     </div>
+    <div class="section-divider"></div>
   </section>
 
-  <!-- ═══════════════════════════════════════════ -->
-  <!-- Slide 2: CEO -->
-  <!-- ═══════════════════════════════════════════ -->
-  <section class="slide slide-ceo" data-index="2">
-    <div class="ceo-inner">
-      <div class="ceo-visual">
-        <div class="ceo-image-wrapper" id="ceoImageWrapper">
-          <img src="erduo-carbon-portrait.jpg" alt="刘冉（耳朵）" class="ceo-image">
-        </div>
-        <div class="ceo-badge">唯一的碳基生命</div>
+  <!-- ╦╦ 团队架构 ╦╦ -->
+  <section class="section section-dark" id="team">
+    <div class="container">
+      <div class="section-heading">
+        <div class="section-heading-label">团队架构</div>
+        <h2>碳基指挥官<br>× 硅基军团</h2>
       </div>
-      <div class="ceo-content">
-        <h2 class="animate-on-enter">刘冉（耳朵）</h2>
-        <div class="ceo-role animate-on-enter stagger-1">Founder & CEO</div>
-        <p class="ceo-bio animate-on-enter stagger-2">
-          11年影视广告导演，从镜头语言到AI语言，从分镜脚本到智能体编排。
-        </p>
-        <p class="ceo-bio animate-on-enter stagger-3">
-          我是这个团队唯一的碳基生命。我的工作不是操作AI，而是理解AI——理解它的能力边界，理解它与人类协作的最佳姿态，然后把这种理解转化为可落地的解决方案。
-        </p>
-        <div class="ceo-quote animate-on-enter stagger-4">
-          <p>"让一个人，拥有一支军团。"</p>
-        </div>
-        <div class="ceo-stats animate-on-enter stagger-5">
-          <div>
-            <div class="ceo-stat-value" data-target="11">0</div>
-            <div class="ceo-stat-label">年导演经验</div>
-          </div>
-          <div>
-            <div class="ceo-stat-value" data-target="2">0</div>
-            <div class="ceo-stat-label">年AI实战</div>
-          </div>
-          <div>
-            <div class="ceo-stat-value" data-target="6">0</div>
-            <div class="ceo-stat-label">个硅基伙伴</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- ═══════════════════════════════════════════ -->
-  <!-- Slide 3: Team Intro -->
-  <!-- ═══════════════════════════════════════════ -->
-  <section class="slide slide-team-intro" data-index="3">
-    <div class="team-intro-inner">
-      <div class="team-intro-icon animate-on-enter">碳</div>
-      <h2 class="team-intro-title animate-on-enter stagger-1">碳基指挥官</h2>
-      <p class="team-intro-subtitle animate-on-enter stagger-2">
-        一个碳基生命，指挥六个硅基智能体。<br>
-        这不是科幻，这是无限涌动的日常。
-      </p>
-      <div class="team-intro-divider animate-on-enter stagger-3"></div>
-      <div class="team-carbon-card animate-on-enter stagger-4">
-        <div class="team-carbon-avatar">碳基</div>
-        <div class="team-carbon-info">
-          <h3>刘冉（耳朵）</h3>
-          <div class="team-carbon-role">创始人 & CEO</div>
-          <p>11年影视广告导演 × AI深度实战，OPC实践者。从亲手搭建第一个智能体开始，到如今指挥6个AI智能体同时驱动三条业务线。</p>
+      <!-- 碳基指挥官 -->
+      <div class="ceo-row animate-on-scroll" style="display:flex;gap:80px;align-items:center;margin-bottom:100px;">
+        <div class="ceo-visual" id="ceoImageWrapper" style="flex:0 0 300px;">
+          <img src="erduo-carbon-portrait.jpg" alt="刘冉（耳朵）" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:4px;filter:grayscale(30%);transition:transform 0.1s ease;">
+        </div>
+        <div class="ceo-info" style="flex:1;">
+          <p style="font-family:var(--sans);font-size:11px;text-transform:uppercase;letter-spacing:0.2em;color:var(--silver);margin-bottom:8px;">碳基指挥官</p>
+          <h3 style="font-family:var(--serif);font-size:36px;font-weight:400;margin-bottom:4px;">刘冉（耳朵）</h3>
+          <p style="font-family:var(--sans);font-size:14px;color:var(--silver);margin-bottom:16px;">创始人 & CEO</p>
+          <p style="font-family:var(--sans);font-size:14px;color:var(--light-gray);line-height:1.7;max-width:480px;">11年影视广告导演 × AI深度实战，OPC实践者。从亲手搭建第一个智能体开始，到如今指挥6个AI智能体同时驱动三条业务线。</p>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- ═══════════════════════════════════════════ -->
-  <!-- Slide 4: Agents (6 cards) -->
-  <!-- ═══════════════════════════════════════════ -->
-  <section class="slide slide-agents" data-index="4">
-    <div class="agents-inner">
-      <div class="agents-header">
-        <h2 class="animate-on-enter">硅基军团</h2>
-        <p class="animate-on-enter stagger-1">六个智能体，六个角色，一支永不疲倦的队伍</p>
+      <!-- 硅基军团 -->
+      <div class="section-heading" style="margin-top:20px;margin-bottom:40px;">
+        <div class="section-heading-label">硅基军团</div>
       </div>
-      <div class="agents-grid">
-        <div class="flip-card animate-on-enter stagger-2">
+      <div class="agents-grid animate-on-scroll" style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:60px;">
+<div class="flip-card animate-on-enter stagger-2">
           <div class="flip-card-inner">
             <div class="flip-card-front">
               <div class="flip-card-icon">🦐</div>
@@ -1690,264 +1628,13 @@
           </div>
         </div>
       </div>
-      <div class="agents-tech animate-on-enter stagger-8">
-        <div class="agents-tech-label">技术底座</div>
-        <p><strong>OpenClaw 智能体操作系统</strong> — Gateway + Agents + Skills + Memory 核心架构，支持MCP协议连接外部工具。</p>
+      <div class="animate-on-scroll" style="padding:32px;border:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.01);text-align:center;">
+        <p style="font-family:var(--sans);font-size:13px;color:var(--silver);margin-bottom:8px;">技术底座</p>
+        <p style="font-family:var(--sans);font-size:15px;color:var(--white);line-height:1.7;"><strong>OpenClaw 智能体操作系统</strong> — Gateway + Agents + Skills + Memory 核心架构，支持MCP协议连接外部工具。</p>
       </div>
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════════ -->
-  <!-- Slide 5: Services Overview (clickable) -->
-  <!-- ═══════════════════════════════════════════ -->
-  <section class="slide slide-services-overview" data-index="5">
-    <div class="services-overview-inner">
-      <div class="services-overview-header">
-        <h2 class="animate-on-enter">业务板块</h2>
-        <p class="animate-on-enter stagger-1">三条业务线，一个核心：让AI真正落地</p>
-      </div>
-      <div class="services-cards">
-        <div class="service-card animate-on-enter stagger-2" data-goto="6">
-          <div class="service-card-num">01</div>
-          <div class="service-card-title">AI赋能教育与咨询</div>
-          <div class="service-card-desc">从认知到落地，从培训到陪跑，一条线拉通。我们不做"讲完就走"的培训，我们做"陪你拿到结果"的咨询。</div>
-          <div class="service-card-arrow">→</div>
-        </div>
-        <div class="service-card animate-on-enter stagger-3" data-goto="7">
-          <div class="service-card-num">02</div>
-          <div class="service-card-title">AIGC创意内容工厂</div>
-          <div class="service-card-desc">用AI重构内容生产链，从脚本到成片，全链路智能驱动。依托创始人11年影视广告专业背景。</div>
-          <div class="service-card-arrow">→</div>
-        </div>
-        <div class="service-card animate-on-enter stagger-4" data-goto="8">
-          <div class="service-card-num">03</div>
-          <div class="service-card-title">大模型算力供应服务</div>
-          <div class="service-card-desc">轻资产、零库存的AI基础设施服务。为企业和开发者提供大模型API算力供应。</div>
-          <div class="service-card-arrow">→</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════════ -->
-  <!-- Slide 6: 教育咨询详情 -->
-  <!-- ═══════════════════════════════════════════ -->
-  <section class="slide slide-service-detail" data-index="6">
-    <div class="service-detail-inner">
-      <button class="back-to-overview animate-on-enter" data-goto="5">← 返回业务总览</button>
-      <div class="service-detail-header">
-        <div class="slide-label animate-on-enter stagger-1">01 / 教育咨询</div>
-        <h2 class="animate-on-enter stagger-2">AI赋能教育与咨询</h2>
-        <p class="animate-on-enter stagger-3">从认知到落地，从培训到陪跑，一条线拉通。我们不做"讲完就走"的培训，我们做"陪你拿到结果"的咨询。</p>
-      </div>
-
-      <!-- 产品矩阵（置顶） -->
-      <div class="service-price">
-        <div class="service-price-title animate-on-enter stagger-4">产品矩阵</div>
-        <div class="service-price-grid">
-          <div class="service-price-item animate-on-enter stagger-4">
-            <div class="service-price-name">企业内训</div>
-            <div class="service-price-value">入企AI智能体落地培训，结果前置，Demo先行 · ¥10,000/天起</div>
-          </div>
-          <div class="service-price-item animate-on-enter stagger-5">
-            <div class="service-price-name">10天驻场陪跑</div>
-            <div class="service-price-value">线下驻场，从认知拆解到MVP交付 · ¥100,000 - 150,000</div>
-          </div>
-          <div class="service-price-item animate-on-enter stagger-6">
-            <div class="service-price-name">个人陪跑</div>
-            <div class="service-price-value">一对一教你养自己的AI助手 · ¥5,000首月 / ¥8,000/月</div>
-          </div>
-          <div class="service-price-item animate-on-enter stagger-7">
-            <div class="service-price-name">深度咨询</div>
-            <div class="service-price-value">业务流重构、AI团队孵化、按效果定价 · 面议</div>
-          </div>
-        </div>
-      </div>
-      <div class="service-note animate-on-enter stagger-8">
-        核心差异：先跑Demo再培训，不是先培训再看效果。10天带着能用的东西走，不是听完还是不会用。
-      </div>
-
-      <!-- 图片占位（底部） -->
-      <div class="service-gallery-featured animate-on-enter stagger-9">
-        <div class="service-gallery-item">
-          <span class="placeholder-icon">📸</span>
-          <span class="placeholder-text">线下培训现场</span>
-        </div>
-        <div class="service-gallery-item">
-          <span class="placeholder-icon">📸</span>
-          <span class="placeholder-text">企业内训</span>
-        </div>
-        <div class="service-gallery-item">
-          <span class="placeholder-icon">📸</span>
-          <span class="placeholder-text">驻场陪跑</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════════ -->
-  <!-- Slide 7: AIGC内容详情 -->
-  <!-- ═══════════════════════════════════════════ -->
-  <section class="slide slide-service-detail" data-index="7">
-    <div class="service-detail-inner">
-      <button class="back-to-overview animate-on-enter" data-goto="5">← 返回业务总览</button>
-      <div class="service-detail-header">
-        <div class="slide-label animate-on-enter stagger-1">02 / AIGC内容</div>
-        <h2 class="animate-on-enter stagger-2">AIGC创意内容工厂</h2>
-        <p class="animate-on-enter stagger-3">用AI重构内容生产链，从脚本到成片，全链路智能驱动。依托创始人11年影视广告专业背景，结合AI生成式技术，提供高品质内容制作服务。</p>
-      </div>
-
-      <!-- 图片占位：AIGC内容生产 -->
-      <div class="service-gallery animate-on-enter stagger-4">
-        <div class="service-gallery-item">
-          <span class="placeholder-icon">📸</span>
-          <span class="placeholder-text">AI视频制作</span>
-        </div>
-        <div class="service-gallery-item">
-          <span class="placeholder-icon">📸</span>
-          <span class="placeholder-text">AI图文内容</span>
-        </div>
-        <div class="service-gallery-item">
-          <span class="placeholder-icon">📸</span>
-          <span class="placeholder-text">品牌视觉设计</span>
-        </div>
-      </div>
-
-      <div class="service-features-grid">
-        <div class="service-feature animate-on-enter stagger-5">AI视频制作：脚本生成 → 分镜设计 → AI动画/实拍合成 → 后期输出</div>
-        <div class="service-feature animate-on-enter stagger-6">AI图文内容：品牌文案、营销素材、社交媒体内容批量生产</div>
-        <div class="service-feature animate-on-enter stagger-7">AI视觉设计：品牌视觉体系、产品图、营销海报</div>
-        <div class="service-feature animate-on-enter stagger-8">适用场景：品牌宣传片、产品TVC、社交媒体内容矩阵</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════════ -->
-  <!-- Slide 8: 大模型算力详情 -->
-  <!-- ═══════════════════════════════════════════ -->
-  <section class="slide slide-service-detail" data-index="8">
-    <div class="service-detail-inner">
-      <button class="back-to-overview animate-on-enter" data-goto="5">← 返回业务总览</button>
-      <div class="service-detail-header">
-        <div class="slide-label animate-on-enter stagger-1">03 / 算力供应</div>
-        <h2 class="animate-on-enter stagger-2">大模型算力供应服务</h2>
-        <p class="animate-on-enter stagger-3">轻资产、零库存的AI基础设施服务。与国际Token中转站达成代理合作，为企业和开发者提供大模型API算力供应。</p>
-      </div>
-
-      <!-- 图片占位：算力/技术 -->
-      <div class="service-gallery animate-on-enter stagger-4">
-        <div class="service-gallery-item">
-          <span class="placeholder-icon">📸</span>
-          <span class="placeholder-text">API架构图</span>
-        </div>
-        <div class="service-gallery-item">
-          <span class="placeholder-icon">📸</span>
-          <span class="placeholder-text">模型覆盖</span>
-        </div>
-        <div class="service-gallery-item">
-          <span class="placeholder-icon">📸</span>
-          <span class="placeholder-text">合作品牌</span>
-        </div>
-      </div>
-
-      <div class="service-features-grid">
-        <div class="service-feature animate-on-enter stagger-5">Token代理销售：覆盖主流大模型API（GPT、Claude、Gemini等）</div>
-        <div class="service-feature animate-on-enter stagger-6">渠道返点模式：客户从我们渠道购买，获得返点优惠</div>
-        <div class="service-feature animate-on-enter stagger-7">技术支持：提供接入指导和使用答疑</div>
-        <div class="service-feature animate-on-enter stagger-8">优势：零库存、低门槛、稳定利润</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════════ -->
-  <!-- Slide 9: Compare -->
-  <!-- ═══════════════════════════════════════════ -->
-  <section class="slide slide-compare" data-index="9">
-    <div class="compare-inner">
-      <div class="compare-header">
-        <h2 class="animate-on-enter">为什么选择无限涌动</h2>
-        <p class="animate-on-enter stagger-1">vs Traditional</p>
-      </div>
-      <table class="compare-table" id="compareTable">
-        <thead>
-          <tr>
-            <th>维度</th>
-            <th>传统服务商</th>
-            <th>无限涌动</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>方法论</td>
-            <td>先培训再看效果（盲盒）</td>
-            <td>先跑Demo再培训（结果前置）</td>
-          </tr>
-          <tr>
-            <td>定位</td>
-            <td>教你怎么用AI工具</td>
-            <td>帮你建一支AI团队</td>
-          </tr>
-          <tr>
-            <td>内容</td>
-            <td>讲功能、讲操作</td>
-            <td>教业务拆解、教AI思维</td>
-          </tr>
-          <tr>
-            <td>结果</td>
-            <td>听完还是不会用</td>
-            <td>10天带着能用的东西走</td>
-          </tr>
-          <tr>
-            <td>后续</td>
-            <td>培训结束=关系结束</td>
-            <td>陪跑持续，深度绑定</td>
-          </tr>
-          <tr>
-            <td>讲师背景</td>
-            <td>纯技术/纯理论</td>
-            <td>11年导演+AI实战，自己就在跑OPC</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════════ -->
-  <!-- Slide 10: Contact -->
-  <!-- ═══════════════════════════════════════════ -->
-  <section class="slide slide-contact" data-index="10">
-    <div class="contact-inner">
-      <h2 class="animate-on-enter">刘冉（耳朵）</h2>
-      <div class="contact-role animate-on-enter stagger-1">Founder & CEO</div>
-      <div class="contact-links">
-        <a href="mailto:erduo1998@gmail.com" class="contact-link animate-on-enter stagger-2">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-            <polyline points="22,6 12,13 2,6"/>
-          </svg>
-          <span>erduo1998@gmail.com</span>
-        </a>
-        <a href="tel:+8613770579373" class="contact-link animate-on-enter stagger-3">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-          </svg>
-          <span>+86 137 7057 9373</span>
-        </a>
-        <div class="contact-link animate-on-enter stagger-4">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-            <circle cx="12" cy="10" r="3"/>
-          </svg>
-          <span>南京，中国</span>
-        </div>
-      </div>
-      <p class="contact-tagline animate-on-enter stagger-5">让一个人，拥有一支军团。</p>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════════ -->
-  <!-- JavaScript -->
-  <!-- ═══════════════════════════════════════════ -->
   <script>
     // ── State ──
     const slides = document.querySelectorAll('.slide');
