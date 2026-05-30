@@ -1,0 +1,2003 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SURGE · 无限涌动</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --white: #ffffff;
+      --off-white: #f5f5f5;
+      --light-gray: #e0e0e0;
+      --silver: #999999;
+      --gray: #666666;
+      --dark-gray: #333333;
+      --near-black: #111111;
+      --black: #000000;
+      --accent: rgba(255,255,255,0.15);
+      --serif: 'Cormorant Garamond', 'Noto Serif SC', Georgia, serif;
+      --sans: 'Space Grotesk', 'Noto Sans SC', -apple-system, sans-serif;
+      --mono: 'Space Grotesk', ui-monospace, monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; overflow: hidden; }
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+      cursor: none;
+    }
+    ::selection { background: rgba(255,255,255,0.2); }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── Custom Cursor ── */
+    .cursor {
+      position: fixed;
+      width: 20px;
+      height: 20px;
+      border: 1px solid rgba(255,255,255,0.5);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 10000;
+      transition: transform 0.15s ease, opacity 0.15s ease;
+      transform: translate(-50%, -50%);
+    }
+
+    .cursor-dot {
+      position: fixed;
+      width: 4px;
+      height: 4px;
+      background: var(--white);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 10001;
+      transform: translate(-50%, -50%);
+    }
+
+    .cursor.hover {
+      transform: translate(-50%, -50%) scale(2);
+      border-color: var(--white);
+      background: rgba(255,255,255,0.1);
+    }
+
+    /* ── Mouse Glow ── */
+    .mouse-glow {
+      position: fixed;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(255,255,255,0.03) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 1;
+      transform: translate(-50%, -50%);
+      transition: opacity 0.3s ease;
+    }
+
+    /* ── Film Grain ── */
+    .grain {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.03;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      mix-blend-mode: overlay;
+    }
+
+    /* ── Progress Bar ── */
+    .progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--white), rgba(255,255,255,0.5));
+      z-index: 1000;
+      transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* ── Particle Canvas ── */
+    #particleCanvas {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── Slide System ── */
+    .slide {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transform: scale(0.95) translateY(20px);
+      transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      overflow-y: auto;
+      overflow-x: hidden;
+      scrollbar-width: none;
+    }
+
+    .slide::-webkit-scrollbar { display: none; }
+
+    .slide.active {
+      opacity: 1;
+      visibility: visible;
+      transform: scale(1) translateY(0);
+    }
+
+    .slide.exit-up { transform: scale(0.95) translateY(-40px); }
+    .slide.exit-down { transform: scale(0.95) translateY(40px); }
+
+    /* Content slides: top-aligned to prevent clipping */
+    .slide-about,
+    .slide-team-intro,
+    .slide-agents,
+    .slide-services-overview,
+    .slide-service-detail,
+    .slide-compare,
+    .slide-contact {
+      align-items: flex-start;
+      padding: 60px 0;
+    }
+
+    /* ── Animate on enter ── */
+    .animate-on-enter {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .animate-on-enter.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .stagger-1 { transition-delay: 0.1s; }
+    .stagger-2 { transition-delay: 0.2s; }
+    .stagger-3 { transition-delay: 0.3s; }
+    .stagger-4 { transition-delay: 0.4s; }
+    .stagger-5 { transition-delay: 0.5s; }
+    .stagger-6 { transition-delay: 0.6s; }
+    .stagger-7 { transition-delay: 0.7s; }
+    .stagger-8 { transition-delay: 0.8s; }
+    .stagger-9 { transition-delay: 0.9s; }
+
+    /* ── Animations ── */
+    @keyframes typewriter { to { width: 100%; } }
+    @keyframes blink { 50% { border-color: transparent; } }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(255,255,255,0.2); }
+      50% { box-shadow: 0 0 20px 10px rgba(255,255,255,0.1); }
+    }
+
+    /* ── Slide 0: Opening ── */
+    .slide-opening {
+      background: url('erduo-hero-poster.png') center/cover no-repeat;
+      align-items: center;
+      padding: 0;
+    }
+
+    .slide-opening::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.7) 100%);
+      transition: all 1s ease;
+    }
+
+    .slide-opening.blurred::before {
+      filter: blur(24px);
+      background: linear-gradient(180deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.85) 100%);
+    }
+
+    .opening-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+    }
+
+    .brand-title {
+      display: flex;
+      align-items: baseline;
+      gap: 24px;
+      justify-content: center;
+    }
+
+    .brand-cn {
+      font-family: var(--serif);
+      font-size: clamp(48px, 12vw, 120px);
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      overflow: hidden;
+      white-space: nowrap;
+      border-right: 2px solid var(--white);
+      width: 0;
+      animation: typewriter 1s steps(4) 0.8s forwards, blink 0.8s step-end infinite;
+    }
+
+    .brand-en {
+      font-size: clamp(14px, 2.5vw, 24px);
+      font-weight: 300;
+      letter-spacing: 0.3em;
+      color: var(--silver);
+      opacity: 0;
+      animation: fadeUp 0.6s ease 2s forwards;
+    }
+
+    .enter-btn {
+      margin-top: 60px;
+      padding: 14px 32px;
+      border: 1px solid rgba(255,255,255,0.3);
+      background: transparent;
+      color: var(--white);
+      font-family: var(--sans);
+      font-size: 14px;
+      letter-spacing: 0.15em;
+      cursor: none;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 2.4s forwards;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .enter-btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--white);
+      transform: translateX(-100%);
+      transition: transform 0.4s ease;
+    }
+
+    .enter-btn:hover { color: var(--black); border-color: var(--white); }
+    .enter-btn:hover::before { transform: translateX(0); }
+    .enter-btn span { position: relative; z-index: 1; }
+
+    /* ── Slide 1: About ── */
+    .slide-about { background: var(--black); }
+
+    .about-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 60px;
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .about-left { position: sticky; top: 120px; }
+
+    .about-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.25em;
+      color: var(--gray);
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    .about-title {
+      font-family: var(--serif);
+      font-size: clamp(36px, 5vw, 56px);
+      font-weight: 600;
+      line-height: 1.2;
+      margin-bottom: 32px;
+    }
+
+    .about-title .thin { font-weight: 400; color: var(--silver); }
+
+    .about-tagline {
+      font-size: 18px;
+      color: var(--silver);
+      line-height: 1.8;
+      font-weight: 300;
+    }
+
+    .about-right { padding-top: 20px; }
+    .about-section { margin-bottom: 48px; }
+
+    .about-section-title {
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.15em;
+      color: var(--gray);
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .about-text {
+      font-size: 15px;
+      line-height: 1.9;
+      color: var(--light-gray);
+      font-weight: 300;
+    }
+
+    .about-text strong { color: var(--white); font-weight: 500; }
+
+    .about-highlight {
+      margin-top: 32px;
+      padding: 24px;
+      background: rgba(255,255,255,0.03);
+      border-left: 2px solid var(--white);
+    }
+
+    .about-highlight p {
+      font-family: var(--serif);
+      font-size: 18px;
+      font-style: italic;
+      color: var(--off-white);
+      line-height: 1.7;
+    }
+
+    /* ── Slide 2: CEO ── */
+    .slide-ceo { background: var(--black); align-items: center; padding: 0; }
+
+    .ceo-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 60px;
+      display: grid;
+      grid-template-columns: 0.6fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .ceo-visual { position: relative; perspective: 1000px; }
+
+    .ceo-image-wrapper {
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.3s ease;
+    }
+
+    .ceo-image {
+      width: 100%;
+      height: auto;
+      max-height: 75vh;
+      object-fit: contain;
+      filter: grayscale(100%) contrast(1.15);
+      transition: filter 0.6s ease;
+    }
+
+    .ceo-image:hover { filter: grayscale(40%) contrast(1.1); }
+
+    .ceo-badge {
+      position: absolute;
+      bottom: 24px;
+      left: 24px;
+      padding: 10px 20px;
+      background: var(--white);
+      color: var(--black);
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      transform: translateX(-20px);
+      opacity: 0;
+      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.3s;
+    }
+
+    .slide-ceo.active .ceo-badge { transform: translateX(0); opacity: 1; }
+
+    .ceo-content h2 {
+      font-family: var(--serif);
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .ceo-role {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--gray);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 40px;
+    }
+
+    .ceo-bio {
+      font-size: 16px;
+      line-height: 2;
+      color: var(--light-gray);
+      font-weight: 300;
+      margin-bottom: 16px;
+    }
+
+    .ceo-quote {
+      margin-top: 40px;
+      padding: 24px 0;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .ceo-quote p {
+      font-family: var(--serif);
+      font-size: 20px;
+      font-style: italic;
+      color: var(--off-white);
+      line-height: 1.6;
+    }
+
+    .ceo-stats { display: flex; gap: 48px; margin-top: 40px; }
+
+    .ceo-stat-value {
+      font-size: 36px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .ceo-stat-label {
+      font-size: 11px;
+      color: var(--gray);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    /* ── Slide 3: Team Intro ── */
+    .slide-team-intro {
+      background: linear-gradient(180deg, var(--near-black) 0%, var(--black) 100%);
+    }
+
+    .team-intro-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 60px;
+      text-align: center;
+    }
+
+    .team-intro-icon {
+      font-size: 80px;
+      margin-bottom: 40px;
+      animation: pulse 3s ease-in-out infinite;
+      display: inline-block;
+    }
+
+    .team-intro-title {
+      font-family: var(--serif);
+      font-size: clamp(40px, 6vw, 72px);
+      font-weight: 700;
+      margin-bottom: 24px;
+      letter-spacing: 0.05em;
+    }
+
+    .team-intro-subtitle {
+      font-size: 18px;
+      color: var(--silver);
+      line-height: 1.8;
+      font-weight: 300;
+      max-width: 600px;
+      margin: 0 auto 48px;
+    }
+
+    .team-intro-divider {
+      width: 60px;
+      height: 1px;
+      background: var(--white);
+      margin: 0 auto 48px;
+    }
+
+    .team-carbon-card {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 40px;
+      padding: 40px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      text-align: left;
+      max-width: 700px;
+      margin: 0 auto;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .team-carbon-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--white), transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .team-carbon-card:hover {
+      background: rgba(255,255,255,0.05);
+      border-color: rgba(255,255,255,0.15);
+      transform: translateY(-4px);
+    }
+
+    .team-carbon-card:hover::before { opacity: 1; }
+
+    .team-carbon-avatar {
+      width: 120px; height: 120px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 48px;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .team-carbon-info h3 {
+      font-family: var(--serif);
+      font-size: 28px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .team-carbon-role {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--gray);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .team-carbon-info p {
+      font-size: 15px;
+      color: var(--silver);
+      line-height: 1.8;
+    }
+
+    /* ── Slide 4: Agents (6 cards) ── */
+    .slide-agents {
+      background: linear-gradient(180deg, var(--black) 0%, var(--near-black) 50%, var(--black) 100%);
+    }
+
+    .agents-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 60px;
+    }
+
+    .agents-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .agents-header h2 {
+      font-family: var(--serif);
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .agents-header p {
+      font-size: 15px;
+      color: var(--silver);
+    }
+
+    .agents-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    /* ── Flip Card ── */
+    .flip-card {
+      perspective: 1000px;
+      height: 240px;
+      cursor: none;
+    }
+
+    .flip-card-inner {
+      position: relative;
+      width: 100%; height: 100%;
+      transform-style: preserve-3d;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .flip-card.flipped .flip-card-inner { transform: rotateY(180deg); }
+
+    .flip-card-front, .flip-card-back {
+      position: absolute;
+      inset: 0;
+      backface-visibility: hidden;
+      padding: 28px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .flip-card-front {
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .flip-card-back {
+      transform: rotateY(180deg);
+      justify-content: center;
+    }
+
+    .flip-card:hover .flip-card-inner { transform: rotateY(180deg); }
+
+    .flip-card-icon {
+      font-size: 40px;
+      margin-bottom: 16px;
+      transition: transform 0.3s ease;
+    }
+
+    .flip-card:hover .flip-card-icon { transform: scale(1.2) rotate(10deg); }
+
+    .flip-card-name {
+      font-family: var(--serif);
+      font-size: 22px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .flip-card-role {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--gray);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .flip-card-back-title {
+      font-family: var(--serif);
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: var(--white);
+    }
+
+    .flip-card-back p {
+      font-size: 13px;
+      color: var(--silver);
+      line-height: 1.8;
+    }
+
+    .flip-card-back .flip-card-role {
+      margin-top: auto;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .agents-tech {
+      margin-top: 32px;
+      padding: 20px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+      text-align: center;
+    }
+
+    .agents-tech-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      color: var(--gray);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .agents-tech p { font-size: 14px; color: var(--silver); line-height: 1.7; }
+    .agents-tech strong { color: var(--white); font-weight: 500; }
+
+    /* ── Slide 5: Services Overview ── */
+    .slide-services-overview {
+      background: var(--black);
+    }
+
+    .services-overview-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 60px;
+    }
+
+    .services-overview-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .services-overview-header h2 {
+      font-family: var(--serif);
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .services-overview-header p {
+      font-size: 15px;
+      color: var(--silver);
+    }
+
+    .services-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .service-card {
+      padding: 40px 32px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+      cursor: none;
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.05), transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .service-card:hover {
+      background: rgba(255,255,255,0.04);
+      border-color: rgba(255,255,255,0.2);
+      transform: translateY(-8px);
+    }
+
+    .service-card:hover::before { opacity: 1; }
+
+    .service-card-num {
+      font-family: var(--serif);
+      font-size: 64px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.1);
+      line-height: 1;
+      margin-bottom: 24px;
+      transition: all 0.3s ease;
+    }
+
+    .service-card:hover .service-card-num {
+      color: rgba(255,255,255,0.25);
+      transform: scale(1.1);
+    }
+
+    .service-card-title {
+      font-family: var(--serif);
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .service-card-desc {
+      font-size: 14px;
+      color: var(--silver);
+      line-height: 1.8;
+    }
+
+    .service-card-arrow {
+      margin-top: 24px;
+      font-size: 20px;
+      color: var(--gray);
+      transition: all 0.3s ease;
+    }
+
+    .service-card:hover .service-card-arrow {
+      color: var(--white);
+      transform: translateX(8px);
+    }
+
+    /* ── Slide 6-8: Service Detail ── */
+    .slide-service-detail {
+      background: var(--black);
+    }
+
+    .service-detail-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 60px;
+    }
+
+    .service-detail-header {
+      margin-bottom: 48px;
+    }
+
+    .service-detail-header .slide-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.25em;
+      color: var(--gray);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .service-detail-header h2 {
+      font-family: var(--serif);
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .service-detail-header p {
+      font-size: 16px;
+      color: var(--silver);
+      line-height: 1.8;
+      max-width: 700px;
+    }
+
+    /* Image placeholders */
+    .service-gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+
+    .service-gallery-item {
+      aspect-ratio: 16/10;
+      background: rgba(255,255,255,0.03);
+      border: 1px dashed rgba(255,255,255,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .service-gallery-item:hover {
+      border-color: rgba(255,255,255,0.25);
+      background: rgba(255,255,255,0.05);
+    }
+
+    .service-gallery-item .placeholder-icon {
+      font-size: 28px;
+      opacity: 0.3;
+    }
+
+    .service-gallery-item .placeholder-text {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--gray);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* Gallery with featured image */
+    .service-gallery-featured {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+
+    .service-gallery-featured .service-gallery-item:first-child {
+      grid-row: 1 / 3;
+      aspect-ratio: auto;
+    }
+
+    /* Pricing grid */
+    .service-price {
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .service-price-title {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      color: var(--gray);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .service-price-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .service-price-item {
+      padding: 20px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: all 0.3s ease;
+    }
+
+    .service-price-item:hover {
+      background: rgba(255,255,255,0.04);
+      border-color: rgba(255,255,255,0.15);
+    }
+
+    .service-price-name {
+      font-size: 16px;
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    .service-price-value {
+      font-family: var(--mono);
+      font-size: 13px;
+      color: var(--silver);
+      line-height: 1.6;
+    }
+
+    /* Features grid */
+    .service-features-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .service-feature {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 16px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.04);
+      font-size: 14px;
+      color: var(--light-gray);
+      line-height: 1.6;
+      transition: all 0.3s ease;
+    }
+
+    .service-feature:hover {
+      background: rgba(255,255,255,0.04);
+      border-color: rgba(255,255,255,0.1);
+    }
+
+    .service-feature::before {
+      content: '→';
+      color: var(--gray);
+      font-size: 12px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .service-note {
+      margin-top: 24px;
+      padding: 20px;
+      border-left: 2px solid rgba(255,255,255,0.2);
+      font-size: 14px;
+      color: var(--silver);
+      font-style: italic;
+      line-height: 1.8;
+    }
+
+    /* Back button */
+    .back-to-overview {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 32px;
+      padding: 10px 20px;
+      border: 1px solid rgba(255,255,255,0.15);
+      background: transparent;
+      color: var(--silver);
+      font-family: var(--sans);
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      cursor: none;
+      transition: all 0.3s ease;
+    }
+
+    .back-to-overview:hover {
+      border-color: var(--white);
+      color: var(--white);
+      background: rgba(255,255,255,0.05);
+    }
+
+    /* ── Slide 9: Compare ── */
+    .slide-compare {
+      background: linear-gradient(180deg, var(--near-black) 0%, var(--black) 100%);
+    }
+
+    .compare-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 60px;
+    }
+
+    .compare-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .compare-header h2 {
+      font-family: var(--serif);
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .compare-header p {
+      font-size: 15px;
+      color: var(--silver);
+    }
+
+    .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .compare-table th {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      color: var(--gray);
+      text-transform: uppercase;
+      text-align: left;
+      padding: 16px 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .compare-table td {
+      padding: 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      font-size: 14px;
+      line-height: 1.6;
+      vertical-align: top;
+      opacity: 0;
+      transform: translateX(-20px);
+      transition: all 0.4s ease;
+    }
+
+    .compare-table.visible td { opacity: 1; transform: translateX(0); }
+    .compare-table.visible tr:nth-child(1) td { transition-delay: 0.1s; }
+    .compare-table.visible tr:nth-child(2) td { transition-delay: 0.2s; }
+    .compare-table.visible tr:nth-child(3) td { transition-delay: 0.3s; }
+    .compare-table.visible tr:nth-child(4) td { transition-delay: 0.4s; }
+    .compare-table.visible tr:nth-child(5) td { transition-delay: 0.5s; }
+    .compare-table.visible tr:nth-child(6) td { transition-delay: 0.6s; }
+
+    .compare-table td:first-child {
+      color: var(--gray);
+      font-weight: 500;
+      width: 120px;
+    }
+
+    .compare-table td:nth-child(2) { color: var(--silver); }
+
+    .compare-table td:last-child {
+      color: var(--white);
+      font-weight: 400;
+    }
+
+    .compare-table tr:hover td { background: rgba(255,255,255,0.02); }
+    .compare-table tr:hover td:last-child { background: rgba(255,255,255,0.05); }
+
+    /* ── Slide 10: Contact ── */
+    .slide-contact { background: var(--black); align-items: center; padding: 0; }
+
+    .contact-inner {
+      text-align: center;
+      max-width: 500px;
+      padding: 0 40px;
+    }
+
+    .contact-inner h2 {
+      font-family: var(--serif);
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .contact-role {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--gray);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 40px;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 48px;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 16px 24px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.02);
+      font-size: 15px;
+      color: var(--off-white);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+      cursor: none;
+    }
+
+    .contact-link::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--white);
+      transform: translateY(100%);
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .contact-link:hover { color: var(--black); border-color: var(--white); }
+    .contact-link:hover::before { transform: translateY(0); }
+    .contact-link span, .contact-link svg { position: relative; z-index: 1; }
+
+    .contact-link svg {
+      width: 18px; height: 18px;
+      opacity: 0.6;
+    }
+
+    .contact-tagline {
+      font-family: var(--serif);
+      font-size: 16px;
+      font-style: italic;
+      color: var(--gray);
+    }
+
+    /* ── Navigation ── */
+    .nav-dots {
+      position: fixed;
+      right: 32px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      z-index: 100;
+    }
+
+    .nav-dot {
+      width: 8px; height: 8px;
+      border: 1px solid rgba(255,255,255,0.3);
+      background: transparent;
+      cursor: none;
+      transition: all 0.3s ease;
+      padding: 0;
+    }
+
+    .nav-dot.active {
+      background: var(--white);
+      border-color: var(--white);
+      transform: scale(1.3);
+    }
+
+    .nav-dot:hover { border-color: var(--white); transform: scale(1.2); }
+
+    .slide-indicator {
+      position: fixed;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--gray);
+      letter-spacing: 0.15em;
+      z-index: 100;
+    }
+
+    /* ── Click Zone Hints ── */
+    .click-zone {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+
+    .click-zone svg {
+      width: 20px;
+      height: 20px;
+      color: rgba(255,255,255,0.3);
+    }
+
+    .click-zone-left { left: 16px; }
+    .click-zone-right { right: 56px; } /* offset for nav dots */
+
+    .click-zone-left.visible { opacity: 1; }
+    .click-zone-right.visible { opacity: 1; }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .about-inner { grid-template-columns: 1fr; gap: 48px; }
+      .about-left { position: static; }
+      .ceo-inner { grid-template-columns: 1fr; gap: 40px; }
+      .ceo-image { max-height: 50vh; }
+
+      .team-carbon-card {
+        grid-template-columns: 80px 1fr;
+        gap: 24px;
+        padding: 24px;
+      }
+      .team-carbon-avatar { width: 80px; height: 80px; font-size: 36px; }
+
+      .agents-grid { grid-template-columns: 1fr 1fr; }
+      .flip-card { height: 220px; }
+
+      .services-cards { grid-template-columns: 1fr; }
+      .service-gallery { grid-template-columns: 1fr 1fr; }
+      .service-gallery-featured { grid-template-columns: 1fr; grid-template-rows: auto; }
+      .service-gallery-featured .service-gallery-item:first-child { grid-row: auto; }
+      .service-price-grid { grid-template-columns: 1fr; }
+      .service-features-grid { grid-template-columns: 1fr; }
+
+      .compare-table { font-size: 13px; }
+      .compare-table td:first-child { width: 80px; }
+
+      .nav-dots { right: 16px; }
+
+      .cursor, .cursor-dot, .mouse-glow { display: none; }
+      body { cursor: auto; }
+      .enter-btn, .nav-dot, .contact-link, .flip-card, .service-card, .back-to-overview { cursor: pointer; }
+    }
+
+    @media (max-width: 600px) {
+      .agents-grid { grid-template-columns: 1fr; }
+      .service-gallery { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Custom Cursor -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="mouse-glow" id="mouseGlow"></div>
+
+  <!-- Film Grain -->
+  <div class="grain"></div>
+
+  <!-- Particle Canvas -->
+  <canvas id="particleCanvas"></canvas>
+
+  <!-- Progress Bar -->
+  <div class="progress-bar" id="progressBar"></div>
+
+  <!-- Navigation Dots -->
+  <div class="nav-dots" id="navDots">
+    <button class="nav-dot active" data-slide="0"></button>
+    <button class="nav-dot" data-slide="1"></button>
+    <button class="nav-dot" data-slide="2"></button>
+    <button class="nav-dot" data-slide="3"></button>
+    <button class="nav-dot" data-slide="4"></button>
+    <button class="nav-dot" data-slide="5"></button>
+    <button class="nav-dot" data-slide="6"></button>
+    <button class="nav-dot" data-slide="7"></button>
+    <button class="nav-dot" data-slide="8"></button>
+    <button class="nav-dot" data-slide="9"></button>
+    <button class="nav-dot" data-slide="10"></button>
+  </div>
+
+  <!-- Slide Indicator -->
+  <div class="slide-indicator" id="slideIndicator">01 / 11</div>
+
+  <!-- Click Zone Hints -->
+  <div class="click-zone click-zone-left" id="clickZoneLeft">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+  </div>
+  <div class="click-zone click-zone-right" id="clickZoneRight">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- Slide 0: Opening -->
+  <!-- ═══════════════════════════════════════════ -->
+  <section class="slide slide-opening active" data-index="0">
+    <div class="opening-content">
+      <div class="brand-title">
+        <div class="brand-cn">无限涌动</div>
+        <div class="brand-en">SURGE</div>
+      </div>
+      <button class="enter-btn" id="enterBtn"><span>开始探索</span></button>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- Slide 1: About -->
+  <!-- ═══════════════════════════════════════════ -->
+  <section class="slide slide-about" data-index="1">
+    <div class="about-inner">
+      <div class="about-left">
+        <div class="about-label animate-on-enter">About Us</div>
+        <h1 class="about-title animate-on-enter stagger-1">
+          碳基的理解<br>
+          <span class="thin">× 硅基的执行</span>
+        </h1>
+        <p class="about-tagline animate-on-enter stagger-2">
+          未来的高效组织，不是拥有一万名员工，<br>
+          而是拥有一位卓越的指挥官和一支永不疲倦的智能体军团。
+        </p>
+      </div>
+      <div class="about-right">
+        <div class="about-section animate-on-enter stagger-2">
+          <div class="about-section-title">关于我们</div>
+          <p class="about-text">
+            <strong>无限涌动（SURGE）</strong>是一家以AI智能体为核心驱动力的新型企业服务公司。
+          </p>
+        </div>
+        <div class="about-section animate-on-enter stagger-3">
+          <p class="about-text">
+            创始人刘冉（耳朵），11年影视广告导演背景，2年AI深度实战经验。从亲手搭建第一个智能体开始，到如今指挥6个AI智能体同时驱动三条业务线——我们不是在讨论AI的未来，我们已经在用AI做生意。
+          </p>
+        </div>
+        <div class="about-highlight animate-on-enter stagger-4">
+          <p>碳基的理解 × 硅基的执行 = 无限涌动</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- Slide 2: CEO -->
+  <!-- ═══════════════════════════════════════════ -->
+  <section class="slide slide-ceo" data-index="2">
+    <div class="ceo-inner">
+      <div class="ceo-visual">
+        <div class="ceo-image-wrapper" id="ceoImageWrapper">
+          <img src="erduo-carbon-portrait.jpg" alt="刘冉（耳朵）" class="ceo-image">
+        </div>
+        <div class="ceo-badge">唯一的碳基生命</div>
+      </div>
+      <div class="ceo-content">
+        <h2 class="animate-on-enter">刘冉（耳朵）</h2>
+        <div class="ceo-role animate-on-enter stagger-1">Founder & CEO</div>
+        <p class="ceo-bio animate-on-enter stagger-2">
+          11年影视广告导演，从镜头语言到AI语言，从分镜脚本到智能体编排。
+        </p>
+        <p class="ceo-bio animate-on-enter stagger-3">
+          我是这个团队唯一的碳基生命。我的工作不是操作AI，而是理解AI——理解它的能力边界，理解它与人类协作的最佳姿态，然后把这种理解转化为可落地的解决方案。
+        </p>
+        <div class="ceo-quote animate-on-enter stagger-4">
+          <p>"让一个人，拥有一支军团。"</p>
+        </div>
+        <div class="ceo-stats animate-on-enter stagger-5">
+          <div>
+            <div class="ceo-stat-value" data-target="11">0</div>
+            <div class="ceo-stat-label">年导演经验</div>
+          </div>
+          <div>
+            <div class="ceo-stat-value" data-target="2">0</div>
+            <div class="ceo-stat-label">年AI实战</div>
+          </div>
+          <div>
+            <div class="ceo-stat-value" data-target="6">0</div>
+            <div class="ceo-stat-label">个硅基伙伴</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- Slide 3: Team Intro -->
+  <!-- ═══════════════════════════════════════════ -->
+  <section class="slide slide-team-intro" data-index="3">
+    <div class="team-intro-inner">
+      <div class="team-intro-icon animate-on-enter">碳</div>
+      <h2 class="team-intro-title animate-on-enter stagger-1">碳基指挥官</h2>
+      <p class="team-intro-subtitle animate-on-enter stagger-2">
+        一个碳基生命，指挥六个硅基智能体。<br>
+        这不是科幻，这是无限涌动的日常。
+      </p>
+      <div class="team-intro-divider animate-on-enter stagger-3"></div>
+      <div class="team-carbon-card animate-on-enter stagger-4">
+        <div class="team-carbon-avatar">碳基</div>
+        <div class="team-carbon-info">
+          <h3>刘冉（耳朵）</h3>
+          <div class="team-carbon-role">创始人 & CEO</div>
+          <p>11年影视广告导演 × AI深度实战，OPC实践者。从亲手搭建第一个智能体开始，到如今指挥6个AI智能体同时驱动三条业务线。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- Slide 4: Agents (6 cards) -->
+  <!-- ═══════════════════════════════════════════ -->
+  <section class="slide slide-agents" data-index="4">
+    <div class="agents-inner">
+      <div class="agents-header">
+        <h2 class="animate-on-enter">硅基军团</h2>
+        <p class="animate-on-enter stagger-1">六个智能体，六个角色，一支永不疲倦的队伍</p>
+      </div>
+      <div class="agents-grid">
+        <div class="flip-card animate-on-enter stagger-2">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <div class="flip-card-icon">🦐</div>
+              <div class="flip-card-name">虾米</div>
+              <div class="flip-card-role">COO · 首席运营官</div>
+            </div>
+            <div class="flip-card-back">
+              <div class="flip-card-back-title">虾米</div>
+              <p>统筹协调整个智能体团队的日常运作，作为记忆中枢管理所有任务上下文，负责将创始人的指令精准分发给各个智能体执行。</p>
+              <div class="flip-card-role">统筹协调 · 记忆中枢 · 任务分发</div>
+            </div>
+          </div>
+        </div>
+        <div class="flip-card animate-on-enter stagger-3">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <div class="flip-card-icon">🧰</div>
+              <div class="flip-card-name">虾吊能</div>
+              <div class="flip-card-role">CTO · 首席技术官</div>
+            </div>
+            <div class="flip-card-back">
+              <div class="flip-card-back-title">虾吊能</div>
+              <p>负责整个智能体系统的技术维护和故障修复，开发新的Skill扩展能力边界，确保所有智能体稳定高效运行。</p>
+              <div class="flip-card-role">系统维护 · 故障修复 · Skill开发</div>
+            </div>
+          </div>
+        </div>
+        <div class="flip-card animate-on-enter stagger-4">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <div class="flip-card-icon">🔥</div>
+              <div class="flip-card-name">虾必火</div>
+              <div class="flip-card-role">CCO · 首席内容官</div>
+            </div>
+            <div class="flip-card-back">
+              <div class="flip-card-back-title">虾必火</div>
+              <p>专注AIGC内容创作，分析爆款规律，制定文案策略，用AI重构内容生产链，让每一条内容都有传播力。</p>
+              <div class="flip-card-role">AIGC内容创作 · 爆款分析 · 文案策略</div>
+            </div>
+          </div>
+        </div>
+        <div class="flip-card animate-on-enter stagger-5">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <div class="flip-card-icon">🦞</div>
+              <div class="flip-card-name">虾涨停</div>
+              <div class="flip-card-role">CIO · 首席情报官</div>
+            </div>
+            <div class="flip-card-back">
+              <div class="flip-card-back-title">虾涨停</div>
+              <p>全网信息源监控，实时情报收集与分析，竞品动态追踪，让团队始终掌握最新市场脉搏。</p>
+              <div class="flip-card-role">情报收集 · 全网信息源 · 竞品分析</div>
+            </div>
+          </div>
+        </div>
+        <div class="flip-card animate-on-enter stagger-6">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <div class="flip-card-icon">🎨</div>
+              <div class="flip-card-name">虾画师</div>
+              <div class="flip-card-role">CVO · 首席视觉官</div>
+            </div>
+            <div class="flip-card-back">
+              <div class="flip-card-back-title">虾画师</div>
+              <p>AI图片生成专家，负责品牌视觉体系搭建，产品图、营销海报、社交媒体素材的智能创作。</p>
+              <div class="flip-card-role">图片生成 · 视觉创作 · 品牌设计</div>
+            </div>
+          </div>
+        </div>
+        <div class="flip-card animate-on-enter stagger-7">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <div class="flip-card-icon">🎓</div>
+              <div class="flip-card-name">虾校长</div>
+              <div class="flip-card-role">首席教育官</div>
+            </div>
+            <div class="flip-card-back">
+              <div class="flip-card-back-title">虾校长</div>
+              <p>课程体系设计与培训执行专家，将复杂的AI能力转化为可教学、可复制的知识体系。</p>
+              <div class="flip-card-role">课程设计 · 培训执行 · 方案整合</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="agents-tech animate-on-enter stagger-8">
+        <div class="agents-tech-label">技术底座</div>
+        <p><strong>OpenClaw 智能体操作系统</strong> — Gateway + Agents + Skills + Memory 核心架构，支持MCP协议连接外部工具。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- Slide 5: Services Overview (clickable) -->
+  <!-- ═══════════════════════════════════════════ -->
+  <section class="slide slide-services-overview" data-index="5">
+    <div class="services-overview-inner">
+      <div class="services-overview-header">
+        <h2 class="animate-on-enter">业务板块</h2>
+        <p class="animate-on-enter stagger-1">三条业务线，一个核心：让AI真正落地</p>
+      </div>
+      <div class="services-cards">
+        <div class="service-card animate-on-enter stagger-2" data-goto="6">
+          <div class="service-card-num">01</div>
+          <div class="service-card-title">AI赋能教育与咨询</div>
+          <div class="service-card-desc">从认知到落地，从培训到陪跑，一条线拉通。我们不做"讲完就走"的培训，我们做"陪你拿到结果"的咨询。</div>
+          <div class="service-card-arrow">→</div>
+        </div>
+        <div class="service-card animate-on-enter stagger-3" data-goto="7">
+          <div class="service-card-num">02</div>
+          <div class="service-card-title">AIGC创意内容工厂</div>
+          <div class="service-card-desc">用AI重构内容生产链，从脚本到成片，全链路智能驱动。依托创始人11年影视广告专业背景。</div>
+          <div class="service-card-arrow">→</div>
+        </div>
+        <div class="service-card animate-on-enter stagger-4" data-goto="8">
+          <div class="service-card-num">03</div>
+          <div class="service-card-title">大模型算力供应服务</div>
+          <div class="service-card-desc">轻资产、零库存的AI基础设施服务。为企业和开发者提供大模型API算力供应。</div>
+          <div class="service-card-arrow">→</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- Slide 6: 教育咨询详情 -->
+  <!-- ═══════════════════════════════════════════ -->
+  <section class="slide slide-service-detail" data-index="6">
+    <div class="service-detail-inner">
+      <button class="back-to-overview animate-on-enter" data-goto="5">← 返回业务总览</button>
+      <div class="service-detail-header">
+        <div class="slide-label animate-on-enter stagger-1">01 / 教育咨询</div>
+        <h2 class="animate-on-enter stagger-2">AI赋能教育与咨询</h2>
+        <p class="animate-on-enter stagger-3">从认知到落地，从培训到陪跑，一条线拉通。我们不做"讲完就走"的培训，我们做"陪你拿到结果"的咨询。</p>
+      </div>
+
+      <!-- 产品矩阵（置顶） -->
+      <div class="service-price">
+        <div class="service-price-title animate-on-enter stagger-4">产品矩阵</div>
+        <div class="service-price-grid">
+          <div class="service-price-item animate-on-enter stagger-4">
+            <div class="service-price-name">企业内训</div>
+            <div class="service-price-value">入企AI智能体落地培训，结果前置，Demo先行 · ¥10,000/天起</div>
+          </div>
+          <div class="service-price-item animate-on-enter stagger-5">
+            <div class="service-price-name">10天驻场陪跑</div>
+            <div class="service-price-value">线下驻场，从认知拆解到MVP交付 · ¥100,000 - 150,000</div>
+          </div>
+          <div class="service-price-item animate-on-enter stagger-6">
+            <div class="service-price-name">个人陪跑</div>
+            <div class="service-price-value">一对一教你养自己的AI助手 · ¥5,000首月 / ¥8,000/月</div>
+          </div>
+          <div class="service-price-item animate-on-enter stagger-7">
+            <div class="service-price-name">深度咨询</div>
+            <div class="service-price-value">业务流重构、AI团队孵化、按效果定价 · 面议</div>
+          </div>
+        </div>
+      </div>
+      <div class="service-note animate-on-enter stagger-8">
+        核心差异：先跑Demo再培训，不是先培训再看效果。10天带着能用的东西走，不是听完还是不会用。
+      </div>
+
+      <!-- 图片占位（底部） -->
+      <div class="service-gallery-featured animate-on-enter stagger-9">
+        <div class="service-gallery-item">
+          <span class="placeholder-icon">📸</span>
+          <span class="placeholder-text">线下培训现场</span>
+        </div>
+        <div class="service-gallery-item">
+          <span class="placeholder-icon">📸</span>
+          <span class="placeholder-text">企业内训</span>
+        </div>
+        <div class="service-gallery-item">
+          <span class="placeholder-icon">📸</span>
+          <span class="placeholder-text">驻场陪跑</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- Slide 7: AIGC内容详情 -->
+  <!-- ═══════════════════════════════════════════ -->
+  <section class="slide slide-service-detail" data-index="7">
+    <div class="service-detail-inner">
+      <button class="back-to-overview animate-on-enter" data-goto="5">← 返回业务总览</button>
+      <div class="service-detail-header">
+        <div class="slide-label animate-on-enter stagger-1">02 / AIGC内容</div>
+        <h2 class="animate-on-enter stagger-2">AIGC创意内容工厂</h2>
+        <p class="animate-on-enter stagger-3">用AI重构内容生产链，从脚本到成片，全链路智能驱动。依托创始人11年影视广告专业背景，结合AI生成式技术，提供高品质内容制作服务。</p>
+      </div>
+
+      <!-- 图片占位：AIGC内容生产 -->
+      <div class="service-gallery animate-on-enter stagger-4">
+        <div class="service-gallery-item">
+          <span class="placeholder-icon">📸</span>
+          <span class="placeholder-text">AI视频制作</span>
+        </div>
+        <div class="service-gallery-item">
+          <span class="placeholder-icon">📸</span>
+          <span class="placeholder-text">AI图文内容</span>
+        </div>
+        <div class="service-gallery-item">
+          <span class="placeholder-icon">📸</span>
+          <span class="placeholder-text">品牌视觉设计</span>
+        </div>
+      </div>
+
+      <div class="service-features-grid">
+        <div class="service-feature animate-on-enter stagger-5">AI视频制作：脚本生成 → 分镜设计 → AI动画/实拍合成 → 后期输出</div>
+        <div class="service-feature animate-on-enter stagger-6">AI图文内容：品牌文案、营销素材、社交媒体内容批量生产</div>
+        <div class="service-feature animate-on-enter stagger-7">AI视觉设计：品牌视觉体系、产品图、营销海报</div>
+        <div class="service-feature animate-on-enter stagger-8">适用场景：品牌宣传片、产品TVC、社交媒体内容矩阵</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- Slide 8: 大模型算力详情 -->
+  <!-- ═══════════════════════════════════════════ -->
+  <section class="slide slide-service-detail" data-index="8">
+    <div class="service-detail-inner">
+      <button class="back-to-overview animate-on-enter" data-goto="5">← 返回业务总览</button>
+      <div class="service-detail-header">
+        <div class="slide-label animate-on-enter stagger-1">03 / 算力供应</div>
+        <h2 class="animate-on-enter stagger-2">大模型算力供应服务</h2>
+        <p class="animate-on-enter stagger-3">轻资产、零库存的AI基础设施服务。与国际Token中转站达成代理合作，为企业和开发者提供大模型API算力供应。</p>
+      </div>
+
+      <!-- 图片占位：算力/技术 -->
+      <div class="service-gallery animate-on-enter stagger-4">
+        <div class="service-gallery-item">
+          <span class="placeholder-icon">📸</span>
+          <span class="placeholder-text">API架构图</span>
+        </div>
+        <div class="service-gallery-item">
+          <span class="placeholder-icon">📸</span>
+          <span class="placeholder-text">模型覆盖</span>
+        </div>
+        <div class="service-gallery-item">
+          <span class="placeholder-icon">📸</span>
+          <span class="placeholder-text">合作品牌</span>
+        </div>
+      </div>
+
+      <div class="service-features-grid">
+        <div class="service-feature animate-on-enter stagger-5">Token代理销售：覆盖主流大模型API（GPT、Claude、Gemini等）</div>
+        <div class="service-feature animate-on-enter stagger-6">渠道返点模式：客户从我们渠道购买，获得返点优惠</div>
+        <div class="service-feature animate-on-enter stagger-7">技术支持：提供接入指导和使用答疑</div>
+        <div class="service-feature animate-on-enter stagger-8">优势：零库存、低门槛、稳定利润</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- Slide 9: Compare -->
+  <!-- ═══════════════════════════════════════════ -->
+  <section class="slide slide-compare" data-index="9">
+    <div class="compare-inner">
+      <div class="compare-header">
+        <h2 class="animate-on-enter">为什么选择无限涌动</h2>
+        <p class="animate-on-enter stagger-1">vs Traditional</p>
+      </div>
+      <table class="compare-table" id="compareTable">
+        <thead>
+          <tr>
+            <th>维度</th>
+            <th>传统服务商</th>
+            <th>无限涌动</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>方法论</td>
+            <td>先培训再看效果（盲盒）</td>
+            <td>先跑Demo再培训（结果前置）</td>
+          </tr>
+          <tr>
+            <td>定位</td>
+            <td>教你怎么用AI工具</td>
+            <td>帮你建一支AI团队</td>
+          </tr>
+          <tr>
+            <td>内容</td>
+            <td>讲功能、讲操作</td>
+            <td>教业务拆解、教AI思维</td>
+          </tr>
+          <tr>
+            <td>结果</td>
+            <td>听完还是不会用</td>
+            <td>10天带着能用的东西走</td>
+          </tr>
+          <tr>
+            <td>后续</td>
+            <td>培训结束=关系结束</td>
+            <td>陪跑持续，深度绑定</td>
+          </tr>
+          <tr>
+            <td>讲师背景</td>
+            <td>纯技术/纯理论</td>
+            <td>11年导演+AI实战，自己就在跑OPC</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- Slide 10: Contact -->
+  <!-- ═══════════════════════════════════════════ -->
+  <section class="slide slide-contact" data-index="10">
+    <div class="contact-inner">
+      <h2 class="animate-on-enter">刘冉（耳朵）</h2>
+      <div class="contact-role animate-on-enter stagger-1">Founder & CEO</div>
+      <div class="contact-links">
+        <a href="mailto:erduo1998@gmail.com" class="contact-link animate-on-enter stagger-2">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
+          </svg>
+          <span>erduo1998@gmail.com</span>
+        </a>
+        <a href="tel:+8613770579373" class="contact-link animate-on-enter stagger-3">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+          </svg>
+          <span>+86 137 7057 9373</span>
+        </a>
+        <div class="contact-link animate-on-enter stagger-4">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+            <circle cx="12" cy="10" r="3"/>
+          </svg>
+          <span>南京，中国</span>
+        </div>
+      </div>
+      <p class="contact-tagline animate-on-enter stagger-5">让一个人，拥有一支军团。</p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- JavaScript -->
+  <!-- ═══════════════════════════════════════════ -->
+  <script>
+    // ── State ──
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.nav-dot');
+    const indicator = document.getElementById('slideIndicator');
+    const enterBtn = document.getElementById('enterBtn');
+    const progressBar = document.getElementById('progressBar');
+    const cursor = document.getElementById('cursor');
+    const cursorDot = document.getElementById('cursorDot');
+    const mouseGlow = document.getElementById('mouseGlow');
+    const ceoImageWrapper = document.getElementById('ceoImageWrapper');
+    const compareTable = document.getElementById('compareTable');
+    let currentSlide = 0;
+    let isAnimating = false;
+
+    // ── Custom Cursor ──
+    let mouseX = 0, mouseY = 0;
+    let cursorX = 0, cursorY = 0;
+
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      cursorDot.style.left = mouseX + 'px';
+      cursorDot.style.top = mouseY + 'px';
+      mouseGlow.style.left = mouseX + 'px';
+      mouseGlow.style.top = mouseY + 'px';
+    });
+
+    function animateCursor() {
+      cursorX += (mouseX - cursorX) * 0.15;
+      cursorY += (mouseY - cursorY) * 0.15;
+      cursor.style.left = cursorX + 'px';
+      cursor.style.top = cursorY + 'px';
+      requestAnimationFrame(animateCursor);
+    }
+    animateCursor();
+
+    // Hover effect
+    document.querySelectorAll('a, button, .flip-card, .nav-dot, .contact-link, .service-card, .back-to-overview').forEach(el => {
+      el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+      el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+    });
+
+    // ── CEO Parallax ──
+    if (ceoImageWrapper) {
+      document.addEventListener('mousemove', (e) => {
+        if (currentSlide !== 2) return;
+        const rect = ceoImageWrapper.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        const deltaX = (e.clientX - centerX) / 30;
+        const deltaY = (e.clientY - centerY) / 30;
+        ceoImageWrapper.style.transform = `rotateY(${deltaX}deg) rotateX(${-deltaY}deg)`;
+      });
+    }
+
+    // ── Particle System ──
+    const canvas = document.getElementById('particleCanvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    class Particle {
+      constructor() { this.reset(); }
+      reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 2 + 0.5;
+        this.speedX = (Math.random() - 0.5) * 0.3;
+        this.speedY = (Math.random() - 0.5) * 0.3;
+        this.opacity = Math.random() * 0.3 + 0.1;
+      }
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) this.reset();
+      }
+      draw() {
+        ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    for (let i = 0; i < 50; i++) particles.push(new Particle());
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => { p.update(); p.draw(); });
+      requestAnimationFrame(animateParticles);
+    }
+    animateParticles();
+
+    // ── Number Counter ──
+    function animateNumbers() {
+      document.querySelectorAll('.ceo-stat-value[data-target]').forEach(el => {
+        const target = parseInt(el.dataset.target);
+        const duration = 1500;
+        const start = performance.now();
+        function update(currentTime) {
+          const elapsed = currentTime - start;
+          const progress = Math.min(elapsed / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          el.textContent = Math.round(target * eased);
+          if (progress < 1) requestAnimationFrame(update);
+        }
+        requestAnimationFrame(update);
+      });
+    }
+
+    // ── Slide Animations ──
+    function resetSlideAnimations(slide) {
+      slide.querySelectorAll('.animate-on-enter').forEach(el => el.classList.remove('visible'));
+      const table = slide.querySelector('.compare-table');
+      if (table) table.classList.remove('visible');
+    }
+
+    function triggerSlideAnimations(slide) {
+      setTimeout(() => {
+        slide.querySelectorAll('.animate-on-enter').forEach(el => el.classList.add('visible'));
+      }, 100);
+    }
+
+    // ── Slide Navigation ──
+    function goToSlide(index) {
+      if (isAnimating || index === currentSlide || index < 0 || index >= slides.length) return;
+      isAnimating = true;
+
+      const direction = index > currentSlide ? 'down' : 'up';
+      const prevSlide = slides[currentSlide];
+
+      resetSlideAnimations(prevSlide);
+      prevSlide.classList.remove('active');
+      prevSlide.classList.add(direction === 'down' ? 'exit-up' : 'exit-down');
+      dots[currentSlide].classList.remove('active');
+
+      currentSlide = index;
+      slides[currentSlide].classList.remove('exit-up', 'exit-down');
+      slides[currentSlide].classList.add('active');
+      dots[currentSlide].classList.add('active');
+
+      triggerSlideAnimations(slides[currentSlide]);
+
+      indicator.textContent = String(currentSlide + 1).padStart(2, '0') + ' / ' + String(slides.length).padStart(2, '0');
+      progressBar.style.width = (currentSlide / (slides.length - 1) * 100) + '%';
+
+      if (currentSlide === 2) setTimeout(animateNumbers, 400);
+      if (currentSlide === 9) setTimeout(() => compareTable.classList.add('visible'), 200);
+
+      setTimeout(() => {
+        prevSlide.classList.remove('exit-up', 'exit-down');
+        isAnimating = false;
+      }, 800);
+    }
+
+    // ── Event Listeners ──
+    enterBtn.addEventListener('click', () => goToSlide(1));
+
+    // Dot navigation
+    dots.forEach(dot => {
+      dot.addEventListener('click', () => goToSlide(parseInt(dot.dataset.slide)));
+    });
+
+    // Keyboard
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+        e.preventDefault();
+        goToSlide(currentSlide + 1);
+      } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+        e.preventDefault();
+        goToSlide(currentSlide - 1);
+      }
+    });
+
+    // Click zones: left edge = prev, right edge = next
+    const clickZoneLeft = document.getElementById('clickZoneLeft');
+    const clickZoneRight = document.getElementById('clickZoneRight');
+
+    document.addEventListener('mousemove', (e) => {
+      const zone = 80;
+      if (e.clientX < zone) {
+        clickZoneLeft.classList.add('visible');
+      } else {
+        clickZoneLeft.classList.remove('visible');
+      }
+      if (e.clientX > window.innerWidth - zone) {
+        clickZoneRight.classList.add('visible');
+      } else {
+        clickZoneRight.classList.remove('visible');
+      }
+    });
+
+    document.addEventListener('click', (e) => {
+      // Ignore clicks on interactive elements
+      if (e.target.closest('a, button, .flip-card, .nav-dot, .contact-link, .service-card, .back-to-overview')) return;
+
+      const x = e.clientX;
+      const w = window.innerWidth;
+      const zone = 80;
+
+      if (x < zone) {
+        goToSlide(currentSlide - 1);
+      } else if (x > w - zone) {
+        goToSlide(currentSlide + 1);
+      }
+    });
+
+    // Service cards: click to navigate
+    document.querySelectorAll('.service-card[data-goto]').forEach(card => {
+      card.addEventListener('click', () => goToSlide(parseInt(card.dataset.goto)));
+    });
+
+    // Back buttons: click to navigate back
+    document.querySelectorAll('.back-to-overview[data-goto]').forEach(btn => {
+      btn.addEventListener('click', () => goToSlide(parseInt(btn.dataset.goto)));
+    });
+
+    // Flip card click for mobile
+    document.querySelectorAll('.flip-card').forEach(card => {
+      card.addEventListener('click', () => card.classList.toggle('flipped'));
+    });
+
+    // Blur opening after typewriter
+    setTimeout(() => {
+      document.querySelector('.slide-opening').classList.add('blurred');
+    }, 2000);
+  </script>
+</body>
+</html>
