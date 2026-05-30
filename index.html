@@ -242,6 +242,30 @@
 
     .product-matrix-item {
       text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      padding: 8px 16px;
+      border-radius: 2px;
+    }
+
+    .product-matrix-item:hover {
+      opacity: 1;
+    }
+
+    .product-matrix-item.personal {
+      border-left: 2px solid rgba(255,255,255,0.15);
+    }
+
+    .product-matrix-item.coaching {
+      border-left: 2px solid rgba(255,255,255,0.25);
+    }
+
+    .product-matrix-item.training {
+      border-left: 2px solid rgba(255,255,255,0.35);
+    }
+
+    .product-matrix-item.onsite {
+      border-left: 2px solid rgba(255,255,255,0.5);
     }
 
     .product-matrix-name {
@@ -1648,26 +1672,26 @@
 
     <!-- 产品矩阵 sticky bar -->
     <div class="product-matrix-bar" id="productMatrixBar">
-      <div class="product-matrix-item">
+      <div class="product-matrix-item personal" onclick="document.getElementById('service-personal').scrollIntoView({behavior:'smooth',block:'start'})">
         <div class="product-matrix-name">个人成长服务</div>
         <div class="product-matrix-price">¥299起</div>
       </div>
-      <div class="product-matrix-item">
+      <div class="product-matrix-item coaching" onclick="document.getElementById('service-coaching').scrollIntoView({behavior:'smooth',block:'start'})">
         <div class="product-matrix-name">个人深度陪跑</div>
         <div class="product-matrix-price">¥8,000/月</div>
       </div>
-      <div class="product-matrix-item">
+      <div class="product-matrix-item training" onclick="document.getElementById('service-training').scrollIntoView({behavior:'smooth',block:'start'})">
         <div class="product-matrix-name">企业内训</div>
         <div class="product-matrix-price">¥10,000/天起</div>
       </div>
-      <div class="product-matrix-item">
+      <div class="product-matrix-item onsite" onclick="document.getElementById('service-onsite').scrollIntoView({behavior:'smooth',block:'start'})">
         <div class="product-matrix-name">10天驻场陪跑</div>
         <div class="product-matrix-price">¥200,000起</div>
       </div>
     </div>
 
     <!-- 子段1：个人成长服务 -->
-    <div style="padding:100px 0;background:var(--black);">
+    <div id="service-personal" style="padding:100px 0;background:var(--black);">
       <div class="container">
         <div class="section-heading" style="margin-bottom:48px;">
           <div class="section-heading-label">个人成长服务</div>
@@ -1717,7 +1741,7 @@
     </div>
 
     <!-- 子段2：个人深度陪跑 -->
-    <div style="padding:100px 0;background:var(--near-black);">
+    <div id="service-coaching" style="padding:100px 0;background:var(--near-black);">
       <div class="container">
         <div class="section-heading">
           <div class="section-heading-label">个人深度陪跑</div>
@@ -1754,7 +1778,7 @@
     </div>
 
     <!-- 子段3：企业内训 -->
-    <div style="padding:100px 0;background:var(--black);">
+    <div id="service-training" style="padding:100px 0;background:var(--black);">
       <div class="container">
         <div class="section-heading">
           <div class="section-heading-label">企业服务</div>
@@ -1768,7 +1792,7 @@
     </div>
 
     <!-- 子段4：10天驻场陪跑 -->
-    <div style="padding:100px 0;background:var(--near-black);">
+    <div id="service-onsite" style="padding:100px 0;background:var(--near-black);">
       <div class="container">
         <div class="section-heading">
           <div class="section-heading-label">企业服务</div>
