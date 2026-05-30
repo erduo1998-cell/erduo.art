@@ -2010,54 +2010,161 @@
     </div>
   </section>
 
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- JavaScript -->
+  <!-- ═══════════════════════════════════════════ -->
   <script>
-    // ── State ──
-    const slides = document.querySelectorAll('.slide');
-    const dots = document.querySelectorAll('.nav-dot');
-    const indicator = document.getElementById('slideIndicator');
-    const enterBtn = document.getElementById('enterBtn');
-    const progressBar = document.getElementById('progressBar');
-    const cursor = document.getElementById('cursor');
-    const cursorDot = document.getElementById('cursorDot');
-    const mouseGlow = document.getElementById('mouseGlow');
-    const ceoImageWrapper = document.getElementById('ceoImageWrapper');
-    const compareTable = document.getElementById('compareTable');
-    let currentSlide = 0;
-    let isAnimating = false;
-
     // ── Custom Cursor ──
     let mouseX = 0, mouseY = 0;
     let cursorX = 0, cursorY = 0;
+    const cursor = document.getElementById('cursor');
+    const cursorDot = document.getElementById('cursorDot');
+    const mouseGlow = document.getElementById('mouseGlow');
 
-    document.addEventListener('mousemove', (e) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-      cursorDot.style.left = mouseX + 'px';
-      cursorDot.style.top = mouseY + 'px';
-      mouseGlow.style.left = mouseX + 'px';
-      mouseGlow.style.top = mouseY + 'px';
-    });
+    if (cursor && cursorDot && mouseGlow) {
+      document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        cursorDot.style.left = mouseX + 'px';
+        cursorDot.style.top = mouseY + 'px';
+        mouseGlow.style.left = mouseX + 'px';
+        mouseGlow.style.top = mouseY + 'px';
+      });
 
-    function animateCursor() {
-      cursorX += (mouseX - cursorX) * 0.15;
-      cursorY += (mouseY - cursorY) * 0.15;
-      cursor.style.left = cursorX + 'px';
-      cursor.style.top = cursorY + 'px';
-      requestAnimationFrame(animateCursor);
+      function animateCursor() {
+        cursorX += (mouseX - cursorX) * 0.15;
+        cursorY += (mouseY - cursorY) * 0.15;
+        cursor.style.left = cursorX + 'px';
+        cursor.style.top = cursorY + 'px';
+        requestAnimationFrame(animateCursor);
+      }
+      animateCursor();
+
+      document.querySelectorAll('a, button, .flip-card, .contact-link, .service-card').forEach(el => {
+        el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+        el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+      });
     }
-    animateCursor();
 
-    // Hover effect
-    document.querySelectorAll('a, button, .flip-card, .nav-dot, .contact-link, .service-card, .back-to-overview').forEach(el => {
-      el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
-      el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+    // ── Particle System ──
+    const canvas = document.getElementById('particleCanvas');
+    if (canvas) {
+      const ctx = canvas.getContext('2d');
+      let particles = [];
+
+      function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+      resizeCanvas();
+      window.addEventListener('resize', resizeCanvas);
+
+      class Particle {
+        constructor() { this.reset(); }
+        reset() {
+          this.x = Math.random() * canvas.width;
+          this.y = Math.random() * canvas.height;
+          this.size = Math.random() * 2 + 0.5;
+          this.speedX = (Math.random() - 0.5) * 0.3;
+          this.speedY = (Math.random() - 0.5) * 0.3;
+          this.opacity = Math.random() * 0.3 + 0.1;
+        }
+        update() {
+          this.x += this.speedX;
+          this.y += this.speedY;
+          if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) this.reset();
+        }
+        draw() {
+          ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+
+      for (let i = 0; i < 50; i++) particles.push(new Particle());
+
+      function animateParticles() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach(p => { p.update(); p.draw(); });
+        requestAnimationFrame(animateParticles);
+      }
+      animateParticles();
+    }
+
+    // ── Sticky Header ──
+    const siteHeader = document.getElementById('siteHeader');
+    const heroSection = document.querySelector('.section-hero');
+    if (siteHeader && heroSection) {
+      let headerScrolled = false;
+      window.addEventListener('scroll', () => {
+        const scrolled = window.scrollY > heroSection.offsetHeight - 100;
+        if (scrolled !== headerScrolled) {
+          headerScrolled = scrolled;
+          siteHeader.classList.toggle('scrolled', scrolled);
+        }
+        // Scroll progress bar
+        const progressBar = document.getElementById('progressBar');
+        if (progressBar) {
+          const scrollPercent = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+          progressBar.style.width = (Math.min(scrollPercent, 1) * 100) + '%';
+        }
+      }, { passive: true });
+    }
+
+    // ── Section Observer (scroll animations + nav highlight) ──
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          // Trigger animations
+          entry.target.querySelectorAll('.animate-on-scroll:not(.visible)').forEach(el => {
+            el.classList.add('visible');
+          });
+
+          // Trigger compare rows
+          entry.target.querySelectorAll('.compare-row').forEach((row, i) => {
+            setTimeout(() => { row.style.opacity = '1'; }, i * 100);
+          });
+
+          // Highlight nav
+          const id = entry.target.id;
+          if (id) {
+            document.querySelectorAll('.header-nav a').forEach(a => {
+              a.classList.toggle('active', a.getAttribute('href') === '#' + id);
+            });
+            // services-aigc and services-compute also highlight "业务"
+            if (id === 'services-aigc' || id === 'services-compute') {
+              document.querySelectorAll('.header-nav a').forEach(a => {
+                if (a.getAttribute('href') === '#services') a.classList.add('active');
+              });
+            }
+          }
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '-60px 0px -60px 0px' });
+
+    document.querySelectorAll('.section[id]').forEach(section => {
+      sectionObserver.observe(section);
     });
+
+    // ── Product Matrix Bar visibility ──
+    const productMatrixBar = document.getElementById('productMatrixBar');
+    const servicesSection = document.getElementById('services');
+    if (productMatrixBar && servicesSection) {
+      const matrixObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          productMatrixBar.classList.toggle('hidden', !entry.isIntersecting);
+        });
+      }, { threshold: 0 });
+      matrixObserver.observe(servicesSection);
+    }
 
     // ── CEO Parallax ──
+    const ceoImageWrapper = document.getElementById('ceoImageWrapper');
     if (ceoImageWrapper) {
       document.addEventListener('mousemove', (e) => {
-        if (currentSlide !== 2) return;
         const rect = ceoImageWrapper.getBoundingClientRect();
+        if (rect.width === 0) return;
         const centerX = rect.left + rect.width / 2;
         const centerY = rect.top + rect.height / 2;
         const deltaX = (e.clientX - centerX) / 30;
@@ -2065,50 +2172,6 @@
         ceoImageWrapper.style.transform = `rotateY(${deltaX}deg) rotateX(${-deltaY}deg)`;
       });
     }
-
-    // ── Particle System ──
-    const canvas = document.getElementById('particleCanvas');
-    const ctx = canvas.getContext('2d');
-    let particles = [];
-
-    function resizeCanvas() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    }
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
-
-    class Particle {
-      constructor() { this.reset(); }
-      reset() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 2 + 0.5;
-        this.speedX = (Math.random() - 0.5) * 0.3;
-        this.speedY = (Math.random() - 0.5) * 0.3;
-        this.opacity = Math.random() * 0.3 + 0.1;
-      }
-      update() {
-        this.x += this.speedX;
-        this.y += this.speedY;
-        if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) this.reset();
-      }
-      draw() {
-        ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fill();
-      }
-    }
-
-    for (let i = 0; i < 50; i++) particles.push(new Particle());
-
-    function animateParticles() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particles.forEach(p => { p.update(); p.draw(); });
-      requestAnimationFrame(animateParticles);
-    }
-    animateParticles();
 
     // ── Number Counter ──
     function animateNumbers() {
@@ -2127,122 +2190,49 @@
       });
     }
 
-    // ── Slide Animations ──
-    function resetSlideAnimations(slide) {
-      slide.querySelectorAll('.animate-on-enter').forEach(el => el.classList.remove('visible'));
-      const table = slide.querySelector('.compare-table');
-      if (table) table.classList.remove('visible');
+    // Trigger number counter when team section enters view
+    const teamSection = document.getElementById('team');
+    if (teamSection) {
+      const ceoObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            setTimeout(animateNumbers, 400);
+            ceoObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.3 });
+      ceoObserver.observe(teamSection);
     }
 
-    function triggerSlideAnimations(slide) {
-      setTimeout(() => {
-        slide.querySelectorAll('.animate-on-enter').forEach(el => el.classList.add('visible'));
-      }, 100);
-    }
-
-    // ── Slide Navigation ──
-    function goToSlide(index) {
-      if (isAnimating || index === currentSlide || index < 0 || index >= slides.length) return;
-      isAnimating = true;
-
-      const direction = index > currentSlide ? 'down' : 'up';
-      const prevSlide = slides[currentSlide];
-
-      resetSlideAnimations(prevSlide);
-      prevSlide.classList.remove('active');
-      prevSlide.classList.add(direction === 'down' ? 'exit-up' : 'exit-down');
-      dots[currentSlide].classList.remove('active');
-
-      currentSlide = index;
-      slides[currentSlide].classList.remove('exit-up', 'exit-down');
-      slides[currentSlide].classList.add('active');
-      dots[currentSlide].classList.add('active');
-
-      triggerSlideAnimations(slides[currentSlide]);
-
-      indicator.textContent = String(currentSlide + 1).padStart(2, '0') + ' / ' + String(slides.length).padStart(2, '0');
-      progressBar.style.width = (currentSlide / (slides.length - 1) * 100) + '%';
-
-      if (currentSlide === 2) setTimeout(animateNumbers, 400);
-      if (currentSlide === 9) setTimeout(() => compareTable.classList.add('visible'), 200);
-
-      setTimeout(() => {
-        prevSlide.classList.remove('exit-up', 'exit-down');
-        isAnimating = false;
-      }, 800);
-    }
-
-    // ── Event Listeners ──
-    enterBtn.addEventListener('click', () => goToSlide(1));
-
-    // Dot navigation
-    dots.forEach(dot => {
-      dot.addEventListener('click', () => goToSlide(parseInt(dot.dataset.slide)));
-    });
-
-    // Keyboard
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
-        e.preventDefault();
-        goToSlide(currentSlide + 1);
-      } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
-        e.preventDefault();
-        goToSlide(currentSlide - 1);
-      }
-    });
-
-    // Click zones: left edge = prev, right edge = next
-    const clickZoneLeft = document.getElementById('clickZoneLeft');
-    const clickZoneRight = document.getElementById('clickZoneRight');
-
-    document.addEventListener('mousemove', (e) => {
-      const zone = 80;
-      if (e.clientX < zone) {
-        clickZoneLeft.classList.add('visible');
-      } else {
-        clickZoneLeft.classList.remove('visible');
-      }
-      if (e.clientX > window.innerWidth - zone) {
-        clickZoneRight.classList.add('visible');
-      } else {
-        clickZoneRight.classList.remove('visible');
-      }
-    });
-
-    document.addEventListener('click', (e) => {
-      // Ignore clicks on interactive elements
-      if (e.target.closest('a, button, .flip-card, .nav-dot, .contact-link, .service-card, .back-to-overview')) return;
-
-      const x = e.clientX;
-      const w = window.innerWidth;
-      const zone = 80;
-
-      if (x < zone) {
-        goToSlide(currentSlide - 1);
-      } else if (x > w - zone) {
-        goToSlide(currentSlide + 1);
-      }
-    });
-
-    // Service cards: click to navigate
-    document.querySelectorAll('.service-card[data-goto]').forEach(card => {
-      card.addEventListener('click', () => goToSlide(parseInt(card.dataset.goto)));
-    });
-
-    // Back buttons: click to navigate back
-    document.querySelectorAll('.back-to-overview[data-goto]').forEach(btn => {
-      btn.addEventListener('click', () => goToSlide(parseInt(btn.dataset.goto)));
-    });
-
-    // Flip card click for mobile
+    // ── Flip card click (mobile) ──
     document.querySelectorAll('.flip-card').forEach(card => {
       card.addEventListener('click', () => card.classList.toggle('flipped'));
     });
 
-    // Blur opening after typewriter
-    setTimeout(() => {
-      document.querySelector('.slide-opening').classList.add('blurred');
-    }, 2000);
+    // ── Smooth anchor scroll ──
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', (e) => {
+        e.preventDefault();
+        const target = document.querySelector(anchor.getAttribute('href'));
+        if (target) {
+          const top = target.getBoundingClientRect().top + window.scrollY - 70;
+          window.scrollTo({ top, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // ── Scroll hint click ──
+    const scrollHint = document.querySelector('.scroll-hint');
+    if (scrollHint) {
+      scrollHint.addEventListener('click', () => {
+        const about = document.getElementById('about');
+        if (about) {
+          const top = about.getBoundingClientRect().top + window.scrollY - 70;
+          window.scrollTo({ top, behavior: 'smooth' });
+        }
+      });
+      scrollHint.style.cursor = 'pointer';
+    }
   </script>
 </body>
 </html>
