@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="metal" x1="12" y1="9" x2="48" y2="55" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F4F7F9"/>
+      <stop offset="0.52" stop-color="#B7C1C8"/>
+      <stop offset="1" stop-color="#6F7B84"/>
+    </linearGradient>
+    <linearGradient id="surge" x1="43" y1="9" x2="58" y2="25" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#8B5CF6"/>
+      <stop offset="1" stop-color="#FF7A3D"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="16" fill="#0C0C0C"/>
+  <path d="M45 18c-5-5-20-6-26 2-7 10 3 14 13 16 10 2 16 5 12 12-5 8-21 7-28 0" fill="none" stroke="url(#metal)" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="51" cy="14" r="6" fill="url(#surge)"/>
+</svg>

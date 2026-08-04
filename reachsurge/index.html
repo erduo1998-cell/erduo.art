@@ -1,756 +1,166 @@
 <!doctype html>
 <html lang="zh-CN">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>ReachSurge · 帮你把获客这份活全干完的 AI 业务员</title>
-<meta name="description" content="ReachSurge 是住在飞书里的 AI 外贸业务员——你一句话下指令，找客户、查底细、补邮箱、写开发信、发跟进，全是它的事。现为特邀体验官内测阶段。" />
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-<style>
-/* =====================================================================
-   ReachSurge 展示页 — 视觉系统逐字对齐 erduo.art（SURGE 品牌）
-   token / 字体 / 渐变 / 圆角 / 字距 全部沿用官网，确保放在 erduo.art 不违和
-   ===================================================================== */
-:root{
-  /* ---- 中性底（官网 verbatim） ---- */
-  --bg:        #0C0C0C;   /* 近黑画布 */
-  --surface:   #161616;   /* 卡片填充 */
-  --surface-2: #1E1E1E;   /* 卡片内分层 */
-  --paper:     #FFFFFF;   /* 纸面插入区（呼应官网 Services 节奏） */
-  --fg:        #D7E2EA;   /* 冷灰白前景 */
-  --fg-dark:   #0C0C0C;   /* 纸面上文字 */
-  --muted:     #868D97;   /* 弱化灰（提亮至 AA 4.5:1 on #0C0C0C） */
-  --soft:      #BBCCD7;   /* 柔冷灰 */
-  --border:    rgba(215,226,234,0.14);  /* 半透明白边（暗面规范） */
-  --border-strong: #D7E2EA;
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0C0C0C">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <meta name="description" content="ReachSurge 是 SURGE 正在内测的 B2B 获客智能体与开源 MCP 技术底座，把多源发现、公司核验、邮箱富集和触达记录连成一条可由 AI 调用的工作流。">
+  <title>ReachSurge｜B2B 获客智能体与开源 MCP 技术底座</title>
+  <link rel="canonical" href="https://www.erduo.art/reachsurge/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
 
-  /* ---- SURGE 签名渐变（唯一决定性的一笔） ---- */
-  --surge-grad: linear-gradient(123deg,#18011F 7%,#B600A8 37%,#7621B0 72%,#BE4C00 100%);
-  --surge-1:#18011F; --surge-2:#B600A8; --surge-3:#7621B0; --surge-4:#BE4C00;
-  --accent:#BE4C00;            /* 烧橙：功能强调 */
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:title" content="ReachSurge｜B2B 获客智能体">
+  <meta property="og:description" content="把海外获客的搜索、核验、邮箱与触达连成一条由 AI 驱动的工作流。">
+  <meta property="og:url" content="https://www.erduo.art/reachsurge/">
+  <meta property="og:image" content="https://www.erduo.art/assets/social-preview.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="SURGE 无限涌动品牌视觉">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ReachSurge｜B2B 获客智能体">
+  <meta name="twitter:description" content="开源 MCP 技术底座，产品内测中。">
+  <meta name="twitter:image" content="https://www.erduo.art/assets/social-preview.jpg">
+  <meta name="twitter:image:alt" content="SURGE 无限涌动品牌视觉">
 
-  /* ---- 金属灰渐变（官网 hero heading） ---- */
-  --metal-grad: linear-gradient(180deg,#646973 0%,#BBCCD7 100%);
-
-  --font-display:'Kanit','Noto Sans SC',sans-serif;
-  --font-body:'Kanit','Noto Sans SC',sans-serif;
-
-  --r-section:40px; --r-card:20px; --r-pill:9999px;
-  --maxw:1200px;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{
-  background:var(--bg);color:var(--fg);
-  font-family:var(--font-body);
-  font-weight:300;line-height:1.65;
-  overflow-x:hidden;
-  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
-}
-img{display:block;max-width:100%}
-a{color:inherit;text-decoration:none}
-section{position:relative}
-.wrap{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 24px}
-@media(min-width:768px){.wrap{padding:0 40px}}
-
-/* ---- 排版工具 ---- */
-.eyebrow{
-  font-weight:500;text-transform:uppercase;letter-spacing:.22em;
-  font-size:.72rem;color:var(--soft);
-}
-.surge-text{
-  background:var(--surge-grad);-webkit-background-clip:text;background-clip:text;
-  -webkit-text-fill-color:transparent;color:transparent;
-}
-.metal-text{
-  background:var(--metal-grad);-webkit-background-clip:text;background-clip:text;
-  -webkit-text-fill-color:transparent;color:transparent;
-}
-.h-display{
-  font-family:var(--font-display);font-weight:900;
-  text-transform:uppercase;letter-spacing:.04em;line-height:.98;
-}
-.lead{font-weight:300;color:var(--fg);line-height:1.6}
-
-/* ---- 按钮（官网 contact-btn / live-btn 同款） ---- */
-.btn{
-  display:inline-flex;align-items:center;justify-content:center;gap:8px;
-  border-radius:var(--r-pill);cursor:pointer;border:none;font-family:var(--font-body);
-  font-weight:500;text-transform:uppercase;letter-spacing:.1em;
-  padding:15px 30px;font-size:.82rem;white-space:nowrap;
-  transition:filter .2s ease,background .2s ease,transform .15s ease;
-}
-.btn-primary{
-  background:var(--surge-grad);color:#fff;
-  box-shadow:0 4px 4px rgba(181,1,167,.25),4px 4px 12px #7721B1 inset;
-  outline:2px solid #fff;outline-offset:-3px;
-}
-.btn-primary:hover{filter:brightness(1.15)}
-.btn-primary:active{transform:translateY(1px)}
-.btn-ghost{
-  background:transparent;border:2px solid var(--border-strong);color:var(--fg);
-  padding:13px 28px;
-}
-.btn-ghost:hover{background:rgba(215,226,234,.08)}
-.btn:focus-visible{outline:3px solid #fff;outline-offset:2px}
-a:focus-visible{outline:3px solid #fff;outline-offset:2px;border-radius:6px}
-
-/* ============================== NAV ============================== */
-.nav{
-  position:sticky;top:0;z-index:100;
-  backdrop-filter:blur(14px) saturate(1.2);-webkit-backdrop-filter:blur(14px) saturate(1.2);
-  background:rgba(12,12,12,.72);border-bottom:1px solid var(--border);
-}
-.nav-row{display:flex;align-items:center;justify-content:space-between;height:64px;gap:16px}
-.brand{display:flex;align-items:baseline;gap:8px;font-family:var(--font-display);font-weight:800;
-  letter-spacing:.02em;font-size:1.15rem}
-.brand .dot{width:8px;height:8px;border-radius:50%;background:var(--surge-grad);box-shadow:0 0 10px var(--surge-2)}
-.brand small{font-weight:300;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
-.nav-links{display:none;gap:28px}
-.nav-links a{font-size:.86rem;font-weight:500;text-transform:uppercase;letter-spacing:.1em;color:var(--fg);opacity:.85;transition:opacity .2s}
-.nav-links a:hover{opacity:1;color:var(--soft)}
-.nav-cta{display:flex;align-items:center;gap:10px}
-.nav-cta .btn{padding:10px 20px;font-size:.74rem}
-@media(min-width:960px){.nav-links{display:flex}}
-
-/* ============================== HERO ============================== */
-.hero{padding:56px 0 72px;overflow:hidden}
-.hero-grid{display:grid;grid-template-columns:1fr;gap:48px;align-items:center}
-@media(min-width:980px){.hero-grid{grid-template-columns:0.84fr 1.16fr;gap:44px}}
-.beta-badge{
-  display:inline-flex;align-items:center;gap:9px;
-  border:1px solid var(--border);border-radius:var(--r-pill);
-  padding:7px 14px;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--soft);
-  background:rgba(190,76,0,.06);
-}
-.beta-badge i{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px var(--accent)}
-.hero h1{font-size:clamp(2.8rem,11vw,7.2rem);margin:22px 0 10px}
-.hero h1 .cn{
-  display:block;font-size:clamp(1rem,2.6vw,1.5rem);font-weight:700;letter-spacing:.04em;
-  text-transform:none;color:var(--fg);margin-top:14px;opacity:.95;
-}
-.hero .pitch{font-size:clamp(1.05rem,2.2vw,1.4rem);max-width:30ch;margin:6px 0 0;font-weight:300;color:var(--soft)}
-.hero .pitch b{font-weight:600;color:var(--fg)}
-.hero-cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:30px}
-.hero-meta{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:26px;color:var(--muted);font-size:.84rem;letter-spacing:.04em}
-.hero-meta span{display:inline-flex;align-items:center;gap:8px}
-.hero-meta svg{width:16px;height:16px;color:var(--soft)}
-
-/* ---- 飞书对话演示（核心画面） ---- */
-.demo{position:relative}
-.demo::before{
-  content:"";position:absolute;inset:-22px -14px 0;border-radius:40px;z-index:0;
-  background:radial-gradient(120% 70% at 70% 0%,rgba(182,0,168,.16),transparent 60%);
-  filter:blur(6px);
-}
-.phone{
-  position:relative;z-index:1;margin:0 auto;max-width:380px;width:100%;
-  background:var(--surface);border:1px solid var(--border);border-radius:34px;
-  padding:10px;box-shadow:0 30px 80px rgba(0,0,0,.5);
-}
-@media(min-width:980px){.phone{max-width:640px}}
-.phone-screen{background:#0A0A0A;border-radius:26px;overflow:hidden;border:1px solid rgba(255,255,255,.04)}
-.chat-head{display:flex;align-items:center;gap:10px;padding:8px 13px;border-bottom:1px solid var(--border)}
-.chat-head .ava{width:30px;height:30px;border-radius:9px;background:var(--surge-grad);display:grid;place-items:center;flex:0 0 auto;box-shadow:0 0 14px rgba(182,0,168,.4)}
-.chat-head .ava svg{width:16px;height:16px;color:#fff}
-.chat-head .meta{line-height:1.2}
-.chat-head .meta b{font-weight:600;font-size:.86rem;letter-spacing:.02em}
-.chat-head .meta small{display:block;font-size:.62rem;color:var(--muted)}
-.chat-head .meta .live{display:inline-flex;align-items:center;gap:5px}
-.chat-head .meta .live::before{content:"";width:6px;height:6px;border-radius:50%;background:#3ad07a;box-shadow:0 0 6px #3ad07a}
-.chat-head .dots{margin-left:auto;color:var(--muted);letter-spacing:.1em}
-.chat-body{padding:7px 10px 3px;display:flex;flex-direction:column;gap:5px}
-.msg{max-width:86%;opacity:0;transform:translateY(10px)}
-.msg.in{animation:pop .5s cubic-bezier(.2,.7,.3,1) forwards}
-.msg.bot{align-self:flex-start}
-.msg.me{align-self:flex-end}
-.bub{padding:4px 10px;border-radius:12px;font-size:.74rem;line-height:1.32;font-weight:300}
-.msg.me .bub{background:rgba(190,76,0,.18);border:1px solid rgba(190,76,0,.4);border-bottom-right-radius:5px;color:var(--fg)}
-.msg.bot .bub{background:var(--surface-2);border:1px solid var(--border);border-bottom-left-radius:5px;color:var(--fg)}
-@keyframes pop{to{opacity:1;transform:none}}
-.card-mini{margin-top:5px;background:var(--surface-2);border:1px solid var(--border);border-radius:13px;overflow:hidden}
-.card-mini .ct{display:flex;align-items:center;gap:7px;padding:4px 9px;border-bottom:1px solid var(--border);font-size:.68rem;font-weight:500;letter-spacing:.02em}
-.card-mini .ct svg{width:15px;height:15px;flex:0 0 auto}
-.card-mini.plan .ct svg{color:var(--accent)}
-.card-mini.result .ct svg{color:#3ad07a}
-.card-mini.mail .ct svg{color:var(--soft)}
-.card-mini .cb{padding:4px 9px;font-size:.69rem;line-height:1.36;font-weight:300;color:var(--soft)}
-.card-mini .cb b{color:var(--fg);font-weight:500}
-.card-mini .cb ul{list-style:none;display:flex;flex-direction:column;gap:2px;margin-top:3px}
-.card-mini .cb li{display:flex;gap:6px;align-items:flex-start}
-.card-mini .cb li::before{content:"·";color:var(--accent)}
-.tag{display:inline-block;font-size:.64rem;letter-spacing:.06em;padding:1px 6px;border-radius:6px;background:rgba(215,226,234,.08);margin:1px 4px 0 0;color:var(--fg)}
-.tag.hi{background:rgba(58,208,122,.14);color:#7be0a5}
-.tag.mid{background:rgba(190,76,0,.16);color:#e9a37a}
-.chat-foot{display:flex;align-items:center;gap:8px;padding:6px 12px;border-top:1px solid var(--border)}
-.chat-foot .field{flex:1;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--r-pill);padding:5px 12px;font-size:.72rem;color:var(--muted)}
-.chat-foot .send{width:26px;height:26px;border-radius:50%;background:var(--surge-grad);display:grid;place-items:center;flex:0 0 auto}
-.chat-foot .send svg{width:13px;height:13px;color:#fff}
-
-/* ============================== 通用 SECTION ============================== */
-.sec{padding:84px 0}
-@media(min-width:768px){.sec{padding:112px 0}}
-.sec-head{max-width:760px;margin-bottom:48px}
-.sec-head .num{font-family:var(--font-display);font-weight:800;color:var(--muted);letter-spacing:.1em;font-size:.8rem;display:block;margin-bottom:14px}
-.sec-head h2{font-family:var(--font-display);font-weight:800;letter-spacing:.01em;line-height:1.05;font-size:clamp(1.9rem,5vw,3.4rem);text-transform:none}
-.sec-head .sub{margin-top:16px;color:var(--soft);font-weight:300;font-size:clamp(1rem,1.6vw,1.18rem);max-width:54ch}
-
-/* ============================== 痛点 ============================== */
-.pain-grid{display:grid;grid-template-columns:1fr;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--r-card);overflow:hidden}
-@media(min-width:640px){.pain-grid{grid-template-columns:1fr 1fr}}
-@media(min-width:1000px){.pain-grid{grid-template-columns:1fr 1fr 1fr}}
-.pain-item{background:var(--bg);padding:30px 26px;display:flex;flex-direction:column;gap:12px;transition:background .25s}
-.pain-item:hover{background:var(--surface)}
-.pain-item .pn{font-family:var(--font-display);font-weight:800;font-size:1rem;color:var(--accent);letter-spacing:.08em;opacity:.8}
-.pain-item h3{font-weight:600;font-size:1.08rem;letter-spacing:.01em;color:var(--fg);line-height:1.35}
-.pain-item p{font-size:.92rem;font-weight:300;color:var(--soft);line-height:1.6}
-.pain-sum{
-  margin-top:36px;font-family:var(--font-display);font-weight:700;
-  font-size:clamp(1.3rem,3.4vw,2.1rem);letter-spacing:.01em;line-height:1.35;text-align:center;
-}
-.pain-sum em{font-style:normal;font-weight:800}
-
-/* ============================== 对比 ============================== */
-.diff-intro{font-size:clamp(1.1rem,2.4vw,1.5rem);font-weight:300;color:var(--fg);max-width:46ch;margin-bottom:40px}
-.diff-intro b{font-weight:700}
-.cmp{display:grid;gap:14px}
-.cmp-head,.cmp-row{display:grid;grid-template-columns:1fr;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--r-card);overflow:hidden}
-.cmp-head{display:none}
-@media(min-width:860px){
-  .cmp-head{display:grid;grid-template-columns:1fr 1.3fr 1.3fr}
-  .cmp-row{grid-template-columns:1fr 1.3fr 1.3fr}
-}
-.cmp-head > div{padding:16px 20px;font-family:var(--font-display);font-weight:600;font-size:.78rem;text-transform:uppercase;letter-spacing:.14em;background:var(--surface)}
-.cmp-head .h-new{color:var(--fg)}
-.cmp-head .h-old{color:var(--muted)}
-.cmp-cell{padding:18px 20px}
-.cmp-cell.dim{background:var(--bg);font-weight:600;font-size:.92rem;color:var(--fg);display:flex;align-items:center}
-.cmp-cell.old{background:var(--bg);font-size:.9rem;font-weight:300;color:var(--muted);line-height:1.5}
-.cmp-cell.old .x{display:none}
-.cmp-cell.new{background:var(--surface);font-size:.92rem;font-weight:400;color:var(--fg);line-height:1.5}
-.cmp-cell.new b{font-weight:600;color:var(--fg)}
-@media(max-width:859px){
-  .cmp-cell{padding:14px 18px}
-  .cmp-cell.dim{font-family:var(--font-display);text-transform:uppercase;letter-spacing:.08em;font-size:.78rem;color:var(--soft);padding-bottom:6px}
-  .cmp-cell.old::before{content:"传统获客";display:inline-block;font-size:.62rem;letter-spacing:.12em;color:var(--muted);text-transform:uppercase;margin-right:8px;opacity:.7}
-  .cmp-cell.new::before{content:"ReachSurge";display:inline-block;font-size:.62rem;letter-spacing:.12em;color:var(--accent);text-transform:uppercase;margin-right:8px}
-}
-
-/* ============================== 能力 ============================== */
-.cap-grid{display:grid;grid-template-columns:1fr;gap:0}
-@media(min-width:720px){.cap-grid{grid-template-columns:1fr 1fr}}
-.cap{display:grid;grid-template-columns:auto 1fr;gap:22px;padding:30px 4px;border-top:1px solid var(--border)}
-.cap .cn{font-family:var(--font-display);font-weight:800;font-size:clamp(2.6rem,6vw,4.2rem);line-height:.9}
-.cap h3{font-weight:600;font-size:1.12rem;letter-spacing:.01em;margin-bottom:8px;color:var(--fg)}
-.cap p{font-size:.94rem;font-weight:300;color:var(--soft);line-height:1.6;max-width:42ch}
-.cap-foot{
-  margin-top:48px;text-align:center;font-family:var(--font-display);font-weight:600;
-  font-size:clamp(1.15rem,3vw,1.8rem);letter-spacing:.01em;color:var(--fg)
-}
-
-/* ============================== 一天 ============================== */
-.day{background:var(--surface);border-radius:var(--r-section);padding:56px 28px;border:1px solid rgba(215,226,234,.10);box-shadow:0 34px 80px rgba(0,0,0,.42),inset 0 1px 0 rgba(255,255,255,.03)}
-@media(min-width:768px){.day{padding:72px 56px}}
-.day-quote{
-  font-family:var(--font-display);font-weight:500;font-size:clamp(1.25rem,3.4vw,2rem);
-  line-height:1.5;letter-spacing:.01em;max-width:24ch;margin-bottom:14px;
-}
-.day-quote::before{content:"\201C";color:var(--accent);font-weight:800;margin-right:4px}
-.day-quote::after{content:"\201D";color:var(--accent);font-weight:800}
-.day .arrow{color:var(--muted);font-family:var(--font-display);letter-spacing:.2em;margin:6px 0 24px;font-size:.8rem;text-transform:uppercase}
-.day-list{display:grid;gap:16px;list-style:none;counter-reset:d}
-@media(min-width:760px){.day-list{grid-template-columns:1fr 1fr}}
-.day-list li{counter-increment:d;display:flex;gap:14px;font-size:1rem;font-weight:300;color:var(--fg);line-height:1.55}
-.day-list li::before{content:counter(d,decimal-leading-zero);font-family:var(--font-display);font-weight:800;color:var(--accent);min-width:36px}
-.day-tail{margin-top:30px;padding-top:24px;border-top:1px solid var(--border);font-weight:500;font-size:1.05rem;color:var(--fg)}
-.day-tail b{font-weight:800}
-
-/* ============================== 指南 ============================== */
-.guide-grid{display:grid;gap:48px}
-@media(min-width:980px){.guide-grid{grid-template-columns:1fr 1fr}}
-.steps{display:flex;flex-direction:column}
-.step{display:grid;grid-template-columns:auto 1fr;gap:18px;padding:22px 0;border-top:1px solid var(--border)}
-.step:last-child{border-bottom:1px solid var(--border)}
-.step .sn{font-family:var(--font-display);font-weight:800;font-size:1.1rem;color:var(--accent);letter-spacing:.05em}
-.step h4{font-weight:600;font-size:1rem;margin-bottom:5px;color:var(--fg)}
-.step p{font-size:.9rem;font-weight:300;color:var(--soft);line-height:1.55}
-.formula{
-  margin-top:28px;border:1px dashed var(--border-strong);border-radius:var(--r-card);
-  padding:18px 20px;background:rgba(190,76,0,.05)
-}
-.formula .fl{font-size:.7rem;text-transform:uppercase;letter-spacing:.16em;color:var(--soft);margin-bottom:8px}
-.formula code{font-family:var(--font-display);font-weight:700;font-size:1.05rem;letter-spacing:.02em;color:var(--fg);word-spacing:6px}
-.formula code em{font-style:normal;color:var(--accent)}
-.cheat{display:grid;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--r-card);overflow:hidden}
-.cheat-row{display:grid;grid-template-columns:1fr;background:var(--bg)}
-@media(min-width:560px){.cheat-row{grid-template-columns:150px 1fr}}
-.cheat-row .lab{padding:13px 16px;display:flex;align-items:center;gap:9px;font-weight:500;font-size:.86rem;color:var(--fg);background:var(--surface)}
-.cheat-row .lab svg{width:16px;height:16px;color:var(--soft);flex:0 0 auto}
-.cheat-row .val{padding:13px 16px;font-size:.86rem;font-weight:300;color:var(--soft);background:var(--bg);line-height:1.5}
-.cheat-row .val b{color:var(--fg);font-weight:500}
-
-/* ============================== 信任 ============================== */
-.trust-grid{display:grid;grid-template-columns:1fr;gap:16px}
-@media(min-width:640px){.trust-grid{grid-template-columns:1fr 1fr}}
-@media(min-width:1000px){.trust-grid{grid-template-columns:1fr 1fr 1fr 1fr}}
-.trust{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-card);padding:28px 24px;transition:border-color .25s,transform .25s}
-.trust:hover{border-color:var(--border-strong);transform:translateY(-3px)}
-.trust .ti{width:38px;height:38px;border-radius:11px;background:rgba(190,76,0,.1);display:grid;place-items:center;margin-bottom:18px}
-.trust .ti svg{width:20px;height:20px;color:var(--accent)}
-.trust h3{font-weight:600;font-size:1.06rem;margin-bottom:10px;letter-spacing:.01em;color:var(--fg)}
-.trust p{font-size:.9rem;font-weight:300;color:var(--soft);line-height:1.6}
-
-/* ============================== 收尾 ============================== */
-.close{padding:96px 0 64px;text-align:center}
-.close .kw{font-family:var(--font-display);font-weight:800;font-size:clamp(2.2rem,8vw,5.6rem);line-height:1.02;letter-spacing:.01em}
-.close .kw2{display:block;margin-top:14px}
-.close p{margin:26px auto 0;max-width:40ch;color:var(--soft);font-weight:300;font-size:1.05rem}
-.close .btn{margin-top:34px}
-.close-note{margin-top:18px;font-size:.78rem;color:var(--muted);letter-spacing:.06em}
-
-/* ---- 申请内测联系卡（微信二维码 + 联系方式） ---- */
-.apply-card{
-  position:relative;z-index:1;display:grid;grid-template-columns:1fr;gap:24px;
-  max-width:700px;margin:40px auto 0;text-align:left;align-items:center;
-  background:rgba(20,20,20,.74);
-  backdrop-filter:blur(12px) saturate(1.1);-webkit-backdrop-filter:blur(12px) saturate(1.1);
-  border:1px solid var(--border);border-radius:var(--r-card);padding:28px;
-  box-shadow:0 30px 70px rgba(0,0,0,.45);
-}
-@media(min-width:720px){.apply-card{grid-template-columns:auto 1fr;gap:34px;padding:32px 34px}}
-.qr-slot{
-  position:relative;width:198px;height:198px;border-radius:18px;overflow:hidden;
-  background:#fff;display:grid;place-items:center;margin:0 auto;
-  box-shadow:0 0 0 1px var(--border),0 16px 36px rgba(0,0,0,.5);
-}
-.qr-slot img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#fff;padding:10px;z-index:1}
-.qr-ph{color:#7a8088;font-size:.78rem;text-align:center;line-height:1.55;font-weight:600;padding:14px;max-width:150px}
-.qr-ph small{display:block;font-size:.64rem;color:#9aa3ab;margin-top:6px;font-weight:400;letter-spacing:.02em}
-.apply-contact .eyebrow{display:block;margin-bottom:10px}
-.apply-contact h3{font-family:var(--font-display);font-weight:700;font-size:clamp(1.2rem,3vw,1.62rem);line-height:1.32;letter-spacing:.01em;color:var(--fg)}
-.apply-list{list-style:none;margin-top:16px;display:flex;flex-direction:column;gap:9px}
-.apply-list li{display:flex;align-items:baseline;gap:14px;font-size:.94rem}
-.apply-list .al-k{font-family:var(--font-display);font-weight:600;text-transform:uppercase;letter-spacing:.12em;font-size:.68rem;color:var(--soft);min-width:46px}
-.apply-list .al-v{color:var(--fg);font-weight:400;word-break:break-all}
-.apply-list a.al-v{transition:color .2s}
-.apply-list a.al-v:hover{color:var(--accent)}
-.apply-card .apply-note{margin:16px 0 0;font-size:.76rem;color:var(--muted);letter-spacing:.04em;max-width:none}
-
-/* ============================== FOOTER ============================== */
-footer{border-top:1px solid rgba(215,226,234,.06);padding:42px 0;background:linear-gradient(180deg,rgba(12,12,12,.4),#0C0C0C 60%)}
-.foot-row{display:flex;flex-wrap:wrap;gap:18px 28px;align-items:center;justify-content:space-between}
-.foot-row .brand{font-size:1rem}
-.foot-links{display:flex;flex-wrap:wrap;gap:22px}
-.foot-links a{font-size:.84rem;color:var(--soft);letter-spacing:.04em;transition:color .2s}
-.foot-links a:hover{color:var(--fg)}
-.foot-copy{color:var(--muted);font-size:.78rem;letter-spacing:.04em}
-
-/* ---- 进入动画 ---- */
-.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.2,.7,.3,1),transform .7s cubic-bezier(.2,.7,.3,1)}
-.reveal.in{opacity:1;transform:none}
-
-/* ===== 媒体槽位（无破图：素材未生成时显示品牌暗调占位，文件一放入 assets/ 自动显示）===== */
-.hero{position:relative;isolation:isolate}
-.hero-bg{position:absolute;inset:0;z-index:-1;overflow:hidden;background:radial-gradient(120% 90% at 78% 8%,rgba(182,0,168,.12),transparent 55%),#0C0C0C}
-.hero-bg-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.42}
-.hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,rgba(12,12,12,.74) 0%,rgba(12,12,12,.3) 55%,rgba(12,12,12,.55) 100%)}
-
-.day{position:relative;overflow:hidden}
-.day-bg{position:absolute;inset:0;z-index:0;overflow:hidden;border-radius:var(--r-section);background:radial-gradient(120% 90% at 50% 0%,rgba(118,33,176,.13),transparent 55%),linear-gradient(180deg,rgba(32,32,32,.94),rgba(18,18,18,.96))}
-.day-bg-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.20}
-.day > *:not(.day-bg){position:relative;z-index:1}
-
-.meet{background:linear-gradient(180deg,#0C0C0C 0%,#000000 13%,#000000 87%,#0C0C0C 100%)}
-.meet .meet-grid{display:grid;grid-template-columns:1fr;gap:36px;align-items:center}
-@media(min-width:860px){.meet .meet-grid{grid-template-columns:.85fr 1.15fr;gap:56px}}
-.meet-figure{
-  aspect-ratio:4/5;min-height:320px;position:relative;
-  background:#000000 url('assets/agent-3d.webp') center/cover no-repeat;
-}
-/* 机器人图自带纯黑 #000000 背景（实测四角/边缘均为 0,0,0）；本段用纯黑舞台，
-   图片背景与段落同色 → 硬矩形边自然消失，无需 mask/羽化。 */
-.meet-text .num{font-family:var(--font-display);font-weight:800;color:var(--muted);letter-spacing:.1em;font-size:.8rem;display:block;margin-bottom:14px}
-.meet-text h2{font-family:var(--font-display);font-weight:800;letter-spacing:.01em;line-height:1.08;font-size:clamp(1.7rem,4.4vw,2.9rem)}
-.meet-text p{margin-top:16px;color:var(--soft);font-weight:300;line-height:1.7;max-width:46ch}
-
-#trust,#apply{position:relative;overflow:hidden}
-.trust-bg{position:absolute;inset:0;z-index:0;opacity:.13;background:#0C0C0C url('assets/data-local.webp') center/cover no-repeat}
-#trust::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:radial-gradient(125% 105% at 50% 50%,transparent 48%,#0C0C0C 100%)}
-#trust .wrap,#apply .wrap{position:relative;z-index:1}
-.close-bg{position:absolute;inset:0;z-index:0;overflow:hidden;background:#0C0C0C}
-.close-bg-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.34}
-.close-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#0C0C0C 0%,rgba(12,12,12,.5) 16%,rgba(12,12,12,.32) 50%,rgba(12,12,12,.55) 80%,#0C0C0C 100%),radial-gradient(80% 60% at 50% 36%,rgba(182,0,168,.12),transparent 62%)}
-@media(prefers-reduced-motion:reduce){
-  .reveal{opacity:1;transform:none}
-  .msg{opacity:1;transform:none;animation:none}
-  html{scroll-behavior:auto}
-}
-</style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "ReachSurge",
+    "url": "https://www.erduo.art/reachsurge/",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "SURGE / 无限涌动",
+      "url": "https://www.erduo.art/"
+    },
+    "about": "B2B 获客智能体与开源 MCP 技术底座"
+  }
+  </script>
+  <script src="/site.js" defer></script>
 </head>
-<body>
+<body class="product-page">
+  <a class="skip-link" href="#main">跳到主要内容</a>
 
-<!-- =================== NAV =================== -->
-<nav class="nav" aria-label="主导航">
-  <div class="wrap nav-row">
-    <a class="brand" href="#top"><span class="dot"></span>ReachSurge<small>by SURGE</small></a>
-    <div class="nav-links">
-      <a href="#pain">痛点</a>
-      <a href="#diff">差异</a>
-      <a href="#cap">能力</a>
-      <a href="#guide">怎么用</a>
-      <a href="#trust">安全</a>
-    </div>
-    <div class="nav-cta">
-      <a class="btn btn-primary" href="#apply">申请内测</a>
-    </div>
-  </div>
-</nav>
+  <header class="site-header is-scrolled" data-header>
+    <a class="brand" href="/" aria-label="返回 SURGE 无限涌动首页">
+      <span class="brand-en">SURGE</span>
+      <span class="brand-cn">无限涌动</span>
+    </a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-navigation" data-menu-toggle>
+      <span>菜单</span>
+      <span class="menu-icon" aria-hidden="true"><i></i><i></i></span>
+    </button>
+    <nav class="site-nav" id="site-navigation" aria-label="产品页导航" data-menu>
+      <a href="#capabilities">能力</a>
+      <a href="#workflow">流程</a>
+      <a href="#boundary">边界</a>
+      <a href="https://github.com/erduo1998-cell/reachsurge" target="_blank" rel="noopener noreferrer">开源仓库</a>
+      <a href="/#contact">联系</a>
+    </nav>
+  </header>
 
-<main id="top">
-
-<!-- =================== HERO =================== -->
-<header class="hero">
-  <div class="hero-bg" aria-hidden="true">
-    <video class="hero-bg-video" autoplay muted loop playsinline preload="none"><source src="assets/hero-bg.mp4" type="video/mp4"></video>
-  </div>
-  <div class="wrap hero-grid">
-    <div>
-      <span class="beta-badge"><i></i>特邀体验官内测 · 暂未公开</span>
-      <h1 class="h-display"><span class="metal-text">ReachSurge</span>
-        <span class="cn">帮你把获客这份活，全部干完的 <span class="surge-text">AI 业务员</span></span>
-      </h1>
-      <p class="pitch">你只用<b>一句话</b>下指令——找客户、查底细、补邮箱、写开发信、发跟进、等回复，<b>全是它的事</b>。</p>
-      <div class="hero-cta">
-        <a class="btn btn-primary" href="#apply">申请内测名额</a>
-        <a class="btn btn-ghost" href="#cap">看它能干哪些活</a>
-      </div>
-      <div class="hero-meta">
-        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>住在飞书里，发句话就能使唤</span>
-        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>数据全部存在你自己的电脑</span>
-        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>24 小时不下班，越用越懂你</span>
-      </div>
-    </div>
-
-    <!-- 飞书对话演示 -->
-    <div class="demo reveal" id="demo">
-      <div class="phone">
-        <div class="phone-screen">
-          <div class="chat-head">
-            <span class="ava"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2a4 4 0 0 1 4 4v1h1a3 3 0 0 1 3 3v1a5 5 0 0 1-5 5h-1l-3 4-2-3a6 6 0 0 1-4-6V9a3 3 0 0 1 3-3h.5A4 4 0 0 1 12 2z"/></svg></span>
-            <span class="meta"><b>ReachSurge</b><small class="live">在线 · 外贸 AI 业务员</small></span>
-            <span class="dots">···</span>
+  <main id="main">
+    <section class="product-hero" aria-labelledby="product-title">
+      <div class="shell product-hero-grid">
+        <div>
+          <div class="status-row reveal" aria-label="产品状态">
+            <span>B2B 获客智能体</span><span>内测中</span><span>开源技术底座</span>
           </div>
-          <div class="chat-body" id="chatBody">
-            <div class="msg me"><div class="bub">帮我找德国做高端商业照明的进口买家</div></div>
-            <div class="msg bot"><div class="bub">收到，我先理一下你的买家画像，再给你作战计划确认。</div>
-              <div class="card-mini plan">
-                <div class="ct"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>作战计划 · 先请你过目</div>
-                <div class="cb"><b>买家画像</b>：博物馆 / 画廊、珠宝零售、照明工程商<br>
-                  <b>判断真假</b>：真 B 端买家 · 有进口迹象 · 合作可能性高</div>
-              </div>
-            </div>
-            <div class="msg me"><div class="bub">开始</div></div>
-            <div class="msg bot"><div class="bub">多渠道并行搜，约 2–3 分钟，搜完汇报。</div>
-              <div class="card-mini result">
-                <div class="ct"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 6L9 17l-5-5"/></svg>第 1 轮结果 · 入库 12 家</div>
-                <div class="cb"><b>高意向 4 家</b>：ERCO · TRILUX · LEDVANCE · Infineon
-                  <ul><li>有邮箱 7 家，待补 5 家</li><li>已自动剔除垃圾 7 家（银行 / 医疗 / 教会）</li></ul>
-                  <span class="tag hi">合作可能性高</span><span class="tag mid">中</span>
-                </div>
-              </div>
-            </div>
-            <div class="msg bot"><div class="bub">给高意向的写开发信：</div>
-              <div class="card-mini mail">
-                <div class="ct"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>开发信草稿（德语）· 3 封</div>
-                <div class="cb">已结合你「高显色」卖点与对方业务起草，<b>过目确认后我再发</b>——不群发、不进垃圾箱。</div>
-              </div>
-            </div>
-          </div>
-          <div class="chat-foot">
-            <span class="field">发消息给 ReachSurge…</span>
-            <span class="send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></span>
+          <p class="eyebrow reveal">REACHSURGE / BY SURGE</p>
+          <h1 class="metal-text reveal" id="product-title">Reach<br>Surge</h1>
+          <p class="product-hero-lead reveal">把找海外买家、核验公司、补全邮箱、写信和跟进，串成一条由 AI 驱动的获客流水线，业务数据留在自己手里。</p>
+          <div class="button-row reveal">
+            <a class="button button-primary" href="https://github.com/erduo1998-cell/reachsurge" target="_blank" rel="noopener noreferrer">查看开源仓库</a>
+            <a class="button button-secondary" href="mailto:erduo1998@gmail.com?subject=ReachSurge%20内测沟通">沟通内测</a>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-</header>
 
-<!-- =================== 痛点 =================== -->
-<section class="sec meet" id="meet" data-od-id="meet">
-  <div class="wrap meet-grid">
-    <div class="meet-figure" role="img" aria-label="ReachSurge AI 业务员 3D 形象"></div>
-    <div class="meet-text reveal">
-      <span class="num">— 认识你的 AI 业务员</span>
-      <h2>不下班、不喊累，<br>还越用越懂你的生意</h2>
-      <p>它不是又一个软件，是长在你飞书里的一个 AI 外贸业务员。你给方向、它出结果——找客户、查底细、补邮箱、写开发信、发跟进，中间这一长串全是它自己干。24 小时不下班，越用越懂你的生意，数据还不出了你的电脑。</p>
-    </div>
-  </div>
-</section>
-
-<section class="sec" id="pain" data-od-id="pain">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <span class="num">01 — 痛点</span>
-      <h2>外贸老板，这些画面<br>熟不熟悉？</h2>
-      <p class="sub">获客这件事，靠堆人、靠砸钱、靠群发，已经走到头了。</p>
-    </div>
-    <div class="pain-grid reveal">
-      <div class="pain-item"><span class="pn">01</span><h3>养了一堆业务员，却还是靠运气找客户</h3><p>一个人一天翻遍 Google 和 B2B 平台，累到吐也就找二三十条，大半还是同行。</p></div>
-      <div class="pain-item"><span class="pn">02</span><h3>开发信群发出去，全进垃圾箱</h3><p>群发几万封，回复寥寥——客户根本不匹配，对方一眼就看穿是群发骚扰。</p></div>
-      <div class="pain-item"><span class="pn">03</span><h3>买了海关数据、买了会员，捞上来全是同行</h3><p>真正在进口的买家藏在大池子里，你根本筛不出来。</p></div>
-      <div class="pain-item"><span class="pn">04</span><h3>工具一大堆，员工不愿用</h3><p>要学、要切窗口、要登录五六个系统，新鲜两天就吃灰了。</p></div>
-      <div class="pain-item"><span class="pn">05</span><h3>业务员一走，客户全带走</h3><p>线索散在个人的 Excel 和微信里，人离职，数据跟着走。</p></div>
-      <div class="pain-item"><span class="pn">06</span><h3>客户在另一个时区，没人盯着跟进</h3><p>晚上和周末，询盘和回复就这么错过了。</p></div>
-    </div>
-    <p class="pain-sum reveal">问题不在<em class="surge-text">更努力</em>，在<em>换了干活的人</em>。</p>
-  </div>
-</section>
-
-<!-- =================== 对比 =================== -->
-<section class="sec" id="diff" data-od-id="diff">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <span class="num">02 — 差异</span>
-      <h2>我们和市面上的工具，<br>根本不是一回事</h2>
-    </div>
-    <p class="diff-intro reveal">市面上绝大多数获客工具做的是同一件事：<b>广撒网，不深挖</b>。给你一个超大名单让你去群发——结果大部分邮件进垃圾箱、大部分公司根本不是你的客户。ReachSurge 是它们的升级版：<b>不撒网，只深挖</b>。</p>
-
-    <div class="cmp reveal">
-      <div class="cmp-head"><div></div><div class="h-old">传统获客工具</div><div class="h-new">ReachSurge</div></div>
-
-      <div class="cmp-row">
-        <div class="cmp-cell dim">找客户方式</div>
-        <div class="cmp-cell old">广撒网，给你一个超大名单</div>
-        <div class="cmp-cell new"><b>AI 深挖</b>：先想清楚「买家是谁、在哪采购」再精准找</div>
+        <dl class="product-summary reveal">
+          <dt>当前形态</dt>
+          <dd>开源 MCP 技术底座 + 内测产品</dd>
+          <dt>核心作用</dt>
+          <dd>让 Agent 可以调用获客工具，并把结果写回本地线索库。</dd>
+          <dt>数据方式</dt>
+          <dd>支持本地 SQLite，按用户隔离；具体安全边界取决于实际部署与第三方数据源。</dd>
+          <dt>使用前提</dt>
+          <dd>需要本地运行环境、按需配置数据源与邮箱，不是零配置 SaaS。</dd>
+        </dl>
       </div>
-      <div class="cmp-row">
-        <div class="cmp-cell dim">名单质量</div>
-        <div class="cmp-cell old">大量同行、垃圾、不沾边</div>
-        <div class="cmp-cell new">每条带<b>合作可能性评分</b>，AI 帮你判断值不值得跟</div>
-      </div>
-      <div class="cmp-row">
-        <div class="cmp-cell dim">开发信</div>
-        <div class="cmp-cell old">群发模板，进垃圾箱</div>
-        <div class="cmp-cell new">针对每个客户<b>单独起草</b>，说到对方心坎上</div>
-      </div>
-      <div class="cmp-row">
-        <div class="cmp-cell dim">操作方式</div>
-        <div class="cmp-cell old">五六个软件来回切，要学习</div>
-        <div class="cmp-cell new">就待在你的<b>飞书 / 微信 / 钉钉</b>里，发句话就行</div>
-      </div>
-      <div class="cmp-row">
-        <div class="cmp-cell dim">谁在干活</div>
-        <div class="cmp-cell old">还是业务员，工具只是辅助</div>
-        <div class="cmp-cell new"><b>AI 自己干活</b>，业务员只管拍板</div>
-      </div>
-      <div class="cmp-row">
-        <div class="cmp-cell dim">数据安全</div>
-        <div class="cmp-cell old">存在别人服务器上</div>
-        <div class="cmp-cell new"><b>存在你自己电脑里</b>，我们碰都碰不到</div>
-      </div>
-      <div class="cmp-row">
-        <div class="cmp-cell dim">数据成本</div>
-        <div class="cmp-cell old">每年几万到几十万买数据 / 会员</div>
-        <div class="cmp-cell new">不依赖昂贵数据包，<b>自己从公开渠道挖</b></div>
-      </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<!-- =================== 能力 =================== -->
-<section class="sec" id="cap" data-od-id="cap">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <span class="num">03 — 能力</span>
-      <h2>它能替你干哪些活</h2>
-      <p class="sub">从找到客户、到把客户聊热，中间这一长串全是它自己干，不需要人盯着。</p>
-    </div>
-    <div class="cap-grid reveal">
-      <div class="cap"><span class="cn surge-text">01</span><div><h3>找真买家</h3><p>不是搜个「LED 经销商」给你一堆同行。AI 先推理你的产品卖给谁、买家在哪进货，再精准下手。</p></div></div>
-      <div class="cap"><span class="cn surge-text">02</span><div><h3>查客户底细（AI 背调）</h3><p>抓客户官网，AI 告诉你这家公司干什么、多大规模、有没有可能跟你合作、可能性多高。</p></div></div>
-      <div class="cap"><span class="cn surge-text">03</span><div><h3>找决策人邮箱</h3><p>公司名有了、邮箱没有？AI 一层层挖：扒网站、查邮箱库、真实握手验证能不能收件，最后兜底一个能用的。</p></div></div>
-      <div class="cap"><span class="cn surge-text">04</span><div><h3>验真采购方</h3><p>查海关提单，这家公司到底真金白银进口过没有——硬证据，不靠猜。</p></div></div>
-      <div class="cap"><span class="cn surge-text">05</span><div><h3>写多语种开发信</h3><p>基于你的产品资料和卖点，AI 针对每个客户单独写，德语、英语、西语都能来，不千篇一律。</p></div></div>
-      <div class="cap"><span class="cn surge-text">06</span><div><h3>发信 · 跟进 · 整理回复，一条龙无人值守</h3><p>确认后按你的节奏自动发；没回的隔几天自动追；回了的整理好推给你。</p></div></div>
-    </div>
-    <p class="cap-foot reveal">一份完整的获客流程，AI 一条龙全包。</p>
-  </div>
-</section>
-
-<!-- =================== 你的一天 =================== -->
-<section class="sec" id="day" data-od-id="day">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <span class="num">04 — 真实画面</span>
-      <h2>你的一天，会变成这样</h2>
-    </div>
-    <div class="day reveal">
-      <div class="day-bg" aria-hidden="true"><video class="day-bg-video" autoplay muted loop playsinline preload="none"><source src="assets/day-scene.mp4" type="video/mp4"></video></div>
-      <p class="day-quote">早上你在飞书里打一行字：帮我找德国做高端商业照明的进口买家。</p>
-      <p class="arrow">▼ 然后你去喝杯咖啡</p>
-      <ul class="day-list">
-        <li>它想清楚了你的买家长什么样，把作战计划发给你确认。</li>
-        <li>你点个头，它从多个渠道找来一批德国公司。</li>
-        <li>每家都查了底细，标好了合作可能性高 / 中 / 低。</li>
-        <li>垃圾公司（银行、教会、不沾边的）被它自己扔掉了。</li>
-        <li>决策人邮箱补得差不多了。</li>
-        <li>一张清单卡片已经躺在你的飞书里，点开就能看。</li>
-      </ul>
-      <p class="day-tail">你说一句「给高意向的写开发信」——几分钟后，几封专为这些客户写的德语开发信就放在你面前，<b>你确认一下就发</b>。<br>全程你只说了两句话、干了两个动作：<b>下指令、拍板</b>。剩下的，全是它。</p>
-    </div>
-  </div>
-</section>
-
-<!-- =================== 指南 =================== -->
-<section class="sec" id="guide" data-od-id="guide">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <span class="num">05 — 操作指南</span>
-      <h2>5 分钟上手，像跟同事发消息</h2>
-      <p class="sub">ReachSurge 就住在你的飞书里，不用装软件、不用开新窗口。你像跟同事发消息一样给它发指令。</p>
-    </div>
-    <div class="guide-grid">
-      <div class="reveal">
-        <div class="steps">
-          <div class="step"><span class="sn">01</span><div><h4>把 ReachSurge 加进飞书</h4><p>在「工作台」或搜索框找到 ReachSurge 应用，发起一次私聊（公司统一开通的，管理员已帮你加好）。</p></div></div>
-          <div class="step"><span class="sn">02</span><div><h4>跟它说第一句话</h4><p>随便发一句都行，比如「你好 / 我想找海外客户」。它会识别你是新用户，主动开始帮你配置。</p></div></div>
-          <div class="step"><span class="sn">03</span><div><h4>回答它三个问题（只需一次）</h4><p>卖什么产品（说清核心卖点）、目标市场在哪、开发信用哪个邮箱——这是它「懂你生意」的关键。</p></div></div>
-          <div class="step"><span class="sn">04</span><div><h4>配置完成，开干</h4><p>它把资料存进你的专属资料库，告诉你「可以开始了」。之后只要一句话，它就干活。</p></div></div>
-        </div>
-        <div class="formula">
-          <div class="fl">万能公式</div>
-          <code><em>[国家]</em> + <em>[产品/行业]</em> + <em>[买家类型]</em></code>
-          <p style="margin-top:8px;font-size:.82rem;color:var(--muted)">三样给齐，它找得最准。「帮我找德国做高端商业照明的进口买家」✓ ·「帮我找客户」✗（太含糊，它会反问你）</p>
+    <section class="product-section product-section-paper" id="capabilities" aria-labelledby="capabilities-title">
+      <div class="shell">
+        <p class="section-label section-label-dark reveal">WHAT IT CONNECTS / 它连接什么</p>
+        <h2 class="reveal" id="capabilities-title">不是再给你一张名单，<br>而是把一段获客工作接起来。</h2>
+        <div class="product-capabilities">
+          <article class="product-capability reveal">
+            <span>01</span>
+            <h3>多源发现</h3>
+            <p>根据产品与目标市场，从地图、B2B 平台、海关和公开网络寻找候选公司；可用来源取决于当前配置。</p>
+          </article>
+          <article class="product-capability reveal">
+            <span>02</span>
+            <h3>核验与富集</h3>
+            <p>整理公司资料，补全并分级邮箱，把来源不同的候选线索归一化、去重并写回线索库。</p>
+          </article>
+          <article class="product-capability reveal">
+            <span>03</span>
+            <h3>触达闭环</h3>
+            <p>基于产品资料生成开发信草稿，并支持经确认后的发信、收信与记录回写。</p>
+          </article>
+          <article class="product-capability reveal">
+            <span>04</span>
+            <h3>本地数据</h3>
+            <p>线索、知识库和触达记录可以存进本地 SQLite，并按用户隔离；第三方接口仍受各自服务边界约束。</p>
+          </article>
         </div>
       </div>
+    </section>
 
-      <div class="reveal">
-        <div class="cheat">
-          <div class="cheat-row"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg>找客户</div><div class="val">「帮我找<b>德国</b>做<b>高端商业照明</b>的<b>进口买家</b>」</div></div>
-          <div class="cheat-row"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>查某家底细</div><div class="val">「帮我查一下 <b>ERCO</b> 这家公司」</div></div>
-          <div class="cheat-row"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 6h16v12H4z"/><path d="M4 7l8 6 8-6"/></svg>给线索补邮箱</div><div class="val">「把刚找到这批线索<b>补上邮箱</b>」</div></div>
-          <div class="cheat-row"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 7l9 6 9-6"/><rect x="3" y="5" width="18" height="14" rx="2"/></svg>写开发信</div><div class="val">「给<b>高意向的</b>写开发信」 / 「给 <b>TRILUX</b> 写一封」</div></div>
-          <div class="cheat-row"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 6h16M4 10h16M4 14h10M4 18h7"/></svg>看线索库</div><div class="val">「我现在库里<b>有多少条线索</b>」 / 「看<b>高意向的</b>」</div></div>
-          <div class="cheat-row"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3v12m0 0l-4-4m4 4l4-4"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>导出</div><div class="val">「导出到<b>飞书多维表格</b>」 / 「导成文档」</div></div>
-          <div class="cheat-row"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.8.4-1 1-1 1.7M12 17h.01"/></svg>不知道干啥</div><div class="val">直接问「<b>你能帮我做什么</b>」</div></div>
+    <section class="product-section" id="workflow" aria-labelledby="workflow-title">
+      <div class="shell">
+        <p class="section-label reveal">WORKFLOW / 工作流</p>
+        <h2 class="metal-text reveal" id="workflow-title">人给目标和边界，<br>Agent 调工具、留记录、交结果。</h2>
+        <ol class="product-flow reveal" aria-label="ReachSurge 工作流程">
+          <li><span>01</span><strong>定义产品与市场</strong></li>
+          <li><span>02</span><strong>发现候选公司</strong></li>
+          <li><span>03</span><strong>核验并补全邮箱</strong></li>
+          <li><span>04</span><strong>生成与确认触达</strong></li>
+          <li><span>05</span><strong>回写线索与回复</strong></li>
+        </ol>
+
+        <div class="product-boundary reveal" id="boundary">
+          <h3>当前边界</h3>
+          <p>ReachSurge 当前是 Alpha 阶段的开源工程与内测产品，不是已经标准化交付的成熟 SaaS。它依赖外部数据源、API 配置和邮箱环境；未配置的来源会降级或不可用。系统提供工具与工作流，不替使用者做最终业务判断，也不承诺所有部署天然拥有相同的数据安全边界。</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="contact" id="contact" aria-labelledby="contact-title">
+    <div class="contact-beam" aria-hidden="true"></div>
+    <div class="shell contact-layout">
+      <div>
+        <p class="section-label reveal">OPEN SOURCE &amp; EARLY ACCESS</p>
+        <h2 class="contact-title metal-text reveal" id="contact-title">先看代码，<br>再聊流程。</h2>
+      </div>
+      <div class="contact-copy reveal">
+        <p>如果你的获客流程正被多个工具和人工搬运切碎，可以带着一段真实流程来聊。我们会先看目标、边界与验收标准。</p>
+        <div class="button-row">
+          <a class="button button-primary" href="https://github.com/erduo1998-cell/reachsurge" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a class="button button-secondary" href="mailto:erduo1998@gmail.com?subject=ReachSurge%20内测沟通">发送邮件</a>
+          <a class="text-link" href="/">返回 SURGE 首页</a>
         </div>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- =================== 信任 =================== -->
-<section class="sec" id="trust" data-od-id="trust">
-  <div class="trust-bg" aria-hidden="true"></div>
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <span class="num">06 — 放心</span>
-      <h2>老板最放心的四件事</h2>
-    </div>
-    <div class="trust-grid reveal">
-      <div class="trust"><span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span><h3>数据不出你的电脑</h3><p>产品资料、客户线索全部存在你自己电脑里，和别人硬隔离。我们不碰、看不到、也带不走。业务员离职，客户还在你的库里。</p></div>
-      <div class="trust"><span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 8h18M8 21h8"/></svg></span><h3>零配置、零窗口、零学习</h3><p>不用装新软件、不用学新系统、不用切窗口。它就长在你的飞书、微信、钉钉里——你的员工本来每天就在用这些。</p></div>
-      <div class="trust"><span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 3a3 3 0 0 1 6 0c2 1 3 3 3 5 0 2-1 4-3 5"/><path d="M9 3C7 4 6 6 6 8s1 4 3 5l3 4 3-3a6 6 0 0 0 3-5"/></svg></span><h3>它真的「懂」你的生意</h3><p>你把产品资料、卖点、开发信思路喂给它一次，它就像把你的产品手册背得滚瓜烂熟的金牌业务员——越用越懂你。</p></div>
-      <div class="trust"><span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="6" width="20" height="13" rx="2"/><path d="M2 11h20M6 15h4"/></svg></span><h3>不用再为找客户烧钱</h3><p>不用买海关数据、买 B2B 会员、买群发工具。它自己从公开渠道把客户挖出来——每一分钱都花在一个会干活的 AI 身上。</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- =================== 收尾 =================== -->
-<section class="close" id="apply" data-od-id="apply">
-  <div class="close-bg" aria-hidden="true"><video class="close-bg-video" autoplay muted loop playsinline preload="none"><source src="assets/close-bg.mp4" type="video/mp4"></video></div>
-  <div class="wrap">
-    <p class="kw reveal">你只管给指令，<br><span class="kw2 surge-text">剩下的，交给它。</span></p>
-    <p class="reveal">ReachSurge 是一个 24 小时不下班、不喊累、不休假、不带走你客户、而且越用越懂你生意的 AI 外贸团队。</p>
-
-    <div class="apply-card reveal" id="contact">
-      <div class="qr-slot" aria-label="微信二维码">
-        <span class="qr-ph">微信二维码<small>扫码加我，备注 ReachSurge 内测</small></span>
-        <img src="assets/wechat-qr.jpg" alt="微信二维码 · 扫码申请 ReachSurge 内测" width="198" height="198" onerror="this.remove()">
-      </div>
-      <div class="apply-contact">
-        <span class="eyebrow">申请内测 · 直接联系</span>
-        <h3>扫码加我微信，<br>备注「ReachSurge 内测」</h3>
-        <ul class="apply-list">
-          <li><span class="al-k">微信</span><span class="al-v">13770579373</span></li>
-          <li><span class="al-k">邮箱</span><a class="al-v" href="mailto:erduo1998@gmail.com?subject=ReachSurge%20内测申请">erduo1998@gmail.com</a></li>
-          <li><span class="al-k">官网</span><a class="al-v" href="https://erduo.art">erduo.art</a></li>
-        </ul>
-        <p class="apply-note">现为特邀体验官内测阶段 · 暂未对外开放 · 不定价</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-</main>
-
-<footer>
-  <div class="wrap foot-row">
-    <a class="brand" href="#top"><span class="dot"></span>ReachSurge<small>by SURGE</small></a>
-    <div class="foot-links">
-      <a href="#pain">痛点</a>
-      <a href="#cap">能力</a>
-      <a href="#guide">操作指南</a>
-      <a href="#apply">联系</a>
-      <a href="https://erduo.art">erduo.art</a>
-    </div>
-    <span class="foot-copy">© SURGE · 无限涌动</span>
-  </div>
-</footer>
-
-<script>
-/* 滚动进入动画 + 飞书对话按节奏逐条浮入（唯一 flourish） */
-(function(){
-  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  // 通用 reveal
-  var reveals = document.querySelectorAll('.reveal');
-  if (reduce || !('IntersectionObserver' in window)) {
-    reveals.forEach(function(el){ el.classList.add('in'); });
-  } else {
-    var io = new IntersectionObserver(function(entries){
-      entries.forEach(function(e){
-        if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
-      });
-    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
-    reveals.forEach(function(el){ io.observe(el); });
-  }
-
-  // 对话逐条浮入
-  var msgs = document.querySelectorAll('#chatBody .msg');
-  function playChat(){
-    msgs.forEach(function(m, i){
-      setTimeout(function(){ m.classList.add('in'); }, reduce ? 0 : 220 + i * 520);
-    });
-  }
-  var demo = document.getElementById('demo');
-  if (reduce || !demo || !('IntersectionObserver' in window)) {
-    playChat();
-  } else {
-    var dio = new IntersectionObserver(function(entries){
-      entries.forEach(function(e){
-        if (e.isIntersecting){ playChat(); dio.disconnect(); }
-      });
-    }, { threshold: 0.3 });
-    dio.observe(demo);
-  }
-
-  // 平滑锚点（避免依赖 scroll-behavior 在某些嵌入环境失效）
-  document.querySelectorAll('a[href^="#"]').forEach(function(a){
-    a.addEventListener('click', function(ev){
-      var id = a.getAttribute('href');
-      if (id.length < 2) return;
-      var t = document.querySelector(id);
-      if (!t) return;
-      ev.preventDefault();
-      var top = t.getBoundingClientRect().top + window.pageYOffset - 56;
-      window.scrollTo({ top: top, behavior: reduce ? 'auto' : 'smooth' });
-    });
-  });
-})();
-</script>
+    <div class="shell footer-line"><span>© 2026 SURGE · 无限涌动 · ReachSurge</span><a href="#main">返回顶部 ↑</a></div>
+  </footer>
 </body>
 </html>
