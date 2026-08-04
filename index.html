@@ -11,9 +11,10 @@
   <link rel="canonical" href="https://www.erduo.art/">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="preload" href="/assets/hero-portrait.webp" as="image" type="image/webp">
   <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/home.css">
 
   <meta property="og:type" content="website">
   <meta property="og:locale" content="zh_CN">
@@ -84,17 +85,32 @@
       <div class="hero-glow hero-glow-b" aria-hidden="true"></div>
       <div class="hero-wordmark metal-text" aria-hidden="true">SURGE</div>
 
-      <div class="hero-portrait" data-parallax>
-        <img src="/assets/hero-portrait.webp" width="591" height="640" alt="SURGE 创始人刘冉（耳总）" fetchpriority="high">
-      </div>
-
-      <div class="hero-content shell">
-        <p class="eyebrow reveal">SURGE / 无限涌动</p>
-        <h1 id="hero-title" class="reveal reveal-delay-1">让 AI 从“会回答”，<br>走到“把事情做完”。</h1>
-        <p class="hero-copy reveal reveal-delay-2">我们围绕 AI Agent 做产品、开源工作流与企业落地，让人保留判断与拍板，把重复执行交给可指挥、可约束、可验收的数字团队。</p>
-        <div class="button-row reveal reveal-delay-3">
-          <a class="button button-primary" href="#open-source">查看开源项目</a>
-          <a class="button button-secondary" href="#contact">聊一个真实业务流程</a>
+      <div class="hero-stage shell">
+        <div class="hero-content">
+          <p class="eyebrow reveal">SURGE / 无限涌动</p>
+          <h1 id="hero-title" class="reveal reveal-delay-1" aria-label="让 AI 从“会回答”，走到“把事情做完”。">
+            <span class="heading-layout heading-layout-wide" aria-hidden="true">
+              <span class="display-line">让 AI 从“会回答”，</span>
+              <span class="display-line">走到“把事情做完”。</span>
+            </span>
+            <span class="heading-layout heading-layout-medium" aria-hidden="true">
+              <span class="display-line">让 AI 从“会回答”，</span>
+              <span class="display-line">走到“把事情做完”。</span>
+            </span>
+            <span class="heading-layout heading-layout-compact" aria-hidden="true">
+              <span class="display-line">让 AI 从</span>
+              <span class="display-line">“会回答”，走到</span>
+              <span class="display-line">“把事情做完”。</span>
+            </span>
+          </h1>
+          <p class="hero-copy reveal reveal-delay-2">我们围绕 AI Agent 做产品、开源工作流与企业落地，让人保留判断与拍板，把重复执行交给可指挥、可约束、可验收的数字团队。</p>
+          <div class="button-row reveal reveal-delay-3">
+            <a class="button button-primary" href="#open-source">查看开源项目</a>
+            <a class="button button-secondary" href="#contact">聊一个真实业务流程</a>
+          </div>
+        </div>
+        <div class="hero-portrait" data-parallax>
+          <img src="/assets/hero-portrait.webp" width="591" height="640" alt="SURGE 创始人刘冉（耳总）" fetchpriority="high">
         </div>
       </div>
 
@@ -107,7 +123,11 @@
     <section class="mission section-dark" id="mission" aria-labelledby="mission-title">
       <div class="shell">
         <p class="section-label reveal">WHAT WE BELIEVE / 我们相信</p>
-        <h2 class="display-title metal-text reveal" id="mission-title">不是更多对话窗口，<br>而是一套真正能完成工作的 Agent 系统。</h2>
+        <h2 class="display-title metal-text reveal" id="mission-title" aria-label="不是更多对话窗口，而是一套真正能完成工作的 Agent 系统。">
+          <span class="heading-layout heading-layout-wide" aria-hidden="true"><span class="display-line">不是更多对话窗口，</span><span class="display-line">而是一套真正能完成工作的</span><span class="display-line">Agent 系统。</span></span>
+          <span class="heading-layout heading-layout-medium" aria-hidden="true"><span class="display-line">不是更多对话窗口，</span><span class="display-line">而是一套真正能</span><span class="display-line">完成工作的 Agent 系统。</span></span>
+          <span class="heading-layout heading-layout-compact" aria-hidden="true"><span class="display-line">不是更多</span><span class="display-line">对话窗口，</span><span class="display-line">而是一套真正</span><span class="display-line">能完成工作的</span><span class="display-line">Agent 系统。</span></span>
+        </h2>
 
         <div class="manifesto-panel reveal">
           <article>
@@ -123,7 +143,7 @@
           <article>
             <span class="panel-index">03</span>
             <h3>品牌公式</h3>
-            <p class="formula">碳基的判断<br><b>×</b><br>硅基的执行</p>
+            <p class="formula" aria-label="碳基的判断×硅基的执行"><span class="display-line" aria-hidden="true">碳基的判断</span><b class="display-line" aria-hidden="true">×</b><span class="display-line" aria-hidden="true">硅基的执行</span></p>
           </article>
         </div>
         <p class="mission-note reveal">人负责目标、边界和拍板；Agent 负责执行、留痕和迭代。</p>
@@ -179,7 +199,7 @@
             <span>B2B 获客智能体</span><span>内测中</span><span>开源技术底座</span>
           </div>
           <p class="section-label reveal">FLAGSHIP PRODUCT</p>
-          <h2 class="product-title metal-text reveal" id="reachsurge-title">Reach<br>Surge</h2>
+          <h2 class="product-title metal-text reveal" id="reachsurge-title" aria-label="ReachSurge"><span class="display-line" aria-hidden="true">Reach</span><span class="display-line" aria-hidden="true">Surge</span></h2>
           <p class="product-lead reveal">把找海外买家、核验公司、补全邮箱、写信和跟进，串成一条由 AI 驱动的获客流水线，业务数据留在自己手里。</p>
           <div class="button-row reveal">
             <a class="button button-primary" href="https://github.com/erduo1998-cell/reachsurge" target="_blank" rel="noopener noreferrer">查看开源</a>
@@ -205,7 +225,11 @@
     <section class="open-source section-dark" id="open-source" aria-labelledby="opensource-title">
       <div class="shell">
         <p class="section-label reveal">OPEN SOURCE LAB</p>
-        <h2 class="display-title metal-text reveal" id="opensource-title">把人的判断，<br>变成能持续工作的 AI 系统。</h2>
+        <h2 class="display-title metal-text reveal" id="opensource-title" aria-label="把人的判断，变成能持续工作的 AI 系统。">
+          <span class="heading-layout heading-layout-wide" aria-hidden="true"><span class="display-line">把人的判断，</span><span class="display-line">变成能持续工作的 AI 系统。</span></span>
+          <span class="heading-layout heading-layout-medium" aria-hidden="true"><span class="display-line">把人的判断，</span><span class="display-line">变成能持续工作的 AI 系统。</span></span>
+          <span class="heading-layout heading-layout-compact" aria-hidden="true"><span class="display-line">把人的判断，</span><span class="display-line">变成能持续</span><span class="display-line">工作的 AI 系统。</span></span>
+        </h2>
         <p class="section-intro reveal">今天开放的是一个个可独立使用的能力；下一步要连接的是一套从发现需求、形成判断、生产内容，到获得客户与复盘迭代的智能体工作系统。</p>
 
         <div class="system-map reveal" aria-label="SURGE 开源能力链">
@@ -222,40 +246,28 @@
         </div>
 
         <div class="project-stack">
-          <div class="project-card-slot">
-            <article class="project-card" style="--card-index:0">
+          <article class="project-card project-feature">
               <div class="project-top"><span class="project-number">01</span><span class="project-status">内测产品 · 开源技术底座</span></div>
               <div class="project-grid">
-                <div><p class="project-role">企业增长智能体</p><h3>ReachSurge</h3></div>
+                <div><p class="project-role">企业增长智能体</p><h3 class="project-name">ReachSurge</h3></div>
                 <div class="project-copy"><p>把海外获客的搜索、核验、邮箱与触达连成 AI 流水线。</p><small>当前不是成熟 SaaS，依赖外部数据源与邮箱配置。</small><a href="https://github.com/erduo1998-cell/reachsurge" target="_blank" rel="noopener noreferrer">查看项目 <span aria-hidden="true">↗</span></a></div>
               </div>
-            </article>
-          </div>
-          <div class="project-card-slot">
-            <article class="project-card project-card-paper" style="--card-index:1">
+          </article>
+          <div class="project-compact-grid">
+            <article class="project-card project-card-paper">
               <div class="project-top"><span class="project-number">02</span><span class="project-status">开源 · 可用 · v1.9</span></div>
-              <div class="project-grid">
-                <div><p class="project-role">创作者策略系统</p><h3>ip-strategist</h3></div>
-                <div class="project-copy"><p>把 IP 定位、选题、脚本、增长和复盘经验，变成能记住创作者上下文的 AI 教练。</p><small>不替代真人问责，不代运营、投放或直播执行。</small><a href="https://github.com/erduo1998-cell/ip-strategist" target="_blank" rel="noopener noreferrer">查看项目 <span aria-hidden="true">↗</span></a></div>
-              </div>
+              <p class="project-role">创作者策略系统</p><h3 class="project-name">ip-strategist</h3>
+              <div class="project-copy"><p>把 IP 定位、选题、脚本、增长和复盘经验，变成能记住创作者上下文的 AI 教练。</p><small>不替代真人问责，不代运营、投放或直播执行。</small><a href="https://github.com/erduo1998-cell/ip-strategist" target="_blank" rel="noopener noreferrer">查看项目 <span aria-hidden="true">↗</span></a></div>
             </article>
-          </div>
-          <div class="project-card-slot">
-            <article class="project-card" style="--card-index:2">
+            <article class="project-card">
               <div class="project-top"><span class="project-number">03</span><span class="project-status">开源 · 可用 · v1.3</span></div>
-              <div class="project-grid">
-                <div><p class="project-role">视频前期导演</p><h3>Video Script<br>Builder</h3></div>
-                <div class="project-copy"><p>把中文口播稿翻译成逐镜头、精确到时间码的执行分镜。</p><small>只生成分镜规格，不下载素材、不直接渲染 MP4。</small><a href="https://github.com/erduo1998-cell/video-script-builder" target="_blank" rel="noopener noreferrer">查看项目 <span aria-hidden="true">↗</span></a></div>
-              </div>
+              <p class="project-role">视频前期导演</p><h3 class="project-name" aria-label="Video Script Builder"><span class="display-line" aria-hidden="true">Video Script</span><span class="display-line" aria-hidden="true">Builder</span></h3>
+              <div class="project-copy"><p>把中文口播稿翻译成逐镜头、精确到时间码的执行分镜。</p><small>只生成分镜规格，不下载素材、不直接渲染 MP4。</small><a href="https://github.com/erduo1998-cell/video-script-builder" target="_blank" rel="noopener noreferrer">查看项目 <span aria-hidden="true">↗</span></a></div>
             </article>
-          </div>
-          <div class="project-card-slot">
-            <article class="project-card project-card-accent" style="--card-index:3">
+            <article class="project-card project-card-accent">
               <div class="project-top"><span class="project-number">04</span><span class="project-status">预发布 · 实验室</span></div>
-              <div class="project-grid">
-                <div><p class="project-role">视频生产研发</p><h3>HyperFrames<br>B-roll</h3></div>
-                <div class="project-copy"><p>正在把字幕、素材、分镜、并行制作和 4K 技术交付接成视频生产流水线。</p><small>真实双端到端、正式 Release、Windows 与剪映/CapCut GUI 尚未完成验证。</small><a href="https://github.com/erduo1998-cell/erduo-hyperframes-broll" target="_blank" rel="noopener noreferrer">查看预发布项目 <span aria-hidden="true">↗</span></a></div>
-              </div>
+              <p class="project-role">视频生产研发</p><h3 class="project-name" aria-label="HyperFrames B-roll"><span class="display-line" aria-hidden="true">HyperFrames</span><span class="display-line" aria-hidden="true">B-roll</span></h3>
+              <div class="project-copy"><p>正在把字幕、素材、分镜、并行制作和 4K 技术交付接成视频生产流水线。</p><small>真实双端到端、正式 Release、Windows 与剪映/CapCut GUI 尚未完成验证。</small><a href="https://github.com/erduo1998-cell/erduo-hyperframes-broll" target="_blank" rel="noopener noreferrer">查看预发布项目 <span aria-hidden="true">↗</span></a></div>
             </article>
           </div>
         </div>
@@ -272,11 +284,11 @@
       <div class="shell founder-layout">
         <div class="founder-image reveal">
           <img src="/assets/hero-portrait.webp" width="591" height="640" alt="刘冉（耳总）" loading="lazy" decoding="async">
-          <span>11 YEARS DIRECTING<br>NOW DIRECTING AGENTS</span>
+          <span><span class="display-line">11 YEARS DIRECTING</span><span class="display-line">NOW DIRECTING AGENTS</span></span>
         </div>
         <div class="founder-copy">
           <p class="section-label reveal">FOUNDER / 刘冉（耳总）</p>
-          <h2 class="display-title metal-text reveal" id="founder-title">做了 11 年导演，<br>现在把导演的工作方式带进 AI。</h2>
+          <h2 class="display-title metal-text reveal" id="founder-title" aria-label="做了 11 年导演，现在把导演的工作方式带进 AI。"><span class="display-line" aria-hidden="true">做了 11 年导演，</span><span class="display-line" aria-hidden="true">现在把导演的工作</span><span class="display-line" aria-hidden="true">方式带进 AI。</span></h2>
           <p class="reveal">刘冉（耳总），11 年影视广告导演，现专注 AI Agent 产品、企业落地与开源工作流。导演这份工作，本来就是先想清目标，再拆任务、调资源、看结果。今天，他把同一套工作方式带进 AI：不满足于模型会回答，而是追问一件事能不能真正交出去，以及最后该怎样验收。</p>
           <blockquote class="reveal">不教工具按钮，只研究怎样把一件事交给 Agent，并验收它到底做没做完。</blockquote>
           <div class="button-row reveal"><a class="button button-secondary" href="https://github.com/erduo1998-cell" target="_blank" rel="noopener noreferrer">查看开源项目</a><a class="text-link" href="#contact">联系耳总 <span aria-hidden="true">↓</span></a></div>
@@ -287,14 +299,22 @@
     <section class="future section-paper" id="future" aria-labelledby="future-title">
       <div class="shell">
         <p class="section-label section-label-dark reveal">WHAT'S NEXT / 正在构建</p>
-        <h2 class="display-title display-title-dark reveal" id="future-title">未来不是一个大而全的平台，<br>而是一组逐步连起来的可用系统。</h2>
+        <h2 class="display-title display-title-dark reveal" id="future-title" aria-label="未来不是一个大而全的平台，而是一组逐步连起来的可用系统。">
+          <span class="heading-layout heading-layout-wide" aria-hidden="true"><span class="display-line">未来不是一个大而全的平台，</span><span class="display-line">而是一组逐步连起来的可用系统。</span></span>
+          <span class="heading-layout heading-layout-medium" aria-hidden="true"><span class="display-line">未来不是一个</span><span class="display-line">大而全的平台，而是一组</span><span class="display-line">逐步连起来的可用系统。</span></span>
+          <span class="heading-layout heading-layout-compact" aria-hidden="true"><span class="display-line">未来不是一个</span><span class="display-line">大而全的平台，</span><span class="display-line">而是一组逐步</span><span class="display-line">连起来的</span><span class="display-line">可用系统。</span></span>
+        </h2>
         <ol class="future-grid">
           <li class="reveal"><span>01</span><h3>开源能力层</h3><p>把定位、研究、视频生产等判断和流程封装成可安装、可验证的 Skill / MCP。</p></li>
           <li class="reveal"><span>02</span><h3>行业产品层</h3><p>从高频、完整、可验收的岗位切入，优先推进 ReachSurge 这样的垂直 Agent 产品。</p></li>
           <li class="reveal"><span>03</span><h3>企业落地层</h3><p>从一个具体流程做诊断和试点，先跑出闭环，再决定是否扩大。</p></li>
           <li class="reveal"><span>04</span><h3>内容与教育层</h3><p>通过公开内容、教程和真实项目，帮助更多人形成交任务、设边界、做验收的 Agent 判断力。</p></li>
         </ol>
-        <p class="future-closing reveal">一个人不需要假装拥有一支万能军团，<br>但可以逐步拥有一套真正能工作的数字系统。</p>
+        <p class="future-closing reveal" aria-label="一个人不需要假装拥有一支万能军团，但可以逐步拥有一套真正能工作的数字系统。">
+          <span class="heading-layout heading-layout-wide" aria-hidden="true"><span class="display-line">一个人不需要假装拥有一支</span><span class="display-line">万能军团，但可以逐步拥有一套</span><span class="display-line">真正能工作的数字系统。</span></span>
+          <span class="heading-layout heading-layout-medium" aria-hidden="true"><span class="display-line">一个人不需要假装</span><span class="display-line">拥有一支万能军团，</span><span class="display-line">但可以逐步拥有一套</span><span class="display-line">真正能工作的数字系统。</span></span>
+          <span class="heading-layout heading-layout-compact" aria-hidden="true"><span class="display-line">一个人不需要</span><span class="display-line">假装拥有一支</span><span class="display-line">万能军团，</span><span class="display-line">但可以逐步拥有</span><span class="display-line">一套真正能工作的</span><span class="display-line">数字系统。</span></span>
+        </p>
       </div>
     </section>
   </main>
@@ -304,7 +324,7 @@
     <div class="shell contact-layout">
       <div>
         <p class="section-label reveal">LET'S TALK</p>
-        <h2 class="contact-title metal-text reveal" id="contact-title">聊一个<br>真实工作流。</h2>
+        <h2 class="contact-title metal-text reveal" id="contact-title" aria-label="聊一个真实工作流。"><span class="display-line" aria-hidden="true">聊一个</span><span class="display-line" aria-hidden="true">真实工作流。</span></h2>
       </div>
       <div class="contact-copy reveal">
         <p>如果你正想把一段重复、分散、靠人搬运的工作交给 AI，我们可以先从目标、边界和验收标准聊起。</p>

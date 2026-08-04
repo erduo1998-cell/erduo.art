@@ -23,7 +23,9 @@ python3 -m http.server 4173
 
 ```text
 index.html                 首页语义内容与 SEO
-styles.css                SURGE 共享视觉系统与响应式
+styles.css                字体、颜色、type/space tokens 与共享组件
+home.css                  首页布局及其响应式规则
+product.css               ReachSurge 产品页布局及其响应式规则
 site.js                   菜单、header、入场和肖像轻动效
 brand-spec.md             品牌资产、tokens 与事实边界
 robots.txt                搜索引擎规则
@@ -41,6 +43,9 @@ reachsurge/index.html     ReachSurge 产品页
 4. 首页项目数据写在语义 HTML 中；JavaScript 只做渐进增强。
 5. 不再把大型图片转成 base64，不加载 `assets/agents/agent-*.png`。
 6. ReachSurge 首页与子页必须同步事实边界，不能出现“零配置、全自动无人值守、所有数据绝对安全”等未普遍验证承诺。
+7. 中文与中英混排使用 Noto Sans SC；Kanit 只用于纯英文或数字展示。不要新增未加载字重或在中文标题上使用紧于 `-0.02em` 的字距。
+8. 标题需要人工断行时使用带 `aria-label` 的 `.heading-layout` / `.display-line`，不要把裸 `<br>` 与自动 balance 混用。
+9. 共享 token 和组件放在 `styles.css`；首页、产品页专属规则分别放在 `home.css`、`product.css`，媒体规则跟随所属页面文件。
 
 ## 发布前检查
 
@@ -50,7 +55,7 @@ node --check site.js
 python3 -m http.server 4173
 ```
 
-人工检查至少覆盖 375×812、768×1024、1440×900 和 reduced-motion。确认：
+人工检查至少覆盖 375×812、768×1024、1440×900、1920×1080 和 reduced-motion。确认：
 
 - 首页与 `/reachsurge/` 无 404；
 - 菜单、锚点、外链和邮件链接可用；
