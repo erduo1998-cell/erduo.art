@@ -18,7 +18,8 @@
 
 | 资产 | 路径 | 用途 | 约束 |
 |---|---|---|---|
-| 创始人主肖像 | `assets/hero-portrait.webp` | 首页 Hero 与 Founder | 591×640；Hero 高优先加载，第二处 lazy load |
+| Hero 品牌肖像 | `assets/hero-portrait.webp` | 仅用于首页 Hero | 591×640；风格化人物视觉，不作为 Founder 正式照片复用；Hero 高优先加载 |
+| Founder 真实肖像 | `assets/founder-erduo-2026.webp` | 首页 Founder | 1600×2400 WebP；保留完整 2:3 真源，页面以 4:5、`object-position: 50% 26%` 和 1.2× 编辑式胸腰裁切并 lazy load |
 | 社交预览 | `assets/social-preview.jpg` | Open Graph / Twitter Card | 1200×630，由现有正式品牌视觉裁切，不是虚构产品截图 |
 | 原始社交视觉 | `hero-poster.png` | 社交预览真源与历史资产 | 文件较大，不在页面正文加载 |
 | 商务微信二维码 | `assets/qrcode.jpg` | 当前首页不展示，保留备用 | 只有明确需要公开商务微信时才加载 |
@@ -54,7 +55,9 @@
 - 中文、正文与中英混排：Noto Sans SC，只加载 400 / 500 / 700。
 - 中文展示标题固定 700，字距不得紧于 `-0.02em`，行高使用 1.08–1.16；Kanit 纯英文大字才可使用更紧字距和 0.86 左右行高。
 - 全站使用 `font-synthesis: none`，不允许浏览器伪造未加载字重。
-- 字体来源：Google Fonts，保留 `display=swap` 和 preconnect；系统 fallback 依次包含 PingFang SC、Hiragino Sans GB、Microsoft YaHei 与平台 sans-serif。
+- 字体由本站自托管，不依赖 Google Fonts CDN；源文件固定为 Google Fonts 官方仓库 [`ea14f3c4`](https://github.com/google/fonts/commit/ea14f3c4c462af1d847b1abe96fcb3c3a8a66f97) 版本的 [Kanit](https://github.com/google/fonts/tree/ea14f3c4c462af1d847b1abe96fcb3c3a8a66f97/ofl/kanit) 与 [Noto Sans SC](https://github.com/google/fonts/tree/ea14f3c4c462af1d847b1abe96fcb3c3a8a66f97/ofl/notosanssc)，以 WOFF2 和 `font-display: swap` 加载。
+- Kanit 分别保存 500 / 600 / 700 / 800 / 900 静态子集；Noto Sans SC 保存 100–900 可变字重子集。两份 OFL 许可证随字体保存在 `assets/fonts/`。
+- 子集字符来自 `index.html`、`reachsurge/index.html`、`site.js` 当前文本，加基础 ASCII 和常用中英文标点。以上文件新增可见文案后必须由固定官方源重新生成并做字符覆盖检查；系统 fallback 依次包含 PingFang SC、Hiragino Sans GB、Microsoft YaHei 与平台 sans-serif。
 - 字体总数不超过两家；不使用 Inter、Roboto、Arial 作为展示字体。
 
 ## 5. 结构与版式
@@ -66,7 +69,9 @@
 - 普通 section 的纵向节奏为 80–136 px；信息型 section 可以使用更紧的 64–96 px，不用空白强行撑成整屏。
 - 大区采用整页 slab、暗白交替和 32–64 px 大圆角。
 - 普通信息以细线、留白和编辑式排版组织，不把每段文字装进小圆角卡片。
-- 首页 Hero 使用超大 SURGE 字标、真实人物肖像、H1 三层景深；H1 是唯一第一焦点，桌面文字与肖像分栏，移动肖像不进入标题字框。
+- 首页 Hero 的唯一大标题是文字品牌锁定 `SURGE / 无限涌动`：`SURGE` 为 Kanit 900 前景主焦点，中文品牌名使用 Noto Sans SC 700；使命句不放在 Hero 与品牌争夺层级。
+- 主命题 `让 AI 从“会回答”，走到“把事情做完”。` 归属 Mission 区并作为该区 H2 第一焦点；`不是更多对话窗口，而是一套真正能完成工作的 Agent 系统。` 是较小的支撑命题。
+- Hero 风格化肖像只服务首屏品牌氛围，Founder 区必须使用真实正式照片；桌面 Hero 品牌与肖像分栏，移动肖像不得覆盖品牌字标。
 - 标题人工断行必须以完整语义行为单位，并提供无重复朗读的 `aria-label`；禁止裸 `<br>` 与 `text-wrap: balance` 叠加。
 - 项目卡只展示：项目名、成熟度、价值、系统角色、边界、真实入口。ReachSurge 是旗舰大卡，其余三个项目使用紧凑网格，不使用伪 sticky 长滚动。
 

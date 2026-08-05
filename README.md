@@ -31,7 +31,8 @@ brand-spec.md             品牌资产、tokens 与事实边界
 robots.txt                搜索引擎规则
 sitemap.xml               首页与 ReachSurge 索引
 vercel.json               Vercel 静态部署、www 跳转与安全头
-assets/                   首页本地图片
+assets/                   首页本地图片与自托管字体
+assets/fonts/             Kanit / Noto Sans SC 子集及 OFL 许可证
 reachsurge/index.html     ReachSurge 产品页
 ```
 
@@ -46,6 +47,16 @@ reachsurge/index.html     ReachSurge 产品页
 7. 中文与中英混排使用 Noto Sans SC；Kanit 只用于纯英文或数字展示。不要新增未加载字重或在中文标题上使用紧于 `-0.02em` 的字距。
 8. 标题需要人工断行时使用带 `aria-label` 的 `.heading-layout` / `.display-line`，不要把裸 `<br>` 与自动 balance 混用。
 9. 共享 token 和组件放在 `styles.css`；首页、产品页专属规则分别放在 `home.css`、`product.css`，媒体规则跟随所属页面文件。
+
+## 字体来源与维护
+
+页面不依赖 Google Fonts CDN。字体源文件来自 Google Fonts 官方仓库固定版本 [`ea14f3c4`](https://github.com/google/fonts/commit/ea14f3c4c462af1d847b1abe96fcb3c3a8a66f97)：
+
+- [Kanit 官方目录](https://github.com/google/fonts/tree/ea14f3c4c462af1d847b1abe96fcb3c3a8a66f97/ofl/kanit)，页面使用 500 / 600 / 700 / 800 / 900 五个静态字重；
+- [Noto Sans SC 官方目录](https://github.com/google/fonts/tree/ea14f3c4c462af1d847b1abe96fcb3c3a8a66f97/ofl/notosanssc)，页面使用 100–900 可变字重文件；
+- 许可证随资产保存在 `assets/fonts/OFL-Kanit.txt` 和 `assets/fonts/OFL-NotoSansSC.txt`。
+
+仓库中的 WOFF2 是按 `index.html`、`reachsurge/index.html`、`site.js` 当前文本，加上基础 ASCII 与常用中英文标点制作的子集。修改这些文件中的可见文案后，必须从上述固定官方源重新生成子集，并检查新字符是否完整覆盖；不要直接从第三方字体站点下载，也不要只修改文件名沿用旧子集。发布前应在屏蔽外部网络时确认字体仍从 `/assets/fonts/` 加载，且实际渲染字体为 Kanit 与 Noto Sans SC。
 
 ## 发布前检查
 

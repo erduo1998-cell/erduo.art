@@ -9,9 +9,8 @@
   <meta name="description" content="SURGE / 无限涌动由刘冉（耳总）创立，围绕 AI Agent 做垂直产品、开源工作流与企业落地，让 AI 从会回答走到真正完成工作。">
   <title>SURGE 无限涌动｜AI Agent 产品、开源工作流与企业落地</title>
   <link rel="canonical" href="https://www.erduo.art/">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="/assets/fonts/kanit-900-subset.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/noto-sans-sc-100-900-subset.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/hero-portrait.webp" as="image" type="image/webp">
   <link rel="stylesheet" href="/styles.css">
   <link rel="stylesheet" href="/home.css">
@@ -83,25 +82,12 @@
     <section class="hero" id="top" aria-labelledby="hero-title">
       <div class="hero-glow hero-glow-a" aria-hidden="true"></div>
       <div class="hero-glow hero-glow-b" aria-hidden="true"></div>
-      <div class="hero-wordmark metal-text" aria-hidden="true">SURGE</div>
 
       <div class="hero-stage shell">
         <div class="hero-content">
-          <p class="eyebrow reveal">SURGE / 无限涌动</p>
-          <h1 id="hero-title" class="reveal reveal-delay-1" aria-label="让 AI 从“会回答”，走到“把事情做完”。">
-            <span class="heading-layout heading-layout-wide" aria-hidden="true">
-              <span class="display-line">让 AI 从“会回答”，</span>
-              <span class="display-line">走到“把事情做完”。</span>
-            </span>
-            <span class="heading-layout heading-layout-medium" aria-hidden="true">
-              <span class="display-line">让 AI 从“会回答”，</span>
-              <span class="display-line">走到“把事情做完”。</span>
-            </span>
-            <span class="heading-layout heading-layout-compact" aria-hidden="true">
-              <span class="display-line">让 AI 从</span>
-              <span class="display-line">“会回答”，走到</span>
-              <span class="display-line">“把事情做完”。</span>
-            </span>
+          <h1 id="hero-title" class="hero-brand reveal reveal-delay-1" aria-label="SURGE / 无限涌动">
+            <span class="hero-brand-en metal-text" aria-hidden="true">SURGE</span>
+            <span class="hero-brand-cn" aria-hidden="true">无限涌动</span>
           </h1>
           <p class="hero-copy reveal reveal-delay-2">我们围绕 AI Agent 做产品、开源工作流与企业落地，让人保留判断与拍板，把重复执行交给可指挥、可约束、可验收的数字团队。</p>
           <div class="button-row reveal reveal-delay-3">
@@ -122,12 +108,17 @@
 
     <section class="mission section-dark" id="mission" aria-labelledby="mission-title">
       <div class="shell">
-        <p class="section-label reveal">WHAT WE BELIEVE / 我们相信</p>
-        <h2 class="display-title metal-text reveal" id="mission-title" aria-label="不是更多对话窗口，而是一套真正能完成工作的 Agent 系统。">
+        <p class="section-label reveal">MISSION / VISION</p>
+        <h2 class="mission-title metal-text reveal" id="mission-title" aria-label="让 AI 从“会回答”，走到“把事情做完”。">
+          <span class="heading-layout heading-layout-wide" aria-hidden="true"><span class="display-line">让 AI 从“会回答”，</span><span class="display-line">走到“把事情做完”。</span></span>
+          <span class="heading-layout heading-layout-medium" aria-hidden="true"><span class="display-line">让 AI 从“会回答”，</span><span class="display-line">走到“把事情做完”。</span></span>
+          <span class="heading-layout heading-layout-compact" aria-hidden="true"><span class="display-line">让 AI 从</span><span class="display-line">“会回答”，走到</span><span class="display-line">“把事情做完”。</span></span>
+        </h2>
+        <p class="mission-thesis reveal" aria-label="不是更多对话窗口，而是一套真正能完成工作的 Agent 系统。">
           <span class="heading-layout heading-layout-wide" aria-hidden="true"><span class="display-line">不是更多对话窗口，</span><span class="display-line">而是一套真正能完成工作的</span><span class="display-line">Agent 系统。</span></span>
           <span class="heading-layout heading-layout-medium" aria-hidden="true"><span class="display-line">不是更多对话窗口，</span><span class="display-line">而是一套真正能</span><span class="display-line">完成工作的 Agent 系统。</span></span>
           <span class="heading-layout heading-layout-compact" aria-hidden="true"><span class="display-line">不是更多</span><span class="display-line">对话窗口，</span><span class="display-line">而是一套真正</span><span class="display-line">能完成工作的</span><span class="display-line">Agent 系统。</span></span>
-        </h2>
+        </p>
 
         <div class="manifesto-panel reveal">
           <article>
@@ -283,12 +274,18 @@
     <section class="founder section-dark" id="founder" aria-labelledby="founder-title">
       <div class="shell founder-layout">
         <div class="founder-image reveal">
-          <img src="/assets/hero-portrait.webp" width="591" height="640" alt="刘冉（耳总）" loading="lazy" decoding="async">
-          <span><span class="display-line">11 YEARS DIRECTING</span><span class="display-line">NOW DIRECTING AGENTS</span></span>
+          <img src="/assets/founder-erduo-2026.webp" width="1600" height="2400" alt="刘冉（耳总）的正式创始人肖像" loading="lazy" decoding="async">
         </div>
         <div class="founder-copy">
           <p class="section-label reveal">FOUNDER / 刘冉（耳总）</p>
-          <h2 class="display-title metal-text reveal" id="founder-title" aria-label="做了 11 年导演，现在把导演的工作方式带进 AI。"><span class="display-line" aria-hidden="true">做了 11 年导演，</span><span class="display-line" aria-hidden="true">现在把导演的工作</span><span class="display-line" aria-hidden="true">方式带进 AI。</span></h2>
+          <h2 class="founder-title reveal" id="founder-title" aria-label="做了 11 年导演，现在把导演的工作方式带进 AI。">
+            <span class="founder-title-mark metal-text" aria-hidden="true">11 → AI</span>
+            <span class="founder-title-summary" aria-hidden="true">
+              <span class="heading-layout heading-layout-wide" aria-hidden="true"><span class="display-line">做了 11 年导演，</span><span class="display-line">现在把导演的工作方式带进 AI。</span></span>
+              <span class="heading-layout heading-layout-medium" aria-hidden="true"><span class="display-line">做了 11 年导演，</span><span class="display-line">现在把导演的工作方式带进 AI。</span></span>
+              <span class="heading-layout heading-layout-compact" aria-hidden="true"><span class="display-line">做了 11 年导演，现在</span><span class="display-line">把导演的工作方式带进 AI。</span></span>
+            </span>
+          </h2>
           <p class="reveal">刘冉（耳总），11 年影视广告导演，现专注 AI Agent 产品、企业落地与开源工作流。导演这份工作，本来就是先想清目标，再拆任务、调资源、看结果。今天，他把同一套工作方式带进 AI：不满足于模型会回答，而是追问一件事能不能真正交出去，以及最后该怎样验收。</p>
           <blockquote class="reveal">不教工具按钮，只研究怎样把一件事交给 Agent，并验收它到底做没做完。</blockquote>
           <div class="button-row reveal"><a class="button button-secondary" href="https://github.com/erduo1998-cell" target="_blank" rel="noopener noreferrer">查看开源项目</a><a class="text-link" href="#contact">联系耳总 <span aria-hidden="true">↓</span></a></div>

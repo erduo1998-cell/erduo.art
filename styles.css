@@ -1,3 +1,51 @@
+@font-face {
+  font-family: "Kanit";
+  src: url("/assets/fonts/kanit-500-subset.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Kanit";
+  src: url("/assets/fonts/kanit-600-subset.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Kanit";
+  src: url("/assets/fonts/kanit-700-subset.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Kanit";
+  src: url("/assets/fonts/kanit-800-subset.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Kanit";
+  src: url("/assets/fonts/kanit-900-subset.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Noto Sans SC";
+  src: url("/assets/fonts/noto-sans-sc-100-900-subset.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+}
+
 :root {
   --surge-bg: #0c0c0c;
   --surge-surface: #161616;
