@@ -6,6 +6,8 @@ const path = require("node:path");
 const puppeteer = require("puppeteer-core");
 
 const base = process.env.KNOWLEDGE_BASE_URL || "http://127.0.0.1:4173";
+const isLocalBase = ["127.0.0.1", "localhost"].includes(new URL(base).hostname);
+const snapshotSha256 = "e423c026f22ac202361f64143000b0a4572563d4883c9a391254a9f3ed98e336";
 const chrome = process.env.CHROME_PATH || "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
 const screenshotDir = process.env.KNOWLEDGE_SCREENSHOT_DIR || "/tmp/erduo-art-knowledge-check";
 const axePath = require.resolve("axe-core/axe.min.js");
@@ -152,7 +154,7 @@ async function main() {
     }));
     assert(noJsState.cards === 100 && noJsState.hidden === 0 && noJsState.summaries === 100, "no-JS content is incomplete");
 
-    const assetChecks = await page.evaluate(async () => {
+    const assetChecks = await page.evaluate(async (expectedSnapshotSha256) => {
       const urls = [
         "/assets/fonts/noto-sans-sc-100-900-subset.woff2",
         "/assets/knowledge/knowledge-pulse-poster.jpg",
@@ -161,12 +163,35 @@ async function main() {
       ];
       return Promise.all(urls.map(async (url) => {
         const response = await fetch(url);
-        return { url, status: response.status, type: response.headers.get("content-type"), size: Number(response.headers.get("content-length") || 0) };
+        const body = await response.arrayBuffer();
+        const result = { url, status: response.status, type: response.headers.get("content-type"), size: body.byteLength };
+        if (url.endsWith("public-knowledge.json")) {
+          const digest = await crypto.subtle.digest("SHA-256", body);
+          result.sha256 = Array.from(new Uint8Array(digest), (byte) => byte.toString(16).padStart(2, "0")).join("");
+          const snapshot = JSON.parse(new TextDecoder().decode(body));
+          result.entries = snapshot.entries.length;
+          result.whitelist = snapshot.public_whitelist.length;
+          result.expectedSha256 = expectedSnapshotSha256;
+        }
+        return result;
       }));
-    });
+    }, snapshotSha256);
     assert(assetChecks.every((item) => item.status === 200 && item.size > 0), "one or more public assets failed");
+    const snapshotAsset = assetChecks.find((item) => item.url.endsWith("public-knowledge.json"));
+    assert(snapshotAsset.sha256 === snapshotSha256 && snapshotAsset.entries === 100 && snapshotAsset.whitelist === 100, "public snapshot body or hash failed");
+
+    const videoRange = await page.evaluate(async () => {
+      const response = await fetch("/assets/knowledge/knowledge-pulse-final.mp4", { headers: { Range: "bytes=0-1" } });
+      const body = await response.arrayBuffer();
+      return { status: response.status, contentRange: response.headers.get("content-range"), size: body.byteLength };
+    });
+    if (isLocalBase) {
+      assert([200, 206].includes(videoRange.status) && videoRange.size > 0, "local video range fallback failed");
+    } else {
+      assert(videoRange.status === 206 && videoRange.contentRange === "bytes 0-1/2535807" && videoRange.size === 2, "production video range failed");
+    }
     assert(consoleErrors.length === 0, `console errors: ${consoleErrors.join(" | ")}`);
-    console.log(JSON.stringify({ status: "passed", desktop, mobile: mobileLayout, responsiveChecks, reduced: reducedState, noJs: noJsState, desktopAxePasses: desktopAxe, mobileAxePasses: mobileAxe, assetChecks, consoleErrors, screenshotDir }, null, 2));
+    console.log(JSON.stringify({ status: "passed", desktop, mobile: mobileLayout, responsiveChecks, reduced: reducedState, noJs: noJsState, desktopAxePasses: desktopAxe, mobileAxePasses: mobileAxe, assetChecks, videoRange, consoleErrors, screenshotDir }, null, 2));
   } finally {
     await browser.close();
   }
