@@ -1,0 +1,2109 @@
+{
+  "schema_version": "1.0",
+  "release_type": "public_safe_snapshot",
+  "generated_at": "2026-08-20T23:17:29+08:00",
+  "public_whitelist": [
+    "method-001",
+    "method-002",
+    "method-003",
+    "method-004",
+    "method-005",
+    "method-006",
+    "method-007",
+    "method-008",
+    "method-009",
+    "method-010",
+    "method-011",
+    "method-012",
+    "method-013",
+    "method-014",
+    "method-015",
+    "method-016",
+    "method-017",
+    "method-018",
+    "method-019",
+    "method-020",
+    "method-021",
+    "method-022",
+    "method-023",
+    "method-024",
+    "method-025",
+    "method-026",
+    "method-027",
+    "method-028",
+    "method-029",
+    "method-030",
+    "method-031",
+    "method-032",
+    "method-033",
+    "method-034",
+    "method-035",
+    "method-036",
+    "method-037",
+    "method-038",
+    "method-039",
+    "method-040",
+    "method-041",
+    "method-042",
+    "method-043",
+    "method-044",
+    "method-045",
+    "method-046",
+    "method-047",
+    "method-048",
+    "method-049",
+    "method-050",
+    "method-051",
+    "method-052",
+    "method-053",
+    "method-054",
+    "method-055",
+    "method-056",
+    "method-057",
+    "method-058",
+    "method-059",
+    "method-060",
+    "method-061",
+    "method-062",
+    "method-063",
+    "method-064",
+    "method-065",
+    "method-066",
+    "method-067",
+    "method-068",
+    "method-069",
+    "method-070",
+    "method-071",
+    "method-072",
+    "method-073",
+    "method-074",
+    "method-075",
+    "method-076",
+    "method-077",
+    "method-078",
+    "method-079",
+    "method-080",
+    "method-081",
+    "method-082",
+    "method-083",
+    "method-084",
+    "method-085",
+    "method-086",
+    "method-087",
+    "method-088",
+    "method-089",
+    "method-090",
+    "method-091",
+    "method-092",
+    "method-093",
+    "method-094",
+    "method-095",
+    "method-096",
+    "method-097",
+    "method-098",
+    "method-099",
+    "method-100"
+  ],
+  "entries": [
+    {
+      "public_id": "method-001",
+      "slug": "knowledge-001-先定判断再做内容",
+      "title": "先定判断再做内容",
+      "category": "内容决策",
+      "public_summary": "把内容判断写成可回看的决策约束，再用后续复盘检查它是否仍成立。",
+      "why_it_matters": "它把创作从临场表达变成可修正的判断过程。",
+      "evidence_level": "已验证决定",
+      "relation_tags": [
+        "决策留痕",
+        "复盘修正"
+      ],
+      "view_tags": [
+        "内容策略",
+        "判断"
+      ],
+      "public_source_label": "内容决策记录",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-002",
+      "slug": "knowledge-002-生产过程也可教学",
+      "title": "生产过程也可教学",
+      "category": "内容决策",
+      "public_summary": "把视频制作过程拆成可解释的步骤，让方法本身成为内容的一部分。",
+      "why_it_matters": "观众获得的不只是结果，还能理解结果如何被做出来。",
+      "evidence_level": "已验证决定",
+      "relation_tags": [
+        "过程解释",
+        "方法复用"
+      ],
+      "view_tags": [
+        "内容策略",
+        "教学"
+      ],
+      "public_source_label": "内容决策记录",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-003",
+      "slug": "knowledge-003-把个人经验交给系统",
+      "title": "把个人经验交给系统",
+      "category": "内容决策",
+      "public_summary": "先把表达习惯和判断边界整理出来，再让工具协助延续一致的表达。",
+      "why_it_matters": "一致性来自明确的判断依据，而非模仿表面语气。",
+      "evidence_level": "已验证决定",
+      "relation_tags": [
+        "经验沉淀",
+        "表达约束"
+      ],
+      "view_tags": [
+        "内容策略",
+        "系统"
+      ],
+      "public_source_label": "内容决策记录",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-004",
+      "slug": "knowledge-004-审美需要可说明",
+      "title": "审美需要可说明",
+      "category": "内容决策",
+      "public_summary": "将视觉选择转成可讨论的参照和约束，而不是把审美当成无法传递的直觉。",
+      "why_it_matters": "团队协作时可以据此讨论取舍，而不只凭喜欢与否。",
+      "evidence_level": "已验证决定",
+      "relation_tags": [
+        "审美约束",
+        "协作判断"
+      ],
+      "view_tags": [
+        "内容策略",
+        "设计"
+      ],
+      "public_source_label": "内容决策记录",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-005",
+      "slug": "knowledge-005-先校正问题定义",
+      "title": "先校正问题定义",
+      "category": "内容决策",
+      "public_summary": "把问题界定视为内容工作的前置步骤，先检验问题再设计回应。",
+      "why_it_matters": "它提醒人们警惕把错误前提高效率地执行下去。",
+      "evidence_level": "待结果验证",
+      "relation_tags": [
+        "问题校正",
+        "证据优先"
+      ],
+      "view_tags": [
+        "内容策略",
+        "判断"
+      ],
+      "public_source_label": "决策方法样本",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-006",
+      "slug": "knowledge-006-先建项目驾驶舱",
+      "title": "先建项目驾驶舱",
+      "category": "工作方法",
+      "public_summary": "在动工前集中记录进度事实权限和下一步，让协作有共同起点。",
+      "why_it_matters": "项目连续性不应依赖某一次对话或某个人的记忆。",
+      "evidence_level": "课程方法样本",
+      "relation_tags": [
+        "状态路由",
+        "授权边界"
+      ],
+      "view_tags": [
+        "项目治理",
+        "课程"
+      ],
+      "public_source_label": "课程工作方法",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-007",
+      "slug": "knowledge-007-资料先回到证据",
+      "title": "资料先回到证据",
+      "category": "工作方法",
+      "public_summary": "把分散材料整理为可追溯证据，再决定哪些信息可以被后续使用。",
+      "why_it_matters": "先保住出处，才能避免内容把猜测写成事实。",
+      "evidence_level": "课程方法样本",
+      "relation_tags": [
+        "来源追溯",
+        "事实分层"
+      ],
+      "view_tags": [
+        "证据治理",
+        "课程"
+      ],
+      "public_source_label": "课程工作方法",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-008",
+      "slug": "knowledge-008-企业事实分层",
+      "title": "企业事实分层",
+      "category": "工作方法",
+      "public_summary": "为企业信息区分事实状态和证据等级，使调用时知道什么能说什么待证。",
+      "why_it_matters": "稳定的知识调用依赖边界清楚的事实层。",
+      "evidence_level": "课程方法样本",
+      "relation_tags": [
+        "证据分级",
+        "事实约束"
+      ],
+      "view_tags": [
+        "知识建模",
+        "课程"
+      ],
+      "public_source_label": "课程工作方法",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-009",
+      "slug": "knowledge-009-先找可见性缺口",
+      "title": "先找可见性缺口",
+      "category": "工作方法",
+      "public_summary": "先判断外部系统难以理解或引用的部分，再决定改什么内容。",
+      "why_it_matters": "内容方向由理解缺口而不是随意选题驱动。",
+      "evidence_level": "课程方法样本",
+      "relation_tags": [
+        "缺口诊断",
+        "内容决策"
+      ],
+      "view_tags": [
+        "市场理解",
+        "课程"
+      ],
+      "public_source_label": "课程工作方法",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-010",
+      "slug": "knowledge-010-内容从客户问题开始",
+      "title": "内容从客户问题开始",
+      "category": "工作方法",
+      "public_summary": "把内容组织在真实问题周围，并为每个回答保留适用边界。",
+      "why_it_matters": "这样能减少口号式表达和无效信息堆积。",
+      "evidence_level": "课程方法样本",
+      "relation_tags": [
+        "问题映射",
+        "边界说明"
+      ],
+      "view_tags": [
+        "内容设计",
+        "课程"
+      ],
+      "public_source_label": "课程工作方法",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-011",
+      "slug": "knowledge-011-竞争研究看回答能力",
+      "title": "竞争研究看回答能力",
+      "category": "工作方法",
+      "public_summary": "研究行业页面如何回答问题和提供证据，而不是制作空泛排名。",
+      "why_it_matters": "可比较的是回答质量与证据结构，不是口号声量。",
+      "evidence_level": "课程方法样本",
+      "relation_tags": [
+        "外部研究",
+        "证据比较"
+      ],
+      "view_tags": [
+        "市场理解",
+        "课程"
+      ],
+      "public_source_label": "课程工作方法",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-012",
+      "slug": "knowledge-012-官网先做事实入口",
+      "title": "官网先做事实入口",
+      "category": "工作方法",
+      "public_summary": "将官网视为一手事实和咨询承接入口，先审计再逐步修复。",
+      "why_it_matters": "官网若不能回答关键问题，后续内容难有稳定落点。",
+      "evidence_level": "课程方法样本",
+      "relation_tags": [
+        "一手事实",
+        "页面审计"
+      ],
+      "view_tags": [
+        "网站治理",
+        "课程"
+      ],
+      "public_source_label": "课程工作方法",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-013",
+      "slug": "knowledge-013-一个问题一份答案资产",
+      "title": "一个问题一份答案资产",
+      "category": "工作方法",
+      "public_summary": "为重要问题制作可独立阅读且有证据边界的答案资产。",
+      "why_it_matters": "可复用的回答比批量文章更适合长期维护。",
+      "evidence_level": "课程方法样本",
+      "relation_tags": [
+        "答案资产",
+        "证据边界"
+      ],
+      "view_tags": [
+        "内容设计",
+        "课程"
+      ],
+      "public_source_label": "课程工作方法",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-014",
+      "slug": "knowledge-014-发布前保留审核链",
+      "title": "发布前保留审核链",
+      "category": "工作方法",
+      "public_summary": "将已审核内容转成发布草稿时保留来源与检查记录。",
+      "why_it_matters": "公开动作应能回看其依据，而不是让审核在发布时消失。",
+      "evidence_level": "课程方法样本",
+      "relation_tags": [
+        "发布审核",
+        "来源保留"
+      ],
+      "view_tags": [
+        "发布治理",
+        "课程"
+      ],
+      "public_source_label": "课程工作方法",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-015",
+      "slug": "knowledge-015-用固定问题观察变化",
+      "title": "用固定问题观察变化",
+      "category": "工作方法",
+      "public_summary": "以固定问题和字段持续观察外部系统如何描述企业。",
+      "why_it_matters": "没有可比的观察口径，就无法判断后续工作是否改变了什么。",
+      "evidence_level": "课程方法样本",
+      "relation_tags": [
+        "基线采样",
+        "可比观察"
+      ],
+      "view_tags": [
+        "度量设计",
+        "课程"
+      ],
+      "public_source_label": "课程工作方法",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-016",
+      "slug": "knowledge-016-把错误描述变成任务",
+      "title": "把错误描述变成任务",
+      "category": "工作方法",
+      "public_summary": "把发现的错误描述拆成有负责人和验收条件的修复任务。",
+      "why_it_matters": "问题被任务化后，修复才可能被检查和交接。",
+      "evidence_level": "课程方法样本",
+      "relation_tags": [
+        "问题闭环",
+        "责任分配"
+      ],
+      "view_tags": [
+        "项目治理",
+        "课程"
+      ],
+      "public_source_label": "课程工作方法",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-017",
+      "slug": "knowledge-017-前后比较要同条件",
+      "title": "前后比较要同条件",
+      "category": "工作方法",
+      "public_summary": "比较变化时保持问题平台和条件尽量一致。",
+      "why_it_matters": "否则所谓前后差异可能只是比较口径变了。",
+      "evidence_level": "课程方法样本",
+      "relation_tags": [
+        "对照设计",
+        "条件一致"
+      ],
+      "view_tags": [
+        "度量设计",
+        "课程"
+      ],
+      "public_source_label": "课程工作方法",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-018",
+      "slug": "knowledge-018-归因要保留不确定",
+      "title": "归因要保留不确定",
+      "category": "工作方法",
+      "public_summary": "分析咨询与成交时区分不同影响层，不把无法证明的结果强行归给单一动作。",
+      "why_it_matters": "诚实的归因比漂亮的结果叙述更能指导下一轮投入。",
+      "evidence_level": "课程方法样本",
+      "relation_tags": [
+        "归因边界",
+        "结果审慎"
+      ],
+      "view_tags": [
+        "度量设计",
+        "课程"
+      ],
+      "public_source_label": "课程工作方法",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-019",
+      "slug": "knowledge-019-复盘需要固定节奏",
+      "title": "复盘需要固定节奏",
+      "category": "工作方法",
+      "public_summary": "按周月季安排检查与验收，把改进从一次性项目变成持续循环。",
+      "why_it_matters": "节奏固定后，发现的问题才不会被日常事务淹没。",
+      "evidence_level": "课程方法样本",
+      "relation_tags": [
+        "周期复盘",
+        "持续改进"
+      ],
+      "view_tags": [
+        "项目治理",
+        "课程"
+      ],
+      "public_source_label": "课程工作方法",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-020",
+      "slug": "knowledge-020-复杂任务要角色分工",
+      "title": "复杂任务要角色分工",
+      "category": "工作方法",
+      "public_summary": "面对研究内容数据和审计并存的任务，先划分角色和交接标准。",
+      "why_it_matters": "并行的价值来自边界清楚，不来自同时开更多窗口。",
+      "evidence_level": "课程方法样本",
+      "relation_tags": [
+        "角色分工",
+        "交接验收"
+      ],
+      "view_tags": [
+        "协作设计",
+        "课程"
+      ],
+      "public_source_label": "课程工作方法",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-021",
+      "slug": "knowledge-021-规则分层才能稳定",
+      "title": "规则分层才能稳定",
+      "category": "工作方法",
+      "public_summary": "区分项目读取顺序可复用能力和长期规则，各自放在合适位置。",
+      "why_it_matters": "把所有说明混在一起会让维护和调用都失去重点。",
+      "evidence_level": "课程方法样本",
+      "relation_tags": [
+        "规则分层",
+        "读取顺序"
+      ],
+      "view_tags": [
+        "系统设计",
+        "课程"
+      ],
+      "public_source_label": "课程工作方法",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-022",
+      "slug": "knowledge-022-授权按风险分级",
+      "title": "授权按风险分级",
+      "category": "工作方法",
+      "public_summary": "把可逆与高风险动作分开，按影响程度决定谁可以确认。",
+      "why_it_matters": "授权不是形式流程，而是为不可逆风险留下停点。",
+      "evidence_level": "课程方法样本",
+      "relation_tags": [
+        "风险分级",
+        "人工确认"
+      ],
+      "view_tags": [
+        "安全治理",
+        "课程"
+      ],
+      "public_source_label": "课程工作方法",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-023",
+      "slug": "knowledge-023-自运行也要可验收",
+      "title": "自运行也要可验收",
+      "category": "工作方法",
+      "public_summary": "轻量自动化应有清楚的顺序检查与人工边界。",
+      "why_it_matters": "能自己运行不等于可以脱离验证和责任。",
+      "evidence_level": "课程方法样本",
+      "relation_tags": [
+        "自动化边界",
+        "验收条件"
+      ],
+      "view_tags": [
+        "系统设计",
+        "课程"
+      ],
+      "public_source_label": "课程工作方法",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-024",
+      "slug": "knowledge-024-项目包不是单次模板",
+      "title": "项目包不是单次模板",
+      "category": "交付规范",
+      "public_summary": "长期项目包应保存工作方式与输入边界，而不绑定一条固定成片。",
+      "why_it_matters": "这样每次交付都能在同一套可维护结构上开始。",
+      "evidence_level": "交付规范样本",
+      "relation_tags": [
+        "项目边界",
+        "长期维护"
+      ],
+      "view_tags": [
+        "交付设计",
+        "方法"
+      ],
+      "public_source_label": "交付规范文档",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-025",
+      "slug": "knowledge-025-参考只服务明确判断",
+      "title": "参考只服务明确判断",
+      "category": "交付规范",
+      "public_summary": "每次参考使用前说明借鉴的是构图节奏色彩还是镜头语言。",
+      "why_it_matters": "把参考目的说清，才能避免案例变成无意识复制。",
+      "evidence_level": "交付规范样本",
+      "relation_tags": [
+        "参考约束",
+        "意图说明"
+      ],
+      "view_tags": [
+        "设计协作",
+        "方法"
+      ],
+      "public_source_label": "交付规范文档",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-026",
+      "slug": "knowledge-026-长期设置先保护隐私",
+      "title": "长期设置先保护隐私",
+      "category": "交付规范",
+      "public_summary": "把品牌素材和隐私处理写成长期设置，并把默认模式显式化。",
+      "why_it_matters": "默认设置往往决定了交付过程中的隐性风险。",
+      "evidence_level": "交付规范样本",
+      "relation_tags": [
+        "隐私约束",
+        "品牌设置"
+      ],
+      "view_tags": [
+        "安全治理",
+        "方法"
+      ],
+      "public_source_label": "交付规范文档",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-027",
+      "slug": "knowledge-027-任务先写授权边界",
+      "title": "任务先写授权边界",
+      "category": "交付规范",
+      "public_summary": "在初始化工作流前明确任务定义输入和授权范围。",
+      "why_it_matters": "工具能力再强，也不应替代用户对边界的决定。",
+      "evidence_level": "交付规范样本",
+      "relation_tags": [
+        "授权边界",
+        "任务定义"
+      ],
+      "view_tags": [
+        "交付设计",
+        "方法"
+      ],
+      "public_source_label": "交付规范文档",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-028",
+      "slug": "knowledge-028-长期规则先于临时指令",
+      "title": "长期规则先于临时指令",
+      "category": "交付规范",
+      "public_summary": "为持续项目建立事实优先级和唯一工作路由。",
+      "why_it_matters": "临时要求再多，也需要稳定规则防止过程漂移。",
+      "evidence_level": "交付规范样本",
+      "relation_tags": [
+        "规则优先",
+        "事实路由"
+      ],
+      "view_tags": [
+        "项目治理",
+        "方法"
+      ],
+      "public_source_label": "交付规范文档",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-029",
+      "slug": "knowledge-029-能力地图要保留人工节点",
+      "title": "能力地图要保留人工节点",
+      "category": "交付规范",
+      "public_summary": "清楚区分用户输入总控调度和内部能力，使人工确认仍在链路中。",
+      "why_it_matters": "透明分工能减少把责任误交给工具的情况。",
+      "evidence_level": "交付规范样本",
+      "relation_tags": [
+        "职责分层",
+        "人工确认"
+      ],
+      "view_tags": [
+        "协作设计",
+        "方法"
+      ],
+      "public_source_label": "交付规范文档",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-030",
+      "slug": "knowledge-030-每次运行都要可回看",
+      "title": "每次运行都要可回看",
+      "category": "交付规范",
+      "public_summary": "为每项工作保留独立运行目录和返工记录，避免覆盖历史。",
+      "why_it_matters": "可回看失败与修改，才能让下一次改进有依据。",
+      "evidence_level": "交付规范样本",
+      "relation_tags": [
+        "运行留痕",
+        "版本保留"
+      ],
+      "view_tags": [
+        "项目治理",
+        "方法"
+      ],
+      "public_source_label": "交付规范文档",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-031",
+      "slug": "knowledge-031-输入要和时间线对应",
+      "title": "输入要和时间线对应",
+      "category": "交付规范",
+      "public_summary": "把最终文本与同一时间线的必要素材放在一起，并区分必选和可选输入。",
+      "why_it_matters": "输入关系清楚，后续检查才知道该验证什么。",
+      "evidence_level": "交付规范样本",
+      "relation_tags": [
+        "输入对齐",
+        "素材边界"
+      ],
+      "view_tags": [
+        "交付设计",
+        "方法"
+      ],
+      "public_source_label": "交付规范文档",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-032",
+      "slug": "knowledge-032-外部服务先做真实检查",
+      "title": "外部服务先做真实检查",
+      "category": "交付规范",
+      "public_summary": "交付说明不替接收者声称配置完成，实际状态应由本机检查或最小调用证明。",
+      "why_it_matters": "把配置想当然是自动化交付中常见的失效来源。",
+      "evidence_level": "交付规范样本",
+      "relation_tags": [
+        "能力核验",
+        "配置边界"
+      ],
+      "view_tags": [
+        "安全治理",
+        "方法"
+      ],
+      "public_source_label": "交付规范文档",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-033",
+      "slug": "knowledge-033-任务模板先留验收位",
+      "title": "任务模板先留验收位",
+      "category": "交付规范",
+      "public_summary": "每期任务模板应同时写清输入目标交付和运行标识。",
+      "why_it_matters": "结构化任务使完成与未完成能够被同一标准检查。",
+      "evidence_level": "交付规范样本",
+      "relation_tags": [
+        "任务结构",
+        "验收准备"
+      ],
+      "view_tags": [
+        "项目治理",
+        "方法"
+      ],
+      "public_source_label": "交付规范文档",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-034",
+      "slug": "knowledge-034-复盘只记录真实证据",
+      "title": "复盘只记录真实证据",
+      "category": "交付规范",
+      "public_summary": "复盘应记录实际画面流程或素材证据，而不是填充好看的结论。",
+      "why_it_matters": "真实复盘才能帮助下一次判断哪里需要调整。",
+      "evidence_level": "交付规范样本",
+      "relation_tags": [
+        "真实复盘",
+        "证据留存"
+      ],
+      "view_tags": [
+        "持续改进",
+        "方法"
+      ],
+      "public_source_label": "交付规范文档",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-035",
+      "slug": "knowledge-035-入口不复制第二份源码",
+      "title": "入口不复制第二份源码",
+      "category": "交付规范",
+      "public_summary": "项目内入口只指向固定发行位置，避免维护多份相互漂移的实现。",
+      "why_it_matters": "单一发行源能降低版本混乱和无法追责的风险。",
+      "evidence_level": "交付规范样本",
+      "relation_tags": [
+        "单一来源",
+        "版本治理"
+      ],
+      "view_tags": [
+        "系统设计",
+        "方法"
+      ],
+      "public_source_label": "交付规范文档",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-036",
+      "slug": "knowledge-036-身份字段先核验",
+      "title": "身份字段先核验",
+      "category": "智能体方法",
+      "public_summary": "处理消息身份时先确认字段代表谁，再做任何路由或存储动作。",
+      "why_it_matters": "字段名相近不代表语义相同。",
+      "evidence_level": "内部方法记录",
+      "relation_tags": [
+        "身份核验",
+        "输入校验"
+      ],
+      "view_tags": [
+        "智能体治理",
+        "方法"
+      ],
+      "public_source_label": "内部方法复盘",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-037",
+      "slug": "knowledge-037-关键文件完整读取",
+      "title": "关键文件完整读取",
+      "category": "智能体方法",
+      "public_summary": "关键文件先确认范围并完整阅读，不把未读部分默认成附录。",
+      "why_it_matters": "决定常常藏在文件后半段。",
+      "evidence_level": "内部方法记录",
+      "relation_tags": [
+        "完整读取",
+        "证据范围"
+      ],
+      "view_tags": [
+        "智能体治理",
+        "方法"
+      ],
+      "public_source_label": "内部方法复盘",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-038",
+      "slug": "knowledge-038-规则与参数分开",
+      "title": "规则与参数分开",
+      "category": "智能体方法",
+      "public_summary": "长期行为规则保持精简，把易变参数移到单独参考层。",
+      "why_it_matters": "分层能减少规则膨胀和改动风险。",
+      "evidence_level": "内部方法记录",
+      "relation_tags": [
+        "配置分层",
+        "规则精简"
+      ],
+      "view_tags": [
+        "智能体治理",
+        "方法"
+      ],
+      "public_source_label": "内部方法复盘",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-039",
+      "slug": "knowledge-039-错误先分责任边界",
+      "title": "错误先分责任边界",
+      "category": "智能体方法",
+      "public_summary": "遇到错误先区分权限通道和配额等责任面，再选择排查路径。",
+      "why_it_matters": "错误分类正确能避免盲目重试。",
+      "evidence_level": "内部方法记录",
+      "relation_tags": [
+        "故障分类",
+        "责任边界"
+      ],
+      "view_tags": [
+        "运维诊断",
+        "方法"
+      ],
+      "public_source_label": "内部方法复盘",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-040",
+      "slug": "knowledge-040-启动记忆也要节制",
+      "title": "启动记忆也要节制",
+      "category": "智能体方法",
+      "public_summary": "排查上下文过载时同时检查启动注入，而不是只盯当前对话。",
+      "why_it_matters": "许多负担来自看不见的预加载内容。",
+      "evidence_level": "内部方法记录",
+      "relation_tags": [
+        "上下文控制",
+        "启动审计"
+      ],
+      "view_tags": [
+        "智能体治理",
+        "方法"
+      ],
+      "public_source_label": "内部方法复盘",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-041",
+      "slug": "knowledge-041-先想再精准修改",
+      "title": "先想再精准修改",
+      "category": "智能体方法",
+      "public_summary": "开始工作前明确目标约束和验收，只改完成任务需要的范围。",
+      "why_it_matters": "小而准的变更更容易验证和回滚。",
+      "evidence_level": "内部方法记录",
+      "relation_tags": [
+        "目标驱动",
+        "最小变更"
+      ],
+      "view_tags": [
+        "执行方法",
+        "方法"
+      ],
+      "public_source_label": "内部方法复盘",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-042",
+      "slug": "knowledge-042-先给结论再展开",
+      "title": "先给结论再展开",
+      "category": "智能体方法",
+      "public_summary": "交流先给可执行结论，再按需要补充依据。",
+      "why_it_matters": "信息密度高时能减少读者的判断负担。",
+      "evidence_level": "内部方法记录",
+      "relation_tags": [
+        "沟通顺序",
+        "结论优先"
+      ],
+      "view_tags": [
+        "协作设计",
+        "方法"
+      ],
+      "public_source_label": "内部方法复盘",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-043",
+      "slug": "knowledge-043-总结不是物理清零",
+      "title": "总结不是物理清零",
+      "category": "智能体方法",
+      "public_summary": "逻辑总结不能替代新的上下文边界，必要时应重新开始会话。",
+      "why_it_matters": "把摘要当清空会低估历史内容的影响。",
+      "evidence_level": "内部方法记录",
+      "relation_tags": [
+        "上下文控制",
+        "会话边界"
+      ],
+      "view_tags": [
+        "智能体治理",
+        "方法"
+      ],
+      "public_source_label": "内部方法复盘",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-044",
+      "slug": "knowledge-044-直觉也要接受数据纠偏",
+      "title": "直觉也要接受数据纠偏",
+      "category": "智能体方法",
+      "public_summary": "当制作直觉与反馈不一致时，用可比数据重新检查判断。",
+      "why_it_matters": "审美判断可以保留，但不应免于复盘。",
+      "evidence_level": "内部方法记录",
+      "relation_tags": [
+        "数据纠偏",
+        "判断复盘"
+      ],
+      "view_tags": [
+        "内容设计",
+        "方法"
+      ],
+      "public_source_label": "内部方法复盘",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-045",
+      "slug": "knowledge-045-陈述不等于执行指令",
+      "title": "陈述不等于执行指令",
+      "category": "智能体方法",
+      "public_summary": "先识别文本是在描述状态还是要求动作，避免把确认语误当命令。",
+      "why_it_matters": "语义误判会把无授权的动作包装成自动化。",
+      "evidence_level": "内部方法记录",
+      "relation_tags": [
+        "语义区分",
+        "授权边界"
+      ],
+      "view_tags": [
+        "安全治理",
+        "方法"
+      ],
+      "public_source_label": "内部方法复盘",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-046",
+      "slug": "knowledge-046-把智能体当新员工",
+      "title": "把智能体当新员工",
+      "category": "智能体方法",
+      "public_summary": "为新智能体补足身份目标边界输入输出和升级路径。",
+      "why_it_matters": "角色清楚比堆叠提示更能提高协作稳定性。",
+      "evidence_level": "内部方法记录",
+      "relation_tags": [
+        "角色定义",
+        "入职设计"
+      ],
+      "view_tags": [
+        "智能体治理",
+        "方法"
+      ],
+      "public_source_label": "内部方法复盘",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-047",
+      "slug": "knowledge-047-红线要对应真实失败",
+      "title": "红线要对应真实失败",
+      "category": "智能体方法",
+      "public_summary": "每条禁止规则都对应一个可识别的失败场景。",
+      "why_it_matters": "能解释风险的红线才容易被执行和检查。",
+      "evidence_level": "内部方法记录",
+      "relation_tags": [
+        "风险约束",
+        "失败样本"
+      ],
+      "view_tags": [
+        "安全治理",
+        "方法"
+      ],
+      "public_source_label": "内部方法复盘",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-048",
+      "slug": "knowledge-048-未知就明确未知",
+      "title": "未知就明确未知",
+      "category": "智能体方法",
+      "public_summary": "信息不足时标注未知并说明需要什么证据，不用讨好式答案填空。",
+      "why_it_matters": "诚实的不确定性是后续调查的入口。",
+      "evidence_level": "内部方法记录",
+      "relation_tags": [
+        "未知标注",
+        "反幻觉"
+      ],
+      "view_tags": [
+        "证据治理",
+        "方法"
+      ],
+      "public_source_label": "内部方法复盘",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-049",
+      "slug": "knowledge-049-技能先从判断开始",
+      "title": "技能先从判断开始",
+      "category": "智能体方法",
+      "public_summary": "设计可复用能力时先明确判断，再倒推内容共创与测试。",
+      "why_it_matters": "能力不是说明书堆砌，而是可验证的判断链。",
+      "evidence_level": "内部方法记录",
+      "relation_tags": [
+        "能力设计",
+        "测试迭代"
+      ],
+      "view_tags": [
+        "智能体治理",
+        "方法"
+      ],
+      "public_source_label": "内部方法复盘",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-050",
+      "slug": "knowledge-050-概念要讲因果",
+      "title": "概念要讲因果",
+      "category": "智能体方法",
+      "public_summary": "解释概念时说明下一步为何由上一步的不足产生。",
+      "why_it_matters": "因果链比并列清单更能帮助迁移理解。",
+      "evidence_level": "内部方法记录",
+      "relation_tags": [
+        "因果解释",
+        "知识迁移"
+      ],
+      "view_tags": [
+        "教学设计",
+        "方法"
+      ],
+      "public_source_label": "内部方法复盘",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-051",
+      "slug": "knowledge-051-身份规则能力要分层",
+      "title": "身份规则能力要分层",
+      "category": "智能体方法",
+      "public_summary": "把角色定义长期规则和可调用能力拆成不同层。",
+      "why_it_matters": "分层后更容易判断哪里该改哪里该读。",
+      "evidence_level": "内部方法记录",
+      "relation_tags": [
+        "分层设计",
+        "职责边界"
+      ],
+      "view_tags": [
+        "智能体治理",
+        "方法"
+      ],
+      "public_source_label": "内部方法复盘",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-052",
+      "slug": "knowledge-052-短规则更容易守住",
+      "title": "短规则更容易守住",
+      "category": "智能体方法",
+      "public_summary": "长期身份规则保持短小，把细节移出核心层。",
+      "why_it_matters": "核心越清楚，越不容易被大量细节稀释。",
+      "evidence_level": "内部方法记录",
+      "relation_tags": [
+        "规则精简",
+        "核心约束"
+      ],
+      "view_tags": [
+        "智能体治理",
+        "方法"
+      ],
+      "public_source_label": "内部方法复盘",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-053",
+      "slug": "knowledge-053-不确定先查再问",
+      "title": "不确定先查再问",
+      "category": "智能体方法",
+      "public_summary": "区分可查证的不确定和必须由人确认的不确定。",
+      "why_it_matters": "先查能减少打扰，先问能避免越权。",
+      "evidence_level": "内部方法记录",
+      "relation_tags": [
+        "不确定分流",
+        "人工确认"
+      ],
+      "view_tags": [
+        "执行方法",
+        "方法"
+      ],
+      "public_source_label": "内部方法复盘",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-054",
+      "slug": "knowledge-054-回应直接进入任务",
+      "title": "回应直接进入任务",
+      "category": "智能体方法",
+      "public_summary": "在明确请求下直接进入可执行内容，少用空泛评价占用注意力。",
+      "why_it_matters": "协作效率来自有效推进而非礼貌填充。",
+      "evidence_level": "内部方法记录",
+      "relation_tags": [
+        "沟通效率",
+        "任务聚焦"
+      ],
+      "view_tags": [
+        "协作设计",
+        "方法"
+      ],
+      "public_source_label": "内部方法复盘",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-055",
+      "slug": "knowledge-055-改动按风险分级",
+      "title": "改动按风险分级",
+      "category": "智能体方法",
+      "public_summary": "同样是改字段，也要按影响面分层检查。",
+      "why_it_matters": "风险不同的变更不应使用同一套验证力度。",
+      "evidence_level": "内部方法记录",
+      "relation_tags": [
+        "变更分级",
+        "验证深度"
+      ],
+      "view_tags": [
+        "安全治理",
+        "方法"
+      ],
+      "public_source_label": "内部方法复盘",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-056",
+      "slug": "knowledge-056-避开默认视觉套路",
+      "title": "避开默认视觉套路",
+      "category": "智能体方法",
+      "public_summary": "生成视觉前先定义独特的参照和限制，避免落入默认样式。",
+      "why_it_matters": "约束能让视觉选择更贴近具体目标。",
+      "evidence_level": "内部方法记录",
+      "relation_tags": [
+        "视觉约束",
+        "参照校准"
+      ],
+      "view_tags": [
+        "设计协作",
+        "方法"
+      ],
+      "public_source_label": "内部方法复盘",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-057",
+      "slug": "knowledge-057-产品先做最小隔离",
+      "title": "产品先做最小隔离",
+      "category": "智能体方法",
+      "public_summary": "早期产品先用最轻的确认与隔离机制验证核心流程。",
+      "why_it_matters": "过早堆叠完整产品形态会掩盖真实需求。",
+      "evidence_level": "内部方法记录",
+      "relation_tags": [
+        "最小产品",
+        "隔离设计"
+      ],
+      "view_tags": [
+        "产品方法",
+        "方法"
+      ],
+      "public_source_label": "内部方法复盘",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-058",
+      "slug": "knowledge-058-先查真实能力",
+      "title": "先查真实能力",
+      "category": "智能体方法",
+      "public_summary": "设计架构前先核对实际能力和术语含义。",
+      "why_it_matters": "同名概念跨系统可能代表完全不同的东西。",
+      "evidence_level": "内部方法记录",
+      "relation_tags": [
+        "能力核验",
+        "术语澄清"
+      ],
+      "view_tags": [
+        "系统设计",
+        "方法"
+      ],
+      "public_source_label": "内部方法复盘",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-059",
+      "slug": "knowledge-059-观察者也会改变系统",
+      "title": "观察者也会改变系统",
+      "category": "智能体方法",
+      "public_summary": "排查运维问题时区分系统现象与自身操作造成的副作用。",
+      "why_it_matters": "先后顺序错了，诊断会把人为变化误当故障。",
+      "evidence_level": "内部方法记录",
+      "relation_tags": [
+        "观察者效应",
+        "运维诊断"
+      ],
+      "view_tags": [
+        "运维诊断",
+        "方法"
+      ],
+      "public_source_label": "内部方法复盘",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-060",
+      "slug": "knowledge-060-身份保护需要探针",
+      "title": "身份保护需要探针",
+      "category": "智能体方法",
+      "public_summary": "保护对外身份时同时设置边界并用探针检查是否生效。",
+      "why_it_matters": "只写规则不验证，更新后很容易失效。",
+      "evidence_level": "内部方法记录",
+      "relation_tags": [
+        "身份保护",
+        "探针验证"
+      ],
+      "view_tags": [
+        "安全治理",
+        "方法"
+      ],
+      "public_source_label": "内部方法复盘",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-061",
+      "slug": "knowledge-061-假设要先实测",
+      "title": "假设要先实测",
+      "category": "智能体方法",
+      "public_summary": "动手前测试继承而来的假设，不把文件状态直接当成运行事实。",
+      "why_it_matters": "未实测的方案不应被当成结论。",
+      "evidence_level": "内部方法记录",
+      "relation_tags": [
+        "实测优先",
+        "假设检验"
+      ],
+      "view_tags": [
+        "执行方法",
+        "方法"
+      ],
+      "public_source_label": "内部方法复盘",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-062",
+      "slug": "knowledge-062-替代方案先验可行",
+      "title": "替代方案先验可行",
+      "category": "智能体方法",
+      "public_summary": "准备多种方案时先验证各自可行性，并清晰标明已作废交接材料。",
+      "why_it_matters": "可行性和版本状态不清会让团队走回旧路。",
+      "evidence_level": "内部方法记录",
+      "relation_tags": [
+        "可行性验证",
+        "版本状态"
+      ],
+      "view_tags": [
+        "项目治理",
+        "方法"
+      ],
+      "public_source_label": "内部方法复盘",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-063",
+      "slug": "knowledge-063-阻塞要沿链路定位",
+      "title": "阻塞要沿链路定位",
+      "category": "智能体方法",
+      "public_summary": "多方协作卡住时按链路和责任面拆分真正的阻塞点。",
+      "why_it_matters": "找到最小阻塞点比同时催所有人更有效。",
+      "evidence_level": "内部方法记录",
+      "relation_tags": [
+        "链路诊断",
+        "阻塞定位"
+      ],
+      "view_tags": [
+        "协作设计",
+        "方法"
+      ],
+      "public_source_label": "内部方法复盘",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-064",
+      "slug": "knowledge-064-看端到端是否通",
+      "title": "看端到端是否通",
+      "category": "智能体方法",
+      "public_summary": "判断流程是否产出时逐段检查核心链路，而不只统计做了多少动作。",
+      "why_it_matters": "局部忙碌不能替代完整交付。",
+      "evidence_level": "内部方法记录",
+      "relation_tags": [
+        "端到端验证",
+        "流程可视化"
+      ],
+      "view_tags": [
+        "项目治理",
+        "方法"
+      ],
+      "public_source_label": "内部方法复盘",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-065",
+      "slug": "knowledge-065-参数先看实际消费",
+      "title": "参数先看实际消费",
+      "category": "智能体方法",
+      "public_summary": "调整参数前先确认它在何处被怎样使用。",
+      "why_it_matters": "名字看起来合理不代表运行时语义正确。",
+      "evidence_level": "内部方法记录",
+      "relation_tags": [
+        "参数核验",
+        "运行理解"
+      ],
+      "view_tags": [
+        "运维诊断",
+        "方法"
+      ],
+      "public_source_label": "内部方法复盘",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-066",
+      "slug": "knowledge-066-工具入口要统一",
+      "title": "工具入口要统一",
+      "category": "智能体方法",
+      "public_summary": "发现工具后纳入统一路由，并验证系统会在合适时机调用它。",
+      "why_it_matters": "注册成功不等于真实工作流会使用。",
+      "evidence_level": "内部方法记录",
+      "relation_tags": [
+        "工具路由",
+        "调用验证"
+      ],
+      "view_tags": [
+        "系统设计",
+        "方法"
+      ],
+      "public_source_label": "内部方法复盘",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-067",
+      "slug": "knowledge-067-未知类型决定方法",
+      "title": "未知类型决定方法",
+      "category": "智能体方法",
+      "public_summary": "按能否描述能否识别和能否提问区分未知，再选对应探索手法。",
+      "why_it_matters": "把所有未知用同一种提问处理会浪费调查机会。",
+      "evidence_level": "内部方法记录",
+      "relation_tags": [
+        "未知分类",
+        "探索设计"
+      ],
+      "view_tags": [
+        "证据治理",
+        "方法"
+      ],
+      "public_source_label": "内部方法复盘",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-068",
+      "slug": "knowledge-068-具体度需要留转弯",
+      "title": "具体度需要留转弯",
+      "category": "智能体方法",
+      "public_summary": "指令既不能把路径焊死，也不能模糊到被默认经验带偏。",
+      "why_it_matters": "好的约束既提供方向，也保留必要的判断空间。",
+      "evidence_level": "内部方法记录",
+      "relation_tags": [
+        "约束设计",
+        "判断空间"
+      ],
+      "view_tags": [
+        "智能体治理",
+        "方法"
+      ],
+      "public_source_label": "内部方法复盘",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-069",
+      "slug": "knowledge-069-失败模式先分类",
+      "title": "失败模式先分类",
+      "category": "智能体方法",
+      "public_summary": "复杂任务先区分被默认值带偏与确实缺少输入等失败类型。",
+      "why_it_matters": "不同失败类型需要不同修复动作。",
+      "evidence_level": "内部方法记录",
+      "relation_tags": [
+        "失败分类",
+        "问题诊断"
+      ],
+      "view_tags": [
+        "执行方法",
+        "方法"
+      ],
+      "public_source_label": "内部方法复盘",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-070",
+      "slug": "knowledge-070-投资稳定接口",
+      "title": "投资稳定接口",
+      "category": "智能体方法",
+      "public_summary": "把投入放在长期接口需求上，谨慎押注容易被内化的临时脚手架。",
+      "why_it_matters": "资源配置应区分短期便利和长期价值。",
+      "evidence_level": "内部方法记录",
+      "relation_tags": [
+        "架构取舍",
+        "长期接口"
+      ],
+      "view_tags": [
+        "系统设计",
+        "方法"
+      ],
+      "public_source_label": "内部方法复盘",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-071",
+      "slug": "knowledge-071-质检也要被质检",
+      "title": "质检也要被质检",
+      "category": "智能体方法",
+      "public_summary": "为质量闸门准备正反样本，验证闸门真的能区分通过与失败。",
+      "why_it_matters": "只检查产物不检查检查器，会留下系统性盲点。",
+      "evidence_level": "内部方法记录",
+      "relation_tags": [
+        "质量闸门",
+        "正反样本"
+      ],
+      "view_tags": [
+        "质量治理",
+        "方法"
+      ],
+      "public_source_label": "内部方法复盘",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-072",
+      "slug": "knowledge-072-工具使用先设准入",
+      "title": "工具使用先设准入",
+      "category": "智能体方法",
+      "public_summary": "在交给智能体前说明工具能力边界和不可假设的部分。",
+      "why_it_matters": "准入条件能减少凭空编造的调用。",
+      "evidence_level": "内部方法记录",
+      "relation_tags": [
+        "工具准入",
+        "能力边界"
+      ],
+      "view_tags": [
+        "安全治理",
+        "方法"
+      ],
+      "public_source_label": "内部方法复盘",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-073",
+      "slug": "knowledge-073-能力进化要知道位置",
+      "title": "能力进化要知道位置",
+      "category": "智能体方法",
+      "public_summary": "用能力层级判断当前交付停在什么阶段。",
+      "why_it_matters": "定位清楚才能知道下一步该补能力还是补验证。",
+      "evidence_level": "内部方法记录",
+      "relation_tags": [
+        "能力分级",
+        "发展路径"
+      ],
+      "view_tags": [
+        "智能体治理",
+        "方法"
+      ],
+      "public_source_label": "内部方法复盘",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-074",
+      "slug": "knowledge-074-约束要防止投机",
+      "title": "约束要防止投机",
+      "category": "智能体方法",
+      "public_summary": "设计约束时防止系统只满足表面检查而绕开真实目标。",
+      "why_it_matters": "结构通过不等于结果有价值。",
+      "evidence_level": "内部方法记录",
+      "relation_tags": [
+        "约束设计",
+        "反投机"
+      ],
+      "view_tags": [
+        "质量治理",
+        "方法"
+      ],
+      "public_source_label": "内部方法复盘",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-075",
+      "slug": "knowledge-075-缺失值也应合法",
+      "title": "缺失值也应合法",
+      "category": "智能体方法",
+      "public_summary": "设计字段时允许未知和缺失被如实表达，不逼系统编值填满结构。",
+      "why_it_matters": "对缺失的诚实表达比形式完整更可靠。",
+      "evidence_level": "内部方法记录",
+      "relation_tags": [
+        "缺失处理",
+        "反幻觉"
+      ],
+      "view_tags": [
+        "数据治理",
+        "方法"
+      ],
+      "public_source_label": "内部方法复盘",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-076",
+      "slug": "knowledge-076-大原文先蒸馏",
+      "title": "大原文先蒸馏",
+      "category": "智能体方法",
+      "public_summary": "让大材料在受控环节蒸馏后再进入主任务上下文。",
+      "why_it_matters": "这样既保留信息，也降低主流程被细节淹没的风险。",
+      "evidence_level": "内部方法记录",
+      "relation_tags": [
+        "上下文蒸馏",
+        "信息分流"
+      ],
+      "view_tags": [
+        "智能体治理",
+        "方法"
+      ],
+      "public_source_label": "内部方法复盘",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-077",
+      "slug": "knowledge-077-付费调用设停止线",
+      "title": "付费调用设停止线",
+      "category": "智能体方法",
+      "public_summary": "为付费调用设定失败停止条件，并在成功后固定可复现路径。",
+      "why_it_matters": "成本控制和可复现性需要同时设计。",
+      "evidence_level": "内部方法记录",
+      "relation_tags": [
+        "成本边界",
+        "调用复现"
+      ],
+      "view_tags": [
+        "运维诊断",
+        "方法"
+      ],
+      "public_source_label": "内部方法复盘",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-078",
+      "slug": "knowledge-078-记忆先保留判断依据",
+      "title": "记忆先保留判断依据",
+      "category": "智能体方法",
+      "public_summary": "沉淀记忆时不仅存结论，也保留形成结论所需的判断线索。",
+      "why_it_matters": "缺少依据的结论难以复查和纠正。",
+      "evidence_level": "内部方法记录",
+      "relation_tags": [
+        "记忆设计",
+        "判断依据"
+      ],
+      "view_tags": [
+        "知识建模",
+        "方法"
+      ],
+      "public_source_label": "内部方法复盘",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-079",
+      "slug": "knowledge-079-工具文档标出确定性",
+      "title": "工具文档标出确定性",
+      "category": "智能体方法",
+      "public_summary": "面向智能体的工具文档明确区分已知事实待验证项和禁止假设。",
+      "why_it_matters": "文档的确定性标记能减少误用。",
+      "evidence_level": "内部方法记录",
+      "relation_tags": [
+        "文档分级",
+        "工具理解"
+      ],
+      "view_tags": [
+        "系统设计",
+        "方法"
+      ],
+      "public_source_label": "内部方法复盘",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-080",
+      "slug": "knowledge-080-把能力放进主链路",
+      "title": "把能力放进主链路",
+      "category": "智能体方法",
+      "public_summary": "判断某项工具能力是否应被内化到核心工作链路。",
+      "why_it_matters": "减少无必要的跳转可使流程更连贯。",
+      "evidence_level": "内部方法记录",
+      "relation_tags": [
+        "能力内化",
+        "流程设计"
+      ],
+      "view_tags": [
+        "系统设计",
+        "方法"
+      ],
+      "public_source_label": "内部方法复盘",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-081",
+      "slug": "knowledge-081-身份归属宁可通读",
+      "title": "身份归属宁可通读",
+      "category": "智能体方法",
+      "public_summary": "处理身份和归属判断时优先完整核实，而非只看节选。",
+      "why_it_matters": "片段很容易制造看似合理的误判。",
+      "evidence_level": "内部方法记录",
+      "relation_tags": [
+        "完整核验",
+        "身份归属"
+      ],
+      "view_tags": [
+        "证据治理",
+        "方法"
+      ],
+      "public_source_label": "内部方法复盘",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-082",
+      "slug": "knowledge-082-经验先过价值筛选",
+      "title": "经验先过价值筛选",
+      "category": "智能体方法",
+      "public_summary": "把经验归入能力框架前先判断它解决了什么价值问题。",
+      "why_it_matters": "分类不是目的，能否指导选择才是。",
+      "evidence_level": "内部方法记录",
+      "relation_tags": [
+        "价值筛选",
+        "经验分类"
+      ],
+      "view_tags": [
+        "知识建模",
+        "方法"
+      ],
+      "public_source_label": "内部方法复盘",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-083",
+      "slug": "knowledge-083-地图先标未知位置",
+      "title": "地图先标未知位置",
+      "category": "智能体方法",
+      "public_summary": "开始任务前标出已知和未知的边界，不把地图当成完整现实。",
+      "why_it_matters": "不知道什么未知，才是最需要先处理的风险。",
+      "evidence_level": "内部方法记录",
+      "relation_tags": [
+        "未知定位",
+        "任务准备"
+      ],
+      "view_tags": [
+        "执行方法",
+        "方法"
+      ],
+      "public_source_label": "内部方法复盘",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-084",
+      "slug": "knowledge-084-云端工具先过隐私门",
+      "title": "云端工具先过隐私门",
+      "category": "智能体方法",
+      "public_summary": "接入外部服务前检查数据是否会离开受控边界。",
+      "why_it_matters": "工具便利不能覆盖数据流向的责任。",
+      "evidence_level": "内部方法记录",
+      "relation_tags": [
+        "数据边界",
+        "工具准入"
+      ],
+      "view_tags": [
+        "安全治理",
+        "方法"
+      ],
+      "public_source_label": "内部方法复盘",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-085",
+      "slug": "knowledge-085-指令失效先查权威层",
+      "title": "指令失效先查权威层",
+      "category": "智能体方法",
+      "public_summary": "当规则不生效时先检查注入顺序和更高层约束。",
+      "why_it_matters": "找到覆盖来源比继续加重提示更有效。",
+      "evidence_level": "内部方法记录",
+      "relation_tags": [
+        "权威层级",
+        "指令诊断"
+      ],
+      "view_tags": [
+        "智能体治理",
+        "方法"
+      ],
+      "public_source_label": "内部方法复盘",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-086",
+      "slug": "knowledge-086-提取先看可收录线索",
+      "title": "提取先看可收录线索",
+      "category": "智能体方法",
+      "public_summary": "做知识提取时先寻找值得保留的线索，再进入质量判断。",
+      "why_it_matters": "过早只做排除会错过可成长的材料。",
+      "evidence_level": "内部方法记录",
+      "relation_tags": [
+        "知识提取",
+        "发现优先"
+      ],
+      "view_tags": [
+        "知识建模",
+        "方法"
+      ],
+      "public_source_label": "内部方法复盘",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-087",
+      "slug": "knowledge-087-搜索先展开术语",
+      "title": "搜索先展开术语",
+      "category": "智能体方法",
+      "public_summary": "检索前把用户用词展开为可核对的概念锚点。",
+      "why_it_matters": "术语不清时直接搜索，结果容易偏离问题。",
+      "evidence_level": "内部方法记录",
+      "relation_tags": [
+        "术语展开",
+        "检索准备"
+      ],
+      "view_tags": [
+        "研究方法",
+        "方法"
+      ],
+      "public_source_label": "内部方法复盘",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-088",
+      "slug": "knowledge-088-方法要保留判断弹性",
+      "title": "方法要保留判断弹性",
+      "category": "智能体方法",
+      "public_summary": "把方法交给智能体时避免只用僵硬评分清单替代情境判断。",
+      "why_it_matters": "规则负责底线，判断负责处理差异。",
+      "evidence_level": "内部方法记录",
+      "relation_tags": [
+        "方法传递",
+        "情境判断"
+      ],
+      "view_tags": [
+        "智能体治理",
+        "方法"
+      ],
+      "public_source_label": "内部方法复盘",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-089",
+      "slug": "knowledge-089-验证顺序不能跳步",
+      "title": "验证顺序不能跳步",
+      "category": "智能体方法",
+      "public_summary": "架构验证按查配置再验证再输出的顺序执行。",
+      "why_it_matters": "跳过前置核验会让后续结论失去基础。",
+      "evidence_level": "内部方法记录",
+      "relation_tags": [
+        "验证顺序",
+        "配置核验"
+      ],
+      "view_tags": [
+        "质量治理",
+        "方法"
+      ],
+      "public_source_label": "内部方法复盘",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-090",
+      "slug": "knowledge-090-先找正式开关",
+      "title": "先找正式开关",
+      "category": "智能体方法",
+      "public_summary": "框架行为不合意时优先寻找正式配置，不把临时补丁当长期方案。",
+      "why_it_matters": "可维护的修复要经得起更新。",
+      "evidence_level": "内部方法记录",
+      "relation_tags": [
+        "配置优先",
+        "可维护性"
+      ],
+      "view_tags": [
+        "运维诊断",
+        "方法"
+      ],
+      "public_source_label": "内部方法复盘",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-091",
+      "slug": "knowledge-091-成熟判断就直接执行",
+      "title": "成熟判断就直接执行",
+      "category": "智能体方法",
+      "public_summary": "当用户已给出成熟判断时，减少重复确认并直接进入实现。",
+      "why_it_matters": "尊重已有判断是协作效率的一部分。",
+      "evidence_level": "内部方法记录",
+      "relation_tags": [
+        "执行授权",
+        "沟通效率"
+      ],
+      "view_tags": [
+        "协作设计",
+        "方法"
+      ],
+      "public_source_label": "内部方法复盘",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-092",
+      "slug": "knowledge-092-接口屏蔽实现差异",
+      "title": "接口屏蔽实现差异",
+      "category": "智能体方法",
+      "public_summary": "为智能体提供稳定接口，隔离底层实现变化。",
+      "why_it_matters": "调用方不必为每次内部变化重写工作流。",
+      "evidence_level": "内部方法记录",
+      "relation_tags": [
+        "稳定接口",
+        "抽象隔离"
+      ],
+      "view_tags": [
+        "系统设计",
+        "方法"
+      ],
+      "public_source_label": "内部方法复盘",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-093",
+      "slug": "knowledge-093-规则闸门不替代品味",
+      "title": "规则闸门不替代品味",
+      "category": "智能体方法",
+      "public_summary": "结构检查之外还需要参照校准与换场景测试。",
+      "why_it_matters": "通过规则不等于内容真的有立意和质量。",
+      "evidence_level": "内部方法记录",
+      "relation_tags": [
+        "质量校准",
+        "参照测试"
+      ],
+      "view_tags": [
+        "质量治理",
+        "方法"
+      ],
+      "public_source_label": "内部方法复盘",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-094",
+      "slug": "knowledge-094-软约束要变成可验证动作",
+      "title": "软约束要变成可验证动作",
+      "category": "智能体方法",
+      "public_summary": "重要约束要落到能被检查的工具触发或记录上。",
+      "why_it_matters": "只写在说明里的规则容易被跳过。",
+      "evidence_level": "内部方法记录",
+      "relation_tags": [
+        "硬化约束",
+        "可验证动作"
+      ],
+      "view_tags": [
+        "安全治理",
+        "方法"
+      ],
+      "public_source_label": "内部方法复盘",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-095",
+      "slug": "knowledge-095-未验证方案不推荐",
+      "title": "未验证方案不推荐",
+      "category": "智能体方法",
+      "public_summary": "没有实测证据的方案保持为假设，重装等高成本动作放在最后。",
+      "why_it_matters": "保守不是拖延，而是避免不可逆试错。",
+      "evidence_level": "内部方法记录",
+      "relation_tags": [
+        "实测门槛",
+        "恢复优先"
+      ],
+      "view_tags": [
+        "运维诊断",
+        "方法"
+      ],
+      "public_source_label": "内部方法复盘",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-096",
+      "slug": "knowledge-096-能力组合看独有价值",
+      "title": "能力组合看独有价值",
+      "category": "智能体方法",
+      "public_summary": "配置能力时看每个来源带来的独有价值，并保留多源输入。",
+      "why_it_matters": "边界最宽不一定带来最好的组合。",
+      "evidence_level": "内部方法记录",
+      "relation_tags": [
+        "能力组合",
+        "多源输入"
+      ],
+      "view_tags": [
+        "系统设计",
+        "方法"
+      ],
+      "public_source_label": "内部方法复盘",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-097",
+      "slug": "knowledge-097-降级不等于等效",
+      "title": "降级不等于等效",
+      "category": "智能体方法",
+      "public_summary": "为工具准备替代路径时说明结果可能发生的结构性变化。",
+      "why_it_matters": "降级方案需要按不同结果重新验收。",
+      "evidence_level": "内部方法记录",
+      "relation_tags": [
+        "降级边界",
+        "差异验收"
+      ],
+      "view_tags": [
+        "系统设计",
+        "方法"
+      ],
+      "public_source_label": "内部方法复盘",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-098",
+      "slug": "knowledge-098-复杂任务一次只做一件",
+      "title": "复杂任务一次只做一件",
+      "category": "智能体方法",
+      "public_summary": "复杂能力拆成顺序明确的小任务，避免过早暴露终点诱发跳步。",
+      "why_it_matters": "把前置条件变成独立任务，执行才更可控。",
+      "evidence_level": "内部方法记录",
+      "relation_tags": [
+        "任务拆分",
+        "顺序控制"
+      ],
+      "view_tags": [
+        "智能体治理",
+        "方法"
+      ],
+      "public_source_label": "内部方法复盘",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-099",
+      "slug": "knowledge-099-触发规则也有成本",
+      "title": "触发规则也有成本",
+      "category": "智能体方法",
+      "public_summary": "设计自动触发时评估每条描述带来的上下文成本。",
+      "why_it_matters": "自动化不是免费午餐，触发范围需要取舍。",
+      "evidence_level": "内部方法记录",
+      "relation_tags": [
+        "触发设计",
+        "上下文成本"
+      ],
+      "view_tags": [
+        "智能体治理",
+        "方法"
+      ],
+      "public_source_label": "内部方法复盘",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    },
+    {
+      "public_id": "method-100",
+      "slug": "knowledge-100-记忆前置发现与边界",
+      "title": "记忆前置发现与边界",
+      "category": "智能体方法",
+      "public_summary": "写入长期记忆前先做发现和边界检查，避免把错误固化。",
+      "why_it_matters": "不可逆沉淀更需要在入口处谨慎。",
+      "evidence_level": "内部方法记录",
+      "relation_tags": [
+        "记忆边界",
+        "前置发现"
+      ],
+      "view_tags": [
+        "知识建模",
+        "方法"
+      ],
+      "public_source_label": "内部方法复盘",
+      "updated_at": "2026-08-20T23:17:29+08:00",
+      "result_boundary": "不含学员会员或商业效果主张"
+    }
+  ]
+}
