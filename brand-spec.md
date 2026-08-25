@@ -24,6 +24,9 @@
 | 原始社交视觉 | `hero-poster.png` | 社交预览真源与历史资产 | 文件较大，不在页面正文加载 |
 | 商务微信二维码 | `assets/qrcode.jpg` | 当前首页不展示，保留备用 | 只有明确需要公开商务微信时才加载 |
 | ReachSurge 本地数据视觉 | `reachsurge/assets/data-local.webp` | 产品资料备用 | 不当作真实界面截图或安全证明 |
+| 知识激活抽象思考者 | `assets/knowledge/founder-knowledge-thinker-abstract-v2.webp` | `/knowledge/` 首屏背景 | Codex 内置生图生成；无脸、非写实人物融入黑场，不作为独立图片卡片 |
+| 知识激活流程视觉 | `assets/knowledge/knowledge-activation-process-abstract-v2.webp` | `/knowledge/` 激活流程 | Codex 内置生图生成；资料、判断核心与 Agent 节点形成连续无真人场景 |
+| 知识激活交付物视觉 | `assets/knowledge/knowledge-activation-deliverables-integrated-v2.webp` | `/knowledge/` 交付物 | Codex 内置生图生成；档案、工作台与验证文件直接融入暖白纸面背景 |
 
 以下旧资产不再由新版页面加载：
 

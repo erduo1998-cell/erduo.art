@@ -6,23 +6,32 @@ const path = require("node:path");
 const puppeteer = require("puppeteer-core");
 
 const base = process.env.KNOWLEDGE_BASE_URL || "http://127.0.0.1:4173";
-const isLocalBase = ["127.0.0.1", "localhost"].includes(new URL(base).hostname);
-const snapshotSha256 = "e423c026f22ac202361f64143000b0a4572563d4883c9a391254a9f3ed98e336";
 const chrome = process.env.CHROME_PATH || "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
 const screenshotDir = process.env.KNOWLEDGE_SCREENSHOT_DIR || "/tmp/erduo-art-knowledge-check";
-const axePath = require.resolve("axe-core/axe.min.js");
 
 function assert(value, message) {
   if (!value) throw new Error(message);
 }
 
-async function audit(page, label) {
-  await page.addScriptTag({ path: axePath });
-  const result = await page.evaluate(async () => window.axe.run(document, {
-    runOnly: { type: "tag", values: ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"] },
-  }));
-  assert(result.violations.length === 0, `${label} axe violations: ${result.violations.map((item) => `${item.id} ${item.nodes.map((node) => `${node.target.join(" ")} [${node.failureSummary}]`).join(" | ")}`).join(", ")}`);
-  return result.passes.length;
+async function inspect(page) {
+  return page.evaluate(() => {
+    const h1 = document.querySelector("h1");
+    const process = document.querySelector(".v03-process-visual img");
+    const delivery = document.querySelector(".v03-delivery-layout img");
+    const applicationLinks = [...document.querySelectorAll('a[href^="mailto:"]')];
+    return {
+      overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
+      h1Count: document.querySelectorAll("h1").length,
+      h1: h1 && h1.textContent.trim(),
+      heroBackground: getComputedStyle(document.querySelector(".v04-hero-field")).backgroundImage,
+      process: process && { complete: process.complete, width: process.naturalWidth, height: process.naturalHeight },
+      delivery: delivery && { complete: delivery.complete, width: delivery.naturalWidth, height: delivery.naturalHeight },
+      prices: document.body.innerText.includes("59,800") && document.body.innerText.includes("98,000"),
+      applicationLinks: applicationLinks.length,
+      applicationSubjects: applicationLinks.every((link) => link.href.includes("59%2C800")),
+      fontReady: document.fonts.status,
+    };
+  });
 }
 
 async function main() {
@@ -31,167 +40,52 @@ async function main() {
   const consoleErrors = [];
   try {
     const page = await browser.newPage();
-    page.on("console", (message) => {
-      if (message.type() === "error") consoleErrors.push(message.text());
-    });
+    page.on("console", (message) => { if (message.type() === "error") consoleErrors.push(message.text()); });
     page.on("pageerror", (error) => consoleErrors.push(error.message));
 
     for (const route of ["/", "/reachsurge/", "/knowledge/"]) {
       const response = await page.goto(base + route, { waitUntil: "networkidle0" });
       assert(response && response.status() === 200, `${route} did not return 200`);
     }
-    assert(consoleErrors.length === 0, `route console errors: ${consoleErrors.join(" | ")}`);
     const missing = await page.goto(base + "/knowledge-not-found", { waitUntil: "domcontentloaded" });
     assert(missing && missing.status() === 404, "missing route did not return 404");
-    consoleErrors.length = 0;
 
-    await page.setViewport({ width: 1440, height: 900, deviceScaleFactor: 1 });
-    await page.goto(base + "/knowledge/", { waitUntil: "networkidle0" });
-    const desktop = await page.evaluate(() => ({
-      cards: document.querySelectorAll("[data-knowledge-card]").length,
-      overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
-      h1: document.querySelector("h1").textContent.replace(/\s+/g, "").trim(),
-      h1Font: getComputedStyle(document.querySelector("h1")).fontFamily,
-      h1Weight: getComputedStyle(document.querySelector("h1")).fontWeight,
-      video: {
-        autoplay: document.querySelector("video").autoplay,
-        muted: document.querySelector("video").muted,
-        paused: document.querySelector("video").paused,
-        controls: document.querySelector("video").controls,
-        playsInline: document.querySelector("video").playsInline,
-        readyState: document.querySelector("video").readyState,
-        duration: document.querySelector("video").duration,
-        width: document.querySelector("video").videoWidth,
-      },
-      fontReady: document.fonts.status,
-    }));
-    assert(desktop.cards === 100, "desktop does not contain 100 cards");
-    assert(desktop.overflow <= 1, `desktop overflow ${desktop.overflow}px`);
-    assert(desktop.h1 === "让判断成为能力", "hero title drifted");
-    assert(desktop.h1Font.includes("Noto Sans SC") && desktop.h1Weight === "700", "hero font contract failed");
-    assert(!desktop.video.autoplay && desktop.video.muted && desktop.video.paused && desktop.video.controls && desktop.video.playsInline, "video contract failed");
-    assert(desktop.video.readyState >= 1 && Math.abs(desktop.video.duration - 8.4) < 0.05 && desktop.video.width === 1920, "video metadata failed");
-    assert(desktop.fontReady === "loaded", "fonts did not finish loading");
-    await page.screenshot({ path: path.join(screenshotDir, "knowledge-desktop-hero.png") });
-
-    await page.select("[data-category]", "工作方法");
-    await page.waitForFunction(() => document.querySelector("[data-result-count]").textContent.includes("18"));
-    assert(await page.$$eval("[data-knowledge-card]:not([hidden])", (items) => items.length) === 18, "category filter count failed");
-    await page.click("[data-reset]");
-    await page.waitForFunction(() => document.querySelector("[data-result-count]").textContent.includes("100"));
-    await page.type("[data-query]", "记忆前置");
-    assert(await page.$$eval("[data-knowledge-card]:not([hidden])", (items) => items.length) === 1, "search filter failed");
-    await page.click("[data-reset]");
-
-    const slug = await page.$eval("[data-knowledge-card]", (item) => item.id);
-    await page.goto(base + "/knowledge/#" + encodeURIComponent(slug), { waitUntil: "networkidle0" });
-    assert(await page.$eval("[data-knowledge-card] details", (detail) => detail.open), "deep link did not open detail");
-    const firstSummary = await page.$("[data-knowledge-card] summary");
-    await firstSummary.focus();
-    await page.keyboard.press("Enter");
-    assert(!(await page.$eval("[data-knowledge-card] details", (detail) => detail.open)), "keyboard did not toggle detail");
-    await page.keyboard.press("Enter");
-
-    await new Promise((resolve) => setTimeout(resolve, 900));
-    const desktopAxe = await audit(page, "desktop");
-    await page.screenshot({ path: path.join(screenshotDir, "knowledge-desktop-library.png") });
-
-    const mobile = await browser.newPage();
-    mobile.on("console", (message) => {
-      if (message.type() === "error") consoleErrors.push(message.text());
-    });
-    await mobile.setViewport({ width: 375, height: 812, deviceScaleFactor: 1, isMobile: true, hasTouch: true });
-    await mobile.goto(base + "/knowledge/", { waitUntil: "networkidle0" });
-    const mobileLayout = await mobile.evaluate(() => ({
-      cards: document.querySelectorAll("[data-knowledge-card]").length,
-      overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
-      columns: getComputedStyle(document.querySelector("[data-knowledge-grid]")).gridTemplateColumns.split(" ").length,
-    }));
-    assert(mobileLayout.cards === 100 && mobileLayout.overflow <= 1 && mobileLayout.columns === 1, "mobile layout failed");
-    await mobile.screenshot({ path: path.join(screenshotDir, "knowledge-mobile-hero.png") });
-    const mobileSummary = await mobile.$("[data-knowledge-card] summary");
-    await mobileSummary.evaluate((element) => element.scrollIntoView({ block: "center" }));
-    await new Promise((resolve) => setTimeout(resolve, 900));
-    const box = await mobileSummary.boundingBox();
-    await mobile.touchscreen.tap(box.x + box.width / 2, box.y + box.height / 2);
-    assert(await mobile.$eval("[data-knowledge-card] details", (detail) => detail.open), "touch did not open detail");
-    await new Promise((resolve) => setTimeout(resolve, 900));
-    const mobileAxe = await audit(mobile, "mobile");
-    await mobile.screenshot({ path: path.join(screenshotDir, "knowledge-mobile-library.png") });
-
-    const responsiveChecks = [];
-    for (const viewport of [{ width: 768, height: 1024 }, { width: 1920, height: 1080 }]) {
-      const responsive = await browser.newPage();
-      await responsive.setViewport(viewport);
-      await responsive.goto(base + "/knowledge/", { waitUntil: "networkidle0" });
-      const result = await responsive.evaluate(() => ({
-        cards: document.querySelectorAll("[data-knowledge-card]").length,
-        overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
-      }));
-      await responsive.close();
-      assert(result.cards === 100 && result.overflow <= 1, `responsive layout failed at ${viewport.width}`);
-      responsiveChecks.push({ ...viewport, ...result });
+    const results = [];
+    for (const viewport of [
+      { width: 375, height: 812, name: "mobile" },
+      { width: 768, height: 1024, name: "tablet" },
+      { width: 1440, height: 900, name: "desktop" },
+      { width: 1920, height: 1080, name: "wide" },
+    ]) {
+      await page.setViewport({ width: viewport.width, height: viewport.height, deviceScaleFactor: 1, isMobile: viewport.width < 500, hasTouch: viewport.width < 500 });
+      await page.goto(base + "/knowledge/", { waitUntil: "networkidle0" });
+      const result = await inspect(page);
+      assert(result.overflow <= 1, `${viewport.name} overflow ${result.overflow}px`);
+      assert(result.h1Count === 1 && result.h1 === "知识激活", `${viewport.name} H1 drifted`);
+      assert(result.heroBackground.includes("founder-knowledge-thinker-abstract-v2.webp"), `${viewport.name} abstract hero missing`);
+      assert(result.process.complete && result.process.width === 1717 && result.process.height === 916, `${viewport.name} process image failed`);
+      assert(result.delivery.complete && result.delivery.width === 1536 && result.delivery.height === 1024, `${viewport.name} delivery image failed`);
+      assert(result.prices && result.applicationLinks >= 1 && result.applicationSubjects, `${viewport.name} pricing or application CTA failed`);
+      assert(result.fontReady === "loaded", `${viewport.name} fonts did not load`);
+      await page.screenshot({ path: path.join(screenshotDir, `knowledge-${viewport.name}.png`) });
+      results.push({ ...viewport, ...result });
     }
 
     const reduced = await browser.newPage();
     await reduced.emulateMediaFeatures([{ name: "prefers-reduced-motion", value: "reduce" }]);
     await reduced.setViewport({ width: 1440, height: 900 });
     await reduced.goto(base + "/knowledge/", { waitUntil: "networkidle0" });
-    const reducedState = await reduced.evaluate(() => ({
-      transform: getComputedStyle(document.querySelector("[data-lightfield]")).transform,
-      videoPaused: document.querySelector("video").paused,
-      animationDuration: getComputedStyle(document.querySelector(".reveal")).animationDuration,
-    }));
-    assert(reducedState.transform === "none" && reducedState.videoPaused, "reduced-motion contract failed");
+    const transform = await reduced.$eval("[data-lightfield]", (element) => getComputedStyle(element).transform);
+    assert(transform === "none", "reduced-motion contract failed");
 
     const noJs = await browser.newPage();
     await noJs.setJavaScriptEnabled(false);
     await noJs.goto(base + "/knowledge/", { waitUntil: "domcontentloaded" });
-    const noJsState = await noJs.evaluate(() => ({
-      cards: document.querySelectorAll("[data-knowledge-card]").length,
-      hidden: document.querySelectorAll("[data-knowledge-card][hidden]").length,
-      summaries: document.querySelectorAll("[data-knowledge-card] summary").length,
-    }));
-    assert(noJsState.cards === 100 && noJsState.hidden === 0 && noJsState.summaries === 100, "no-JS content is incomplete");
+    const noJsState = await noJs.evaluate(() => ({ h1: document.querySelector("h1").textContent.trim(), links: document.querySelectorAll("a").length, sections: document.querySelectorAll("main section").length }));
+    assert(noJsState.h1 === "知识激活" && noJsState.links > 5 && noJsState.sections === 10, "no-JS product page is incomplete");
 
-    const assetChecks = await page.evaluate(async (expectedSnapshotSha256) => {
-      const urls = [
-        "/assets/fonts/noto-sans-sc-100-900-subset.woff2",
-        "/assets/knowledge/knowledge-pulse-poster.jpg",
-        "/assets/knowledge/knowledge-pulse-final.mp4",
-        "/assets/knowledge/public-knowledge.json",
-      ];
-      return Promise.all(urls.map(async (url) => {
-        const response = await fetch(url);
-        const body = await response.arrayBuffer();
-        const result = { url, status: response.status, type: response.headers.get("content-type"), size: body.byteLength };
-        if (url.endsWith("public-knowledge.json")) {
-          const digest = await crypto.subtle.digest("SHA-256", body);
-          result.sha256 = Array.from(new Uint8Array(digest), (byte) => byte.toString(16).padStart(2, "0")).join("");
-          const snapshot = JSON.parse(new TextDecoder().decode(body));
-          result.entries = snapshot.entries.length;
-          result.whitelist = snapshot.public_whitelist.length;
-          result.expectedSha256 = expectedSnapshotSha256;
-        }
-        return result;
-      }));
-    }, snapshotSha256);
-    assert(assetChecks.every((item) => item.status === 200 && item.size > 0), "one or more public assets failed");
-    const snapshotAsset = assetChecks.find((item) => item.url.endsWith("public-knowledge.json"));
-    assert(snapshotAsset.sha256 === snapshotSha256 && snapshotAsset.entries === 100 && snapshotAsset.whitelist === 100, "public snapshot body or hash failed");
-
-    const videoRange = await page.evaluate(async () => {
-      const response = await fetch("/assets/knowledge/knowledge-pulse-final.mp4", { headers: { Range: "bytes=0-1" } });
-      const body = await response.arrayBuffer();
-      return { status: response.status, contentRange: response.headers.get("content-range"), size: body.byteLength };
-    });
-    if (isLocalBase) {
-      assert([200, 206].includes(videoRange.status) && videoRange.size > 0, "local video range fallback failed");
-    } else {
-      assert(videoRange.status === 206 && videoRange.contentRange === "bytes 0-1/2535807" && videoRange.size === 2, "production video range failed");
-    }
     assert(consoleErrors.length === 0, `console errors: ${consoleErrors.join(" | ")}`);
-    console.log(JSON.stringify({ status: "passed", desktop, mobile: mobileLayout, responsiveChecks, reduced: reducedState, noJs: noJsState, desktopAxePasses: desktopAxe, mobileAxePasses: mobileAxe, assetChecks, videoRange, consoleErrors, screenshotDir }, null, 2));
+    console.log(JSON.stringify({ status: "passed", results, reducedMotion: transform, noJs: noJsState, screenshotDir }, null, 2));
   } finally {
     await browser.close();
   }

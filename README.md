@@ -8,7 +8,7 @@ SURGE / 无限涌动官网与 ReachSurge 产品页。网站用于说明公司使
 
 - `/`：SURGE 公司品牌首页。
 - `/reachsurge/`：ReachSurge B2B 获客智能体产品页；当前口径为“内测产品 / 开源 MCP 技术底座”。
-- `/knowledge/`：面向潜在客户与合作方的公开知识视图；只消费具名授权的 100 条脱敏安全快照。
+- `/knowledge/`：创始人知识资产激活计划客户介绍与申请页面。
 
 ## 本地预览
 
@@ -35,10 +35,10 @@ vercel.json               Vercel 静态部署、www 跳转与安全头
 assets/                   首页本地图片与自托管字体
 assets/fonts/             Kanit / Noto Sans SC 子集及 OFL 许可证
 reachsurge/index.html     ReachSurge 产品页
-knowledge/index.html      公开知识视图的语义 HTML
-knowledge/knowledge.css   知识页布局、光场与响应式规则
-knowledge/knowledge.js    筛选、深链与光场渐进增强
-assets/knowledge/         公开快照、已批准视频与 poster
+knowledge/index.html      创始人知识资产激活计划正式页面
+knowledge/knowledge.css   产品页布局、光场与响应式规则
+knowledge/knowledge.js    菜单与光场渐进增强
+assets/knowledge/         产品视觉与历史公开知识资产
 scripts/                  知识页生成、字体子集与验证脚本
 ```
 
@@ -53,7 +53,7 @@ scripts/                  知识页生成、字体子集与验证脚本
 7. 中文与中英混排使用 Noto Sans SC；Kanit 只用于纯英文或数字展示。不要新增未加载字重或在中文标题上使用紧于 `-0.02em` 的字距。
 8. 标题需要人工断行时使用带 `aria-label` 的 `.heading-layout` / `.display-line`，不要把裸 `<br>` 与自动 balance 混用。
 9. 共享 token 和组件放在 `styles.css`；首页、产品页专属规则分别放在 `home.css`、`product.css`，媒体规则跟随所属页面文件。
-10. 知识页只消费 `assets/knowledge/public-knowledge.json` 冻结公开快照白名单内的条目；公开资产不携带审批过程元数据，也不复制私有审核包、原文、绝对路径、内部 ID 或决策 provenance。
+10. 知识资产产品页不公开客户原文、私人资料、内部 ID 或未经确认的效果主张。
 
 ## 字体来源与维护
 

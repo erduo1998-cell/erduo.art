@@ -13,6 +13,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 SNAPSHOT = ROOT / "assets" / "knowledge" / "public-knowledge.json"
 OUTPUT = ROOT / "knowledge" / "index.html"
+PRODUCT_TEMPLATE = OUTPUT
 SNAPSHOT_SHA256 = "e423c026f22ac202361f64143000b0a4572563d4883c9a391254a9f3ed98e336"
 ALLOWED_ENTRY_FIELDS = {
     "public_id", "slug", "title", "category", "public_summary", "why_it_matters",
@@ -103,23 +104,23 @@ def render_page(snapshot: dict, entries: list[dict]) -> str:
   <meta name="theme-color" content="#0C0C0C">
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <meta name="description" content="SURGE 公开知识视图，用一百条脱敏安全快照展示人的判断如何变成可追溯、可调用、可修正的 AI 能力。">
+  <meta name="description" content="把散落在对话、项目和资料里的经验，变成可追溯、可调用、会随结果更新的做事方法，让你、团队和 Agent 不再重复找资料、踩旧坑、从零开始。">
   <meta name="knowledge-snapshot-sha256" content="{SNAPSHOT_SHA256}">
   <title>公开知识视图｜SURGE 无限涌动</title>
   <link rel="canonical" href="https://www.erduo.art/knowledge/">
   <link rel="preload" href="/assets/fonts/noto-sans-sc-100-900-subset.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="/assets/knowledge/knowledge-pulse-poster.jpg" as="image" type="image/jpeg">
+  <link rel="preload" href="/assets/knowledge/knowledge-hero-method-flow.webp" as="image" type="image/webp">
   <link rel="stylesheet" href="/styles.css">
   <link rel="stylesheet" href="/knowledge/knowledge.css">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:title" content="公开知识视图｜SURGE 无限涌动">
-  <meta property="og:description" content="一百条脱敏安全快照，展示判断如何成为可追溯、可调用、可修正的 AI 能力。">
+  <meta property="og:description" content="把散落的经验，变成可追溯、可调用、会随结果更新的做事方法。">
   <meta property="og:url" content="https://www.erduo.art/knowledge/">
   <meta property="og:image" content="https://www.erduo.art/assets/knowledge/knowledge-pulse-poster.jpg">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="公开知识视图｜SURGE 无限涌动">
-  <meta name="twitter:description" content="一百条脱敏安全快照，展示判断如何成为 AI 能力。">
+  <meta name="twitter:description" content="让你、团队和 Agent 不再重复找资料、踩旧坑、从零开始。">
   <meta name="twitter:image" content="https://www.erduo.art/assets/knowledge/knowledge-pulse-poster.jpg">
   <script src="/site.js" defer></script>
   <script src="/knowledge/knowledge.js" defer></script>
@@ -134,22 +135,18 @@ def render_page(snapshot: dict, entries: list[dict]) -> str:
 
   <main id="main">
     <section class="knowledge-hero" id="top" aria-labelledby="knowledge-title">
-      <div class="knowledge-orbit" aria-hidden="true"></div>
       <div class="shell knowledge-hero-layout">
         <div class="knowledge-hero-copy">
-          <p class="section-label reveal">PUBLIC KNOWLEDGE VIEW</p>
-          <h1 id="knowledge-title" class="reveal reveal-delay-1" aria-label="让判断成为能力"><span class="display-line" aria-hidden="true">让判断</span><span class="display-line metal-text" aria-hidden="true">成为能力</span></h1>
-          <p class="knowledge-lead reveal reveal-delay-2">让合作方不接触私人原文，也能看懂一个判断从哪里来、怎样被使用、何时需要修正。这是一份经过授权的公开安全快照，不是本地知识库的镜像。</p>
-          <div class="button-row reveal reveal-delay-3"><a class="button button-primary" href="#library">浏览一百条</a><a class="button button-secondary" href="/#contact">讨论合作</a></div>
+          <p class="section-label reveal">KNOWLEDGE SYSTEM / PUBLIC VIEW</p>
+          <h1 id="knowledge-title" class="knowledge-hero-title reveal reveal-delay-1" aria-label="SURGE 无限涌动"><span class="knowledge-brand-en metal-text" aria-hidden="true">SURGE</span><span class="knowledge-brand-cn" aria-hidden="true">无限涌动</span></h1>
+          <p class="knowledge-quote reveal reveal-delay-2">把散落在对话、项目和资料里的经验，变成<strong>可追溯、可调用、会随结果更新</strong>的做事方法，让你、团队和 Agent 不再重复找资料、踩旧坑、从零开始。</p>
+          <div class="button-row reveal reveal-delay-3"><a class="button button-primary" href="#pulse">看它如何工作</a><a class="button button-secondary" href="#library">浏览公开方法</a></div>
         </div>
-        <div class="knowledge-hero-field reveal reveal-delay-2" data-lightfield aria-label="公开知识能力概览">
-          <div class="field-core"><span>100</span><small>PUBLIC SAFE ENTRIES</small></div>
-          <div class="field-node field-node-a"><b>可追溯</b><small>判断保留来源类型</small></div>
-          <div class="field-node field-node-b"><b>可调用</b><small>方法能够进入工作</small></div>
-          <div class="field-node field-node-c"><b>可修正</b><small>证据状态持续透明</small></div>
+        <div class="knowledge-hero-visual reveal reveal-delay-2" data-lightfield>
+          <img src="/assets/knowledge/knowledge-hero-method-flow.webp" width="1003" height="1254" alt="散落的工作资料沿金属经验带汇聚成可复用方法，并由真实结果持续回流" fetchpriority="high">
         </div>
       </div>
-      <div class="shell knowledge-proof"><span>公开安全快照 100 条</span><span>四类方法视图</span><span>不含原文路径与效果承诺</span></div>
+      <div class="shell knowledge-proof"><span>散落经验进入系统</span><span>做事方法共同调用</span><span>真实结果持续更新</span></div>
     </section>
 
     <section class="pulse-section section-dark" id="pulse" aria-labelledby="pulse-title">
@@ -199,11 +196,31 @@ def render_page(snapshot: dict, entries: list[dict]) -> str:
 
 
 def main() -> None:
-    snapshot, entries = load_snapshot()
+    # Keep validating the frozen public snapshot because it remains a project
+    # asset, but /knowledge/ is now the client-facing activation service page.
+    load_snapshot()
+    page = PRODUCT_TEMPLATE.read_text(encoding="utf-8")
+    production_meta = '''<meta name="description" content="创始人知识资产激活计划：用 6～8 周，把散落在聊天、项目、内容和资料中的创始人经验，整理成团队和 Agent 能用于真实工作的判断与方法。">
+  <link rel="canonical" href="https://www.erduo.art/knowledge/">
+  <link rel="preload" href="/assets/knowledge/founder-knowledge-thinker-abstract-v2.webp" as="image" type="image/webp">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:title" content="创始人知识资产激活计划｜SURGE 无限涌动">
+  <meta property="og:description" content="把创始人经验变成团队和 Agent 能直接用于真实工作的判断与方法。">
+  <meta property="og:url" content="https://www.erduo.art/knowledge/">
+  <meta property="og:image" content="https://www.erduo.art/assets/knowledge/founder-knowledge-thinker-abstract-v2.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="创始人知识资产激活计划｜SURGE 无限涌动">
+  <meta name="twitter:description" content="一项为期 6～8 周的深度服务，让过去做过的工作开始帮助下一次工作。">
+  <meta name="twitter:image" content="https://www.erduo.art/assets/knowledge/founder-knowledge-thinker-abstract-v2.webp">'''
+    page = page.replace('<meta name="robots" content="noindex,nofollow">', production_meta)
+    page = page.replace('<title>创始人知识资产激活计划｜设计 v0.4</title>', '<title>创始人知识资产激活计划｜SURGE 无限涌动</title>')
+    page = page.replace('href="/knowledge/v0-2.css"', 'href="/knowledge/knowledge.css"')
+    page = page.replace('Founder Knowledge Activation · Design v0.4', 'Founder Knowledge Activation · SURGE 无限涌动')
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
-    OUTPUT.write_text(render_page(snapshot, entries), encoding="utf-8")
-    print(f"generated {OUTPUT} from 100 whitelisted public-safe entries")
-    print(f"snapshot sha256 {SNAPSHOT_SHA256}")
+    OUTPUT.write_text(page, encoding="utf-8")
+    print(f"generated {OUTPUT} from {PRODUCT_TEMPLATE}")
+    print(f"validated frozen snapshot sha256 {SNAPSHOT_SHA256}")
 
 
 if __name__ == "__main__":
