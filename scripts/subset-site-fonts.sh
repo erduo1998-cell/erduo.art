@@ -12,12 +12,12 @@ text_file=$(mktemp "${TMPDIR:-/tmp}/erduo-visible-text.XXXXXX")
 subset_file=$(mktemp "${TMPDIR:-/tmp}/noto-site.XXXXXX.woff2")
 trap 'rm -f "$text_file" "$subset_file"' EXIT
 
-for source in index.html reachsurge/index.html site.js portfolio.js knowledge/index.html knowledge/knowledge.js; do
+for source in index.html reachsurge/index.html site.js portfolio.js motion.js toolbox-scene.js knowledge/index.html knowledge/knowledge.js; do
   test -f "$source"
   sed -n '1,$p' "$source" >> "$text_file"
 done
 
-pyftsubset "$source_font" \
+python3 -m fontTools.subset "$source_font" \
   --text-file="$text_file" \
   --output-file="$subset_file" \
   --flavor=woff2 \

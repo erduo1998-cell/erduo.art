@@ -10,23 +10,26 @@
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="preload" href="/assets/fonts/kanit-500-subset.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="/assets/fonts/noto-sans-sc-100-900-subset.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="/assets/portfolio/erduo-avatar.webp" as="image" type="image/webp">
+  <link rel="preload" href="/assets/fonts/noto-sans-sc-100-900-subset.woff2?v=20260907-2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/portfolio/erduo-avatar.webp?v=20260907-2" as="image" type="image/webp">
   <link rel="stylesheet" href="/portfolio.css">
+  <link rel="stylesheet" href="/motion.css">
+  <link rel="stylesheet" href="/toolbox-scene.css">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:title" content="耳朵 ERDUO｜用导演的判断，指挥 AI 做成事">
   <meta property="og:description" content="影视广告导演、AI 创作者、SURGE 无限涌动创始人。作品、工具，以及把想法做成现实的方法。">
   <meta property="og:url" content="https://www.erduo.art/">
-  <meta property="og:image" content="https://www.erduo.art/assets/portfolio/social-preview.jpg">
+  <meta property="og:image" content="https://www.erduo.art/assets/portfolio/social-preview.jpg?v=20260907-2">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="耳朵 ERDUO 的立体人物形象与导演、AI 创作者身份">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="耳朵 ERDUO｜导演 · AI 创作者">
-  <meta name="twitter:image" content="https://www.erduo.art/assets/portfolio/social-preview.jpg">
+  <meta name="twitter:image" content="https://www.erduo.art/assets/portfolio/social-preview.jpg?v=20260907-2">
   <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Person","@id":"https://www.erduo.art/#founder","name":"刘冉","alternateName":["耳朵","耳总","ERDUO"],"jobTitle":"影视广告导演、AI 创作者","url":"https://www.erduo.art/","image":"https://www.erduo.art/assets/founder-erduo-2026.webp","sameAs":["https://github.com/erduo1998-cell"],"worksFor":{"@id":"https://www.erduo.art/#organization"}},{"@type":"Organization","@id":"https://www.erduo.art/#organization","name":"SURGE 无限涌动","url":"https://www.erduo.art/","founder":{"@id":"https://www.erduo.art/#founder"}}]}</script>
   <script src="/portfolio.js" defer></script>
+  <script src="/motion.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#about">跳到主要内容</a>
@@ -38,9 +41,9 @@
     <a class="header-mail" href="mailto:erduo1998@gmail.com">erduo1998@gmail.com</a>
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="navigation"><span>菜单</span><i aria-hidden="true"></i></button>
     <nav class="navigation" id="navigation" aria-label="主要导航">
-      <a href="#about"><span>ABOUT</span><span class="nav-cn">关于</span></a>
-      <a href="#work"><span>WORK</span><span class="nav-cn">作品</span></a>
-      <a href="#contact"><span>CONTACT</span><span class="nav-cn">联系</span></a>
+      <a href="#about"><span>ABOUT</span><span class="nav-cn" aria-hidden="true">ABOUT</span></a>
+      <a href="#work"><span>WORK</span><span class="nav-cn" aria-hidden="true">WORK</span></a>
+      <a href="#contact"><span>CONTACT</span><span class="nav-cn" aria-hidden="true">CONTACT</span></a>
     </nav>
   </header>
   <aside class="social-rail" aria-label="快捷入口">
@@ -61,14 +64,16 @@
         </div>
         <div class="avatar" data-avatar>
           <div class="avatar-glow" aria-hidden="true"></div>
-          <div class="avatar-visual">
-            <img src="/assets/portfolio/erduo-avatar.webp" width="1254" height="1254" alt="耳朵刘冉的 3D 风格化人物形象" fetchpriority="high">
-            <video class="avatar-video" muted playsinline loop preload="none" poster="/assets/portfolio/erduo-avatar.webp" aria-hidden="true" data-hero-video data-src="/assets/portfolio/erduo-idle.mp4"></video>
+          <div class="avatar-visual" data-avatar-control role="img" aria-label="移动鼠标，耳朵会跟随你的视线；也可以按住拖动">
+            <img src="/assets/portfolio/erduo-avatar.webp?v=20260907-2" width="1254" height="1254" alt="耳朵刘冉的 3D 风格化人物形象" fetchpriority="high">
+            <video class="avatar-video" muted playsinline loop preload="none" poster="/assets/portfolio/erduo-avatar.webp?v=20260907-2" aria-hidden="true" data-hero-video data-src="/assets/portfolio/erduo-idle.mp4?v=20260907-2"></video>
+            <canvas class="avatar-poses" width="640" height="640" aria-hidden="true"></canvas>
           </div>
+          <div class="avatar-workstation" aria-hidden="true"><img src="/assets/portfolio/erduo-workstation.webp?v=20260907-2" width="1254" height="1254" alt=""><video class="workstation-video" muted playsinline loop preload="none" data-desk-video data-src="/assets/portfolio/erduo-workstation-loop.mp4?v=20260907-2"></video></div>
         </div>
         <div class="hero-role">
           <p class="hello">A Creative</p>
-          <div class="role-stack" aria-label="导演、创作者、构建者"><span class="role-echo" aria-hidden="true">DIRECTOR</span><div class="role-window" aria-hidden="true"><div class="role-reel"><span>CREATOR</span><span>BUILDER</span><span>DIRECTOR</span><span>CREATOR</span></div></div></div>
+          <div class="role-stack" aria-label="导演、创作者、构建者"><span class="role-echo" aria-hidden="true">DIRECTOR</span><div class="role-window" aria-hidden="true">CREATOR</div></div>
           <p class="role-caption">用导演的判断，指挥 AI 做成事。</p>
         </div>
         <div class="hero-bottom"><span>DIRECTOR × AI × HUMAN</span><a href="#about" class="scroll-cue">SCROLL TO EXPLORE <span aria-hidden="true">↓</span></a></div>
@@ -79,14 +84,11 @@
           <p>导演的工作，是把一个想法拆成镜头，组织不同的人一起完成，再对最后的画面负责。今天，我把同一套工作方式带进 AI：先想清楚要做什么，再交任务、调资源、看结果。</p>
           <a class="text-link" href="#services">把创意做成内容，把经验做成系统 <span aria-hidden="true">↘</span></a>
         </div>
-      </div>
-    </section>
-
     <section class="services section shell" id="services" aria-labelledby="services-title">
       <div class="services-visual reveal">
         <p class="eyebrow">THE WAY I WORK</p>
-        <h2 class="english-heading" id="services-title">WHAT<br>I <span class="accent">DO</span></h2>
-        <img src="/assets/portfolio/erduo-workstation.webp" width="1254" height="1254" alt="耳朵在工作台前创作的立体场景" loading="lazy">
+        <h2 class="english-heading" id="services-title">W<em>HAT</em><br>I <span class="accent">DO</span></h2>
+        <img src="/assets/portfolio/erduo-workstation.webp?v=20260907-2" width="1254" height="1254" alt="耳朵在工作台前创作的立体场景" loading="lazy"><video class="workstation-video mobile-workstation-video" muted playsinline loop preload="none" aria-hidden="true" data-desk-video data-src="/assets/portfolio/erduo-workstation-loop.mp4?v=20260907-2"></video>
         <p class="visual-note">人的判断 × AI 的执行</p>
       </div>
       <div class="service-list reveal">
@@ -108,6 +110,10 @@
         </details>
       </div>
     </section>
+      </div>
+    </section>
+
+
 
     <section class="journey section shell" id="founder" aria-labelledby="journey-title">
       <div class="section-heading reveal"><p class="eyebrow">THE THREAD THROUGH IT ALL</p><h2 id="journey-title">My journey &amp;<br><span class="accent">what stays.</span></h2><p>工具一直在变。<br>想清楚、做出来、看结果，这件事没变。</p></div>
@@ -134,6 +140,28 @@
         <div class="work-footer shell"><span>创作片段、概念演示与公开产品</span><div class="work-progress" aria-hidden="true"><i></i></div><span class="work-counter">01 / 06</span></div>
       </div>
     </section>
+
+<section class="toolbox-scene" id="toolbox" data-toolbox aria-labelledby="toolbox-title">
+  <div class="toolbox-scene__heading">
+    <p class="eyebrow">IDEAS BECOME REAL WITH THE RIGHT TOOLS</p>
+    <h2 id="toolbox-title">MY <span>TOOLBOX</span></h2>
+  </div>
+  <div class="toolbox-scene__mount" data-toolbox-canvas></div>
+  <ul class="toolbox-scene__fallback" data-toolbox-fallback aria-label="我的创作工具与工作方法">
+    <li>Codex</li><li>VidMuse</li><li>AI</li><li>GitHub</li><li>SRT</li><li>B-roll</li>
+    <li>SURGE</li><li>知识</li><li>GPT</li><li>MCP</li><li>Python</li><li>JavaScript</li>
+    <li>导演</li><li>剪辑</li><li>IP</li><li>系统</li><li>Git</li><li>Claude</li>
+    <li>音频</li><li>视觉</li><li>React</li><li>工作流</li><li>创作</li><li>实验</li>
+  </ul>
+  <div class="toolbox-scene__footer">
+    <p class="toolbox-scene__hint" id="toolbox-help">
+      <span class="toolbox-scene__hint-live">推动、拖拽，给想法一点动量。</span>
+      <span class="toolbox-scene__hint-paused">让想法，成为可以使用的工具。</span>
+      <small>HUMAN DIRECTION. A LITTLE AI. A LOT OF MAKING.</small>
+    </p>
+    <button class="toolbox-scene__reset" type="button" data-toolbox-reset aria-label="散开工具球并重新聚合"><span>重新聚合</span><i aria-hidden="true">↻</i></button>
+  </div>
+</section>
 
     <section class="knowledge section shell" id="knowledge" aria-labelledby="knowledge-title">
       <div class="knowledge-image reveal"><img src="/assets/knowledge/founder-knowledge-thinker-abstract-v2.webp" width="1536" height="1024" alt="沉淀经验与判断的抽象知识思考者" loading="lazy"></div>
@@ -166,5 +194,6 @@
     </section>
   </main>
   <dialog class="video-dialog" aria-labelledby="video-title"><div class="video-dialog-bar"><h2 id="video-title">作品播放</h2><button type="button" class="close-video" aria-label="关闭视频">关闭 ×</button></div><video controls playsinline preload="none"></video><p>耳朵的 AI 创作与工作流演示</p></dialog>
+  <script type="module" src="/toolbox-scene.js"></script>
 </body>
 </html>

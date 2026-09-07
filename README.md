@@ -8,22 +8,26 @@
 
 | 路径 | 用途 | 当前代码入口 |
 |---|---|---|
-| `/` | 个人介绍、服务、经历、作品展、知识资产与项目 | `index.html`、`portfolio.css`、`portfolio.js` |
+| `/` | 个人介绍、服务、经历、作品展、知识资产与项目 | `index.html`、`portfolio.css`、`portfolio.js`、`motion.css` / `motion.js`、`toolbox-scene.css` / `toolbox-scene.js` |
 | `/reachsurge/` | ReachSurge B2B 获客产品介绍；Alpha / 本地 MCP 技术底座 | `reachsurge/index.html`、`styles.css`、`product.css`、`site.js` |
 | `/knowledge/` | 创始人知识资产激活计划与申请 | `knowledge/index.html`、`styles.css`、`knowledge/knowledge.css`、`site.js`、`knowledge/knowledge.js` |
 
-新首页独立加载 `portfolio.css` 和 `portfolio.js`。`styles.css` 与 `site.js` 继续服务子页，`home.css` 保留为旧首页资产。旧首页的 SURGE 巨型字标、暗白交替、旗舰项目网格、固定年限和预发布链接要求，不再约束新首页。
+新首页独立加载 `portfolio.css` / `portfolio.js`，v2 交互由 `motion.css` / `motion.js` 与 `toolbox-scene.css` / `toolbox-scene.js` 增强。`styles.css` 与 `site.js` 继续服务子页，`home.css` 保留为旧首页资产。旧首页的 SURGE 巨型字标、暗白交替、旗舰项目网格、固定年限和预发布链接要求，不再约束新首页。
 
 [brand-spec.md](brand-spec.md) 记录当前视觉与事实边界；[docs/portfolio-design.md](docs/portfolio-design.md) 记录本次设计；[assets/portfolio/README.md](assets/portfolio/README.md) 是首页媒体来源、用途和生成性质的说明。
 
 ## 首页设计与交互
 
-- 黑底、雾白文字与淡紫光，以风格化人物和英文身份大字构成首屏；个人是主角，SURGE 是品牌归属。
-- 桌面介绍采用共同 sticky 容器：人物随滚动移向一侧，关于文字在同一场景中出现。移动端按文档流排列。
-- 作品采用横向展览与交替图文。桌面动效开启时由纵向滚动推动展览；移动端、暂停动效和未增强状态使用原生横向滚动。
-- 作品支持前后按钮、左右方向键和点击播放；视频弹层保留原生播放控件。正文、项目和链接直接保存在语义 HTML 中。
-- 遵循 `prefers-reduced-motion`，并提供全局动效暂停按钮。首屏静音视频按可见性、暂停状态和节流数据偏好启停，无法播放时保留图片。
-- 关闭 JavaScript 后，介绍、服务、作品信息和链接仍可阅读；动效不能成为获取信息的前提。
+- 黑底、雾白文字与淡紫光，以真人比例的生成角色和英文身份大字构成首屏。人物参考为本人提供的黑色 Polo 肖像，保持成年脸型和身材比例。
+- 标题逐字进入，DIRECTOR / CREATOR / BUILDER 按字母轮换；细指针设备支持光标磁吸，服务条目悬浮展开并保留点击、键盘操作。
+- 桌面介绍采用共同 sticky 容器：人物随滚动移向一侧，关于文字在同一场景出现。移动端按文档流排列。
+- 头像左右看使用生成视频提取的姿态图集，根据指针方向选帧；这是二维媒体交互，不是可自由旋转的 3D 人物模型。坐姿使用静音短循环，图片始终作为回退。
+- 作品采用横向展览与交替图文。桌面动效开启时由纵向滚动推动展览，支持鼠标拖拽、前后按钮、方向键与点击播放；移动端、暂停动效和未增强状态使用原生横向滚动。
+- 工具区以本地 Three.js 渲染 24 个工具球，支持推动、拖拽、散开与重新聚合；工具名称代表使用与方法，不表示品牌合作。Three.js MIT 许可随本地副本保留。
+- 视频弹层保留原生播放控件。正文、项目和链接直接保存在语义 HTML 中；无 JavaScript 或 WebGL 不可用时仍可阅读文字与使用链接。
+- 遵循 `prefers-reduced-motion`，提供全局动效暂停按钮。人物动态按可见性、暂停状态和节流数据偏好启停，未就绪或失败时使用图片。
+
+人物源视频由 VidMuse H3 生成，8 秒、1440p，预计 96 积分。网页使用 36 个朝向与 6 个眨眼帧的图集、960×960 的静音循环；媒体已完整解码，桌面鼠标跟随与坐姿播放已在浏览器验证。来源详见 [媒体说明](assets/portfolio/README.md)。
 
 ## 本地预览
 
@@ -41,9 +45,12 @@ python3 -m http.server 4173
 index.html                个人首页内容、元信息与结构化数据
 portfolio.css             首页字体、颜色、布局、响应式与动效样式
 portfolio.js              首页渐进增强、展览、动效开关与视频弹层
+motion.css / motion.js    字母动效、磁吸光标、姿态选帧、悬浮与拖拽
+toolbox-scene.css / .js    24 个 Three.js 工具球与文字降级
+assets/vendor/three/      本地 Three.js 运行库及 MIT 许可证
 brand-spec.md             视觉规范、产品状态与内容边界
 assets/portfolio/         本次人物、作品视频、封面与媒体来源说明
-assets/fonts/             自托管 Kanit / Noto Sans SC 与 OFL 许可证
+assets/fonts/             本地字体、Clash Display FFL、OFL 与字体来源记录
 styles.css / site.js      现有子页共享样式与交互
 home.css                  旧首页样式，当前首页不加载
 product.css               ReachSurge 子页样式
@@ -72,7 +79,7 @@ vercel.json               静态部署、主域跳转与响应头
 ## 修改规则
 
 1. 首页身份统一为耳朵 / 刘冉，履历年限使用已确认的“十余年”。不编造客户 Logo、业绩、评价、团队成员或真实界面。
-2. 首页样式与交互只在 `portfolio.css` / `portfolio.js` 维护；修改共享子页代码时，验证 `/reachsurge/` 与 `/knowledge/`。
+2. 首页样式与交互在 `portfolio.css` / `portfolio.js`、`motion.css` / `motion.js` 和 `toolbox-scene.css` / `toolbox-scene.js` 维护；修改共享子页代码时，验证 `/reachsurge/` 与 `/knowledge/`。
 3. 保护作品来源说明；生成形象不当作真实摄影，概念动画不当作产品录屏，技术演示不当作客户验收。
 4. 项目状态、许可和链接以公开仓库为准。ReachSurge 保留 Alpha、本地运行、确认后发送的边界；IP Strategist v2 不称为无限制免费商用。
 5. 知识资产子页保留已确认的服务范围、价格与申请入口；不因首页重构修改报价，也不公开客户原文、私人资料或内部 ID。
@@ -80,17 +87,19 @@ vercel.json               静态部署、主域跳转与响应头
 
 ## 字体来源与更新
 
-页面使用自托管字体，不依赖 Google Fonts CDN。字体源固定来自 Google Fonts 官方仓库 [`ea14f3c4`](https://github.com/google/fonts/commit/ea14f3c4c462af1d847b1abe96fcb3c3a8a66f97)：[Kanit](https://github.com/google/fonts/tree/ea14f3c4c462af1d847b1abe96fcb3c3a8a66f97/ofl/kanit) 与 [Noto Sans SC](https://github.com/google/fonts/tree/ea14f3c4c462af1d847b1abe96fcb3c3a8a66f97/ofl/notosanssc)。
+首页展示标题使用 Clash Display，由 `portfolio.css` 的 `@font-face` 直接加载官方 Fontshare CDN，`--display` 指定其展示字族；它不是仓库内自托管字体。正文英文使用本地 Geist，中文使用本地 Noto Sans SC。完整来源见 [FONT-SOURCES.md](assets/fonts/FONT-SOURCES.md)。
 
-首页实际加载 Kanit 500 / 700，用于英文与数字；中文和混排使用 Noto Sans SC 100–900 可变字重，首页 CSS 字体名为 `Noto`。子页保留原有 Kanit 500 / 600 / 700 / 800 / 900。两家字体均使用 WOFF2、`font-display: swap` 与 `font-synthesis: none`。
+既有 Kanit 与 Noto Sans SC 的字体源固定来自 Google Fonts 官方仓库 [`ea14f3c4`](https://github.com/google/fonts/commit/ea14f3c4c462af1d847b1abe96fcb3c3a8a66f97)：[Kanit](https://github.com/google/fonts/tree/ea14f3c4c462af1d847b1abe96fcb3c3a8a66f97/ofl/kanit) 与 [Noto Sans SC](https://github.com/google/fonts/tree/ea14f3c4c462af1d847b1abe96fcb3c3a8a66f97/ofl/notosanssc)。
 
-许可证保留在 `assets/fonts/OFL-Kanit.txt` 与 `assets/fonts/OFL-NotoSansSC.txt`。修改可见文案后，检查新字符是否在子集中；需要更新 Noto 时，以固定官方源运行：
+首页展示字采用 Clash Display 200–700 可变字体，英文正文采用本地 Geist；中文和混排使用 Noto Sans SC 100–900 可变字重，首页 CSS 字体名为 `Noto`。子页保留原有 Kanit 500 / 600 / 700 / 800 / 900。页面字体均使用 WOFF2、`font-display: swap` 与 `font-synthesis: none`。
+
+Clash Display 是 Fontshare / ITF 的专有免费字体，FFL 许可保留在 `assets/fonts/FFL-ClashDisplay.txt`；仓库不再分发其字体二进制，不对其做子集化或修改。复用站点时应自行从 Fontshare 获取字体。其余许可证保留在 `assets/fonts/OFL-Geist.txt`、`assets/fonts/OFL-Kanit.txt` 与 `assets/fonts/OFL-NotoSansSC.txt`；上面的 Google Fonts 固定源记录适用于 Kanit / Noto Sans SC，不套用于 Geist。修改可见文案后，检查新字符是否在子集中；需要更新 Noto 时，以固定官方源运行：
 
 ```bash
 sh scripts/subset-site-fonts.sh /path/to/NotoSansSC-Variable.ttf
 ```
 
-脚本汇总首页、两个子页和相应脚本的文本。发布前确认没有缺字，字体离线仍能从 `/assets/fonts/` 加载；不要从第三方字体站替换来源或仅改文件名沿用旧子集。
+脚本汇总首页、两个子页和相应脚本的文本。发布前确认没有缺字、本地字体能从 `/assets/fonts/` 加载；Clash Display 需要访问官方 Fontshare CDN，断网或加载失败时应正常回退到后备字族；不要从第三方字体站替换来源或仅改文件名沿用旧子集。
 
 ## 最小发布检查
 

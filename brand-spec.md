@@ -20,7 +20,7 @@
 
 | 页面 | 视觉真源 | 维护要求 |
 |---|---|---|
-| 个人首页 | `index.html`、`portfolio.css`、`portfolio.js` | 黑底紫光、人物叙事、共同 sticky 介绍、横向作品展 |
+| 个人首页 | `index.html`、`portfolio.css` / `portfolio.js`、`motion.css` / `motion.js`、`toolbox-scene.css` / `toolbox-scene.js` | 黑底紫光、真人比例人物、共同 sticky 介绍、横向作品展与工具球 |
 | ReachSurge | `reachsurge/index.html`、`styles.css`、`product.css`、`site.js` | 保留 Alpha / 内测和本地 MCP 事实，不把首页主题强制覆盖产品页 |
 | 知识资产激活 | `knowledge/index.html`、`styles.css`、`knowledge/knowledge.css`、相关 JS | 保留现有服务范围、报价、申请方式与隐私边界 |
 
@@ -47,43 +47,50 @@
 
 ## 4. 字体与许可证
 
-- 英文与数字：Kanit，首页仅加载 500 / 700。
-- 中文、正文与混排：Noto Sans SC 100–900 可变字体；首页字体族名为 `Noto`，子页为 `Noto Sans SC`。
+- 首页展示标题：Clash Display 200–700，由 `portfolio.css` 顶部 `@font-face` 直接加载官方 Fontshare CDN，末尾 `--display` 指定展示字族；不称整页字体自托管。
+- 首页英文正文：本地 Geist 可变字体；子页保留 Kanit。
+- 中文与混排：Noto Sans SC 100–900 可变字体；首页字体族名为 `Noto`，子页为 `Noto Sans SC`。
 - 子页继续加载 Kanit 500 / 600 / 700 / 800 / 900，避免删除仍在使用的字重文件。
-- 全部自托管 WOFF2，`font-display: swap`，`font-synthesis: none`；不依赖 Google Fonts CDN。
+- 字体使用 WOFF2、`font-display: swap` 与 `font-synthesis: none`。Geist、Kanit、Noto Sans SC 自托管；Clash Display 依赖官方 Fontshare CDN，加载失败时保留后备字族。
 - 固定源为 Google Fonts 官方仓库 [`ea14f3c4`](https://github.com/google/fonts/commit/ea14f3c4c462af1d847b1abe96fcb3c3a8a66f97) 中的 Kanit 与 Noto Sans SC。
-- OFL 许可证随字体保留于 `assets/fonts/OFL-Kanit.txt` 和 `assets/fonts/OFL-NotoSansSC.txt`。字体授权不等同于站内图片、视频或品牌授权。
+- Clash Display 为 Fontshare / ITF 的专有免费字体，适用 `assets/fonts/FFL-ClashDisplay.txt`。仓库不再分发其二进制，不对字体做子集化或修改；复用者应从官方获取自己的副本。完整来源见 [FONT-SOURCES.md](assets/fonts/FONT-SOURCES.md)。
+- OFL 许可证随其余字体保留于 `assets/fonts/OFL-Geist.txt`、`assets/fonts/OFL-Kanit.txt` 和 `assets/fonts/OFL-NotoSansSC.txt`。上述固定 Google Fonts 源记录只适用于 Kanit / Noto Sans SC。字体授权不等同于站内图片、视频或品牌授权。
 
-修改页面与脚本文案后，检查字体子集字符覆盖。Noto 子集通过 `scripts/subset-site-fonts.sh` 从固定官方字体源更新；操作方法与最小发布检查见 [README](README.md)。不加入第三套展示字体，不伪造未加载字重。
+修改页面与脚本文案后，检查字体子集字符覆盖。Noto 子集通过 `scripts/subset-site-fonts.sh` 从固定官方字体源更新；操作方法与最小发布检查见 [README](README.md)。不随意增加展示字体，不伪造未加载字重。
 
 ## 5. 交互、动效与降级
 
-- 桌面宽度 1025 px 起，开启动效时，Hero 与 About 使用同一个 sticky 容器。人物移向左侧，姓名与角色淡出，介绍在同一场景出现；禁止用互相独立的悬停卡片拼凑该过渡。
-- 桌面作品区使用共同 sticky 展览容器，由页面纵向进度推动横向轨道。保留上一件、下一件、左右键与焦点跟随能力。
-- 1024 px 及以下，介绍回到正常文档流，作品使用原生横向滚动与触屏吸附；暂停动效时也保留可操作的原生展览。
-- 细指针设备可用轻量光标与人物跟随。服务采用原生 `details`；作品通过 `dialog` 和原生视频控件播放，关闭后恢复焦点。
-- 默认跟随 `prefers-reduced-motion`，提供显式动效暂停按钮并保存选择。暂停时停下装饰性动画、首屏视频和滚动驱动过渡，正文保持可达。
-- 首屏人物视频是静音氛围媒体，按可见性、页面前后台和节流数据偏好加载/暂停；失败时使用静态人物。作品视频由用户点击播放。
-- CSS 与 JavaScript 只渐进增强。无 JavaScript、reduced-motion、键盘和触屏都必须能够访问文本及项目入口；不能为了动画隐藏唯一信息。
+- 标题按字母进入，DIRECTOR / CREATOR / BUILDER 按字母轮换；文字的可访问名称保持完整，不让拆字改变朗读含义。
+- 桌面宽度 1025 px 起，开启动效时，Hero 与 About 使用同一个 sticky 容器。人物移向左侧，姓名与角色淡出，介绍在同一场景出现。
+- 桌面作品区由页面纵向进度推动横向轨道，支持鼠标拖拽；保留上一件、下一件、左右键与焦点跟随。1024 px 及以下采用原生横向滚动与触屏吸附。
+- 细指针设备支持光标磁吸与服务悬浮展开；服务继续采用原生 `details`，点击和键盘可用。作品通过 `dialog` 与原生视频控件播放，关闭后恢复焦点。
+- 人物左右看由生成视频提取的二维姿态图集呈现，根据指针方向选择帧；它不是可自由旋转的真实 3D 人物模型。坐姿用静音短循环，保留静态图片回退。
+- 工具区使用本地 Three.js 构建 24 个球体，支持推动、拖拽、散开与重新聚合；球体为程序生成的三维对象，与人物的二维姿态图集是两种不同实现。工具标签不代表商业合作，MIT 许可保留在 `assets/vendor/three/LICENSE`。
+- 默认跟随 `prefers-reduced-motion`，提供动效暂停按钮并保存选择。暂停时停下装饰动画、人物视频、工具球运动和滚动驱动过渡，全部正文和链接保持可达。
+- 人物媒体按可见性、页面前后台和节流数据偏好加载/暂停；缺失、失败或未就绪时使用图片。作品视频由用户点击播放。
+- CSS、JavaScript 与 WebGL 只作渐进增强。无 JavaScript、WebGL 不可用、reduced-motion、键盘和触屏状态均需能访问文本与项目入口。
 
-动效时长与位移以实际 `portfolio.css` / `portfolio.js` 为准。修改断点、展览宽度或暂停逻辑后，检查滚动位置、按钮状态和从桌面切换到移动端的恢复。
+动效实现以 `portfolio.css` / `portfolio.js`、`motion.css` / `motion.js`、`toolbox-scene.css` / `toolbox-scene.js` 为准。修改断点、展览、暂停逻辑或图集规格后，检查滚动位置、按钮状态、媒体回退以及桌面与移动端切换。
 
 ## 6. 媒体与身份资产
 
-首页媒体的来源和用途以 [assets/portfolio/README.md](assets/portfolio/README.md) 为准；新增媒体同步补充说明。
+首页媒体的来源和用途以 [assets/portfolio/README.md](assets/portfolio/README.md) 为准；新增媒体同步补充说明。当前角色参考为本人提供的黑色 Polo 肖像，保留成年脸型、五官与身材比例。
 
 | 资产 | 当前用途 | 表述边界 |
 |---|---|---|
-| `assets/portfolio/erduo-avatar.webp` | 首页风格化人物 | 基于公开本人肖像的生成形象，不称真实摄影 |
-| `assets/portfolio/erduo-workstation.webp` | 创作者与工作台场景 | 生成场景，不当作真实工作现场记录 |
-| `assets/portfolio/erduo-idle.mp4` | 首屏人物轻动态 | VidMuse 生成的氛围媒体，保留静态 fallback |
+| `assets/portfolio/erduo-avatar.webp` | 真人比例头像 | 基于本人提供的黑色 Polo 肖像生成，不称真实摄影 |
+| `assets/portfolio/erduo-workstation.webp` | 完整工作台场景 | 同一角色方向的生成场景，不当作真实现场记录 |
+| `assets/portfolio/erduo-look-atlas.webp` | 头像左右看 | 从生成视频提取的二维姿态图集，不是可自由旋转的 3D 人物模型 |
+| `assets/portfolio/erduo-idle.mp4` 与坐姿短循环 | 人物静音轻动态 | VidMuse 生成媒体，坐姿使用静音短循环，保留静态 fallback |
 | `assets/portfolio/director-is-me.mp4` 及封面 | 个人创作片段 | 不宣称客户验收或商业效果 |
 | `assets/portfolio/broll-showcase.mp4` 及封面 | 已公开 B-roll 项目演示 | 原始 Master 与网页播放分辨率分别说明 |
 | `assets/portfolio/social-preview.jpg` | 当前首页社交预览 | 个人网站展示配图 |
-| `assets/founder-erduo-2026.webp` | 真实身份与人物参考 | 保留本人真实肖像来源，不以风格化图替代摄影事实 |
+| `assets/founder-erduo-2026.webp` | 既有真实身份肖像 | 继续保留摄影事实；新角色以本人提供的黑色 Polo 肖像为参考 |
 | `assets/knowledge/knowledge-pulse-final.mp4` | 知识能力概念演示 | 不是客户结果或实际产品界面录屏 |
 | `assets/knowledge/founder-knowledge-thinker-abstract-v2.webp` | 知识品牌视觉 | 不包含或象征已公开的私人知识正文 |
 | `reachsurge/assets/hero-bg-poster.webp` | 产品抽象网络视觉 | 不代表真实客户分布或流量 |
+
+人物源视频由 VidMuse H3 生成，8 秒、1440p，预计 96 积分。36 个朝向与 6 个眨眼帧组成二维姿态图集；网页循环为 960×960 H.264 静音媒体。媒体已完整解码，指针转头与坐姿播放已在浏览器验证。
 
 既有知识子页的流程、交付物视觉与对应素材继续保留。旧品牌图和二维码可存档；只在具体公开用途成立时重新使用。旧虚拟团队头像不代表真实成员。媒体不能因位于公开仓库就被统一标成 MIT 素材库。
 

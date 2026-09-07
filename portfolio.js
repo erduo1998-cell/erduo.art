@@ -15,6 +15,9 @@
   const heroRole = document.querySelector('.hero-role');
   const heroBottom = document.querySelector('.hero-bottom');
   const about = document.querySelector('.about-copy');
+  const services = document.querySelector('.services');
+  const portrait = document.querySelector('.avatar-visual');
+  const workstation = document.querySelector('.avatar-workstation');
   const heroVideo = document.querySelector('[data-hero-video]');
   const work = document.querySelector('.work');
   const viewport = document.querySelector('.work-viewport');
@@ -30,6 +33,7 @@
   let travel = 0;
   let workStart = 0;
   let workFraction = 0;
+  let workDisplay = 0;
   let frame = 0;
   let cursorX = -100;
   let cursorY = -100;
@@ -52,7 +56,7 @@
   });
 
   function manageHeroVideo() {
-    const shouldPlay = !paused && !document.hidden && heroOnScreen && !heroFailed && !navigator.connection?.saveData;
+    const shouldPlay = !(root.classList.contains('poses-ready') && finePointer.matches) && !paused && !document.hidden && heroOnScreen && !heroFailed && !navigator.connection?.saveData;
     if (lastVideoState === shouldPlay) return;
     lastVideoState = shouldPlay;
     if (shouldPlay) {
@@ -70,6 +74,8 @@
     heroVideo.classList.remove('ready');
   });
   document.addEventListener('visibilitychange', manageHeroVideo);
+  document.addEventListener('avatar-poses-ready', () => { lastVideoState = null; manageHeroVideo(); });
+  finePointer.addEventListener('change', () => { lastVideoState = null; manageHeroVideo(); });
 
   function measure() {
     work.classList.toggle('enhanced', !paused && desktop.matches);
@@ -88,25 +94,41 @@
       // Enhanced work uses the page scroll only; native scrolling can remain
       // after a motion/breakpoint switch or when a project receives focus.
       if (viewport.scrollLeft) viewport.scrollLeft = 0;
-      const t = clamp((y - intro.offsetTop) / h);
-      const phase = t * t * (3 - 2 * t);
-      const fade = 1 - clamp(t / .43);
+      const t = clamp((y - intro.offsetTop) / h, 0, 2.2);
+      const ease = value => value * value * (3 - 2 * value);
+      const phase = ease(clamp(t / .9));
+      const retreat = ease(clamp((t - 1.03) / .87));
+      const fade = 1 - clamp(t / .48);
       heroIntro.style.opacity = String(fade);
       heroRole.style.opacity = String(fade);
       heroBottom.style.opacity = String(fade);
-      heroIntro.style.transform = 'translateY(' + (-20 - phase * 50) + '%)';
-      heroRole.style.transform = 'translateY(' + (-15 - phase * 50) + '%)';
-      avatar.style.transform = 'translateX(calc(-50% - ' + (phase * 25) + 'vw)) scale(' + (1 - phase * .08) + ')';
-      const show = clamp((t - .25) / .52);
+      heroIntro.style.transform = 'translateY(' + (-50 + phase * 40) + '%)';
+      heroRole.style.transform = 'translateY(' + (-50 + phase * 40) + '%)';
+      avatar.style.transform = 'translateX(calc(-50% - ' + (phase * 25 - retreat * 13) + 'vw)) scale(' + (1 + phase * .07 + retreat * .05) + ')';
+      const show = clamp((t - .22) / .48) * (1 - clamp((t - 1.05) / .46));
       about.style.opacity = String(show);
-      about.style.transform = 'translateY(' + (-35 - show * 12) + '%)';
+      about.style.transform = 'translateY(' + (-50 + (1 - show) * 22) + '%)';
       about.style.pointerEvents = show > .65 ? 'auto' : 'none';
       about.toggleAttribute('inert', show < .65);
+      portrait.style.opacity = String(1 - clamp((retreat - .12) / .55));
+      portrait.style.setProperty('--camera-scale', String(1 - retreat * .55));
+      workstation.style.opacity = String(clamp((retreat - .12) / .68));
+      workstation.style.transform = 'scale(' + (.67 + retreat * .33) + ')';
+      const serviceShow = clamp((t - 1.42) / .4);
+      services.style.opacity = String(serviceShow);
+      services.style.transform = 'translateY(' + ((1 - serviceShow) * 35) + 'px)';
+      services.style.pointerEvents = serviceShow > .7 ? 'auto' : 'none';
+      services.toggleAttribute('inert', serviceShow < .7);
+      intro.dataset.phase = t.toFixed(3);
       workFraction = travel ? clamp((y - workStart) / travel) : 0;
-      track.style.transform = 'translate3d(' + (-maxX * workFraction) + 'px,0,0)';
+      workDisplay += (workFraction - workDisplay) * .16;
+      if (Math.abs(workFraction - workDisplay) < .00015) workDisplay = workFraction;
+      track.style.transform = 'translate3d(' + (-maxX * workDisplay) + 'px,0,0)';
+      if (workDisplay !== workFraction) requestRender();
     } else {
       workFraction = maxX ? viewport.scrollLeft / maxX : 0;
     }
+    work.dataset.progress = workFraction.toFixed(3);
     const index = Math.min(cards.length - 1, Math.round(workFraction * (cards.length - 1)));
     progress.style.transform = 'translateX(' + (workFraction * 500) + '%)';
     counter.textContent = String(index + 1).padStart(2, '0') + ' / 06';
@@ -133,27 +155,31 @@
     motionButton.setAttribute('aria-label', paused ? '开启页面动效' : '暂停页面动效');
     motionButton.querySelector('.motion-symbol').textContent = paused ? '▷' : 'Ⅱ';
     motionButton.querySelector('.motion-label').textContent = paused ? '开启动效' : '暂停动效';
-    [heroIntro, heroRole, heroBottom, avatar, about, track].forEach(element => {
+    [heroIntro, heroRole, heroBottom, avatar, about, track, services, portrait, workstation].forEach(element => {
       element.style.removeProperty('transform');
       element.style.removeProperty('opacity');
       element.style.removeProperty('pointer-events');
     });
     about.removeAttribute('inert');
+    services.removeAttribute('inert');
+    portrait.style.removeProperty('--camera-scale');
+    intro.dataset.phase = '0';
     lastVideoState = null;
     measure();
   }
   motionButton.addEventListener('click', () => {
-    const section = [...document.querySelectorAll('main > section')].filter(el => el.getBoundingClientRect().top < window.innerHeight * .6).pop();
+    const section = [intro, about, services, ...document.querySelectorAll('main > section:not(.intro)')].filter(el => { const r = el.getBoundingClientRect(); return r.top < innerHeight * .6 && r.bottom > innerHeight * .25 && !el.inert && Number(getComputedStyle(el).opacity) > .5; }).pop();
     paused = !paused;
     try { localStorage.setItem('erduo-motion', paused ? 'paused' : 'playing'); } catch (_) { /* Optional persistence. */ }
     applyMotion();
-    if (section && section !== intro) window.scrollTo({ top: section.offsetTop, behavior: 'instant' });
+    if (section && section !== intro) window.scrollTo({ top: anchorY(section.id) ?? section.getBoundingClientRect().top + scrollY, behavior: 'instant' });
   });
   reduced.addEventListener('change', () => { paused = reduced.matches; applyMotion(); });
   desktop.addEventListener('change', applyMotion);
 
   function anchorY(id) {
     if (id === 'about' && !paused && desktop.matches) return intro.offsetTop + window.innerHeight * .92;
+    if (id === 'services' && !paused && desktop.matches) return intro.offsetTop + window.innerHeight * 1.95;
     if (id === 'work' && !paused && desktop.matches) return work.offsetTop;
     const target = document.getElementById(id);
     return target ? target.getBoundingClientRect().top + window.scrollY - (id === 'top' ? 0 : 80) : null;
@@ -199,48 +225,14 @@
   // A focused offscreen project is brought into view for keyboard navigation.
   track.addEventListener('focusin', event => {
     const card = event.target.closest('.work-card');
-    if (!card || paused || !desktop.matches) return;
+    if (!card || paused || !desktop.matches || !event.target.matches(':focus-visible')) return;
     const rect = card.getBoundingClientRect();
     if (rect.left < 70 || rect.right > window.innerWidth - 30) {
       const fraction = clamp((card.offsetLeft - 120) / Math.max(1, maxX));
       window.scrollTo({ top: workStart + travel * fraction, behavior: 'instant' });
     }
   });
-  document.querySelectorAll('.service').forEach(detail => {
-    detail.addEventListener('toggle', () => {
-      if (!detail.open) return;
-      document.querySelectorAll('.service[open]').forEach(other => { if (other !== detail) other.open = false; });
-      measure();
-    });
-  });
-
-  const revealObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-      entry.target.classList.add('visible');
-      revealObserver.unobserve(entry.target);
-    });
-  }, { threshold: .1 });
-  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-
-  const cursor = document.querySelector('.cursor');
-  document.addEventListener('pointermove', event => {
-    if (!finePointer.matches || paused) return;
-    cursorX = event.clientX;
-    cursorY = event.clientY;
-    cursor.style.transform = 'translate3d(' + cursorX + 'px,' + cursorY + 'px,0)';
-    cursor.style.opacity = '1';
-    if (heroOnScreen) {
-      avatar.style.setProperty('--pointer-x', ((event.clientX / window.innerWidth - .5) * 12) + 'px');
-      avatar.style.setProperty('--pointer-y', ((event.clientY / window.innerHeight - .5) * 8) + 'px');
-    }
-  }, { passive: true });
-  document.addEventListener('pointerover', event => {
-    const active = event.target.closest('a,button,summary');
-    cursor.classList.toggle('active', !!active);
-    cursor.textContent = active?.dataset.cursor || '';
-  });
-  document.addEventListener('pointerleave', () => { cursor.style.opacity = '0'; });
+  window.addEventListener('portfolio-layout', measure);
 
   const dialog = document.querySelector('.video-dialog');
   const player = dialog.querySelector('video');
@@ -256,6 +248,7 @@
       dialog.showModal();
       document.body.style.overflow = 'hidden';
       heroVideo.pause();
+      document.dispatchEvent(new CustomEvent('portfolio-modal', {detail: true}));
       player.play().catch(() => { /* Native controls remain available if autoplay is blocked. */ });
     });
   });
@@ -266,6 +259,7 @@
     player.removeAttribute('src');
     player.load();
     document.body.style.removeProperty('overflow');
+    document.dispatchEvent(new CustomEvent('portfolio-modal', {detail: false}));
     lastVideoState = null;
     manageHeroVideo();
     if (videoTrigger) videoTrigger.focus({ preventScroll: true });

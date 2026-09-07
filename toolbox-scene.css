@@ -1,0 +1,29 @@
+/* The toolbox is an isolated 3D scene, with readable HTML as its fallback. */
+.toolbox-scene{position:relative;isolation:isolate;min-height:620px;height:100svh;overflow:clip;background:var(--bg,#000);color:var(--text,#e9e5ed);scroll-margin-top:60px}
+.toolbox-scene__heading{position:absolute;z-index:2;top:clamp(55px,8svh,110px);left:0;width:100%;text-align:center;pointer-events:none}
+.toolbox-scene__heading .eyebrow{margin-bottom:14px;color:var(--muted,#99939f);letter-spacing:.18em}
+.toolbox-scene__heading h2{font-family:ClashDisplay,'Clash Display',Geist,Arial,sans-serif;font-size:clamp(54px,6.4vw,110px);font-weight:500;line-height:.95;letter-spacing:-.055em;margin:0}
+.toolbox-scene__heading h2 span{color:var(--accent,#b496ed)}
+.toolbox-scene__mount{position:absolute;inset:22% 8% 4%;z-index:1;contain:layout paint}
+.toolbox-scene__canvas{display:block;width:100%;height:100%;outline:none;cursor:grab;touch-action:pan-y;-webkit-user-select:none;user-select:none}
+.toolbox-scene__canvas.is-dragging{cursor:grabbing}
+.toolbox-scene__canvas:focus-visible{outline:1px solid var(--accent,#b496ed);outline-offset:-8px;border-radius:16px}
+.toolbox-scene__footer{position:absolute;z-index:2;bottom:42px;left:12%;right:8%;display:flex;align-items:center;justify-content:space-between;gap:25px;pointer-events:none}
+.toolbox-scene__hint{font-family:Geist,Noto,sans-serif;color:var(--muted,#99939f);font-size:12px;line-height:1.6;letter-spacing:.09em;margin:0}
+.toolbox-scene__hint span{display:block}
+.toolbox-scene__hint small{display:block;font:400 10px/1.8 Geist,Arial,sans-serif;letter-spacing:.18em;margin-top:3px;opacity:.65}
+.toolbox-scene__hint-paused{display:none!important}
+.toolbox-scene__reset{display:none;align-items:center;gap:13px;pointer-events:auto;padding:9px 0;background:none;border:0;color:var(--text,#e9e5ed);font:400 11px/1.4 Geist,Noto,sans-serif;letter-spacing:.08em;cursor:pointer}
+.toolbox-scene__reset i{display:grid;place-items:center;width:36px;height:36px;border:1px solid var(--line,#29262e);border-radius:50%;font:normal 23px/1 Arial;transition:transform .4s,color .3s,border-color .3s}
+.toolbox-scene__reset:hover i{transform:rotate(90deg);color:var(--accent,#b496ed);border-color:var(--accent,#b496ed)}
+.toolbox-ready .toolbox-scene__reset{display:flex}
+.toolbox-scene__reset:disabled{opacity:.35;cursor:default}
+.toolbox-scene__fallback{position:absolute;inset:34% 16% 18%;list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;justify-content:center;align-content:center;gap:13px;z-index:0}
+.toolbox-scene__fallback li{display:grid;place-items:center;width:85px;height:85px;background:#e9e5ed;border-radius:50%;color:#302939;font:500 12px/1.3 Geist,Noto,sans-serif;text-align:center;box-shadow:inset -8px -10px 18px #b2a4c0,inset 5px 5px 18px #fff}
+.toolbox-ready .toolbox-scene__fallback{visibility:hidden}
+html.motion-paused .toolbox-scene__canvas{cursor:default}
+html.motion-paused .toolbox-scene__hint-live{display:none}
+html.motion-paused .toolbox-scene__hint-paused{display:block!important}
+@media(prefers-reduced-motion:reduce){.toolbox-scene__hint-live{display:none}.toolbox-scene__hint-paused{display:block!important}.toolbox-scene__canvas{cursor:default}.toolbox-scene__reset i{transition:none}}
+@media(max-width:1024px){.toolbox-scene{min-height:650px}.toolbox-scene__heading{top:70px}.toolbox-scene__mount{inset:20% 3% 6%}.toolbox-scene__footer{left:8%;right:6%;bottom:34px}.toolbox-scene__heading h2{font-size:clamp(50px,9vw,90px)}}
+@media(max-width:600px){.toolbox-scene{min-height:640px;height:92svh}.toolbox-scene__heading{top:58px}.toolbox-scene__heading .eyebrow{font-size:9px;margin-bottom:15px}.toolbox-scene__heading h2{font-size:clamp(48px,12.8vw,76px)}.toolbox-scene__mount{inset:22% -4% 8%}.toolbox-scene__footer{left:24px;right:24px;bottom:28px;gap:12px}.toolbox-scene__hint{font-size:10px;letter-spacing:.025em}.toolbox-scene__hint small{font-size:8px;letter-spacing:.06em}.toolbox-scene__reset{font-size:9px;gap:8px}.toolbox-scene__reset i{width:31px;height:31px;font-size:19px}.toolbox-scene__fallback{inset:28% 7% 14%;gap:9px}.toolbox-scene__fallback li{width:56px;height:56px;font-size:10px}}
