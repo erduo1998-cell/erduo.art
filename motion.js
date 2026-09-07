@@ -116,7 +116,7 @@
       document.dispatchEvent(new Event('avatar-poses-ready'));
     };
     atlas.onerror = failPoses;
-    atlas.src = '/assets/portfolio/erduo-look-atlas.webp?v=20260907-2';
+    atlas.src = '/assets/portfolio/erduo-look-atlas.webp?v=20260907-4';
   }
   loadPoses();
   fine.addEventListener('change', loadPoses);

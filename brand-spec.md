@@ -14,13 +14,13 @@
 - 叙事顺序：个人介绍 → 工作方式与合作方向 → 经历 → 作品 → 知识资产 → 公开工具 → 联系。
 - 语气：直接、具体、有作品依据。区分创作片段、概念演示、正式版本、Alpha 和公开实验。
 
-正式品牌名称以 HTML 文本排版。风格化人物是个人网站形象，不替代真实肖像，也不把临时图形包装为已注册品牌 Logo。参考站提供视觉与交互方向，不复制其人物、作品、履历、客户或身份内容。
+正式品牌名称以 HTML 文本排版。贴近本人五官的 Q 版人物是个人网站形象，不替代真实肖像，也不把临时图形包装为已注册品牌 Logo。参考站提供视觉与交互方向，不复制其人物、作品、履历、客户或身份内容。
 
 ## 2. 页面边界
 
 | 页面 | 视觉真源 | 维护要求 |
 |---|---|---|
-| 个人首页 | `index.html`、`portfolio.css` / `portfolio.js`、`motion.css` / `motion.js`、`toolbox-scene.css` / `toolbox-scene.js` | 黑底紫光、真人比例人物、共同 sticky 介绍、横向作品展与工具球 |
+| 个人首页 | `index.html`、`portfolio.css` / `portfolio.js`、`motion.css` / `motion.js`、`toolbox-scene.css` / `toolbox-scene.js` | 黑底紫光、Q 版人物、共同 sticky 介绍、横向作品展与工具球 |
 | ReachSurge | `reachsurge/index.html`、`styles.css`、`product.css`、`site.js` | 保留 Alpha / 内测和本地 MCP 事实，不把首页主题强制覆盖产品页 |
 | 知识资产激活 | `knowledge/index.html`、`styles.css`、`knowledge/knowledge.css`、相关 JS | 保留现有服务范围、报价、申请方式与隐私边界 |
 
@@ -74,12 +74,12 @@
 
 ## 6. 媒体与身份资产
 
-首页媒体的来源和用途以 [assets/portfolio/README.md](assets/portfolio/README.md) 为准；新增媒体同步补充说明。当前角色参考为本人提供的黑色 Polo 肖像，保留成年脸型、五官与身材比例。
+首页媒体的来源和用途以 [assets/portfolio/README.md](assets/portfolio/README.md) 为准；新增媒体同步补充说明。当前角色为贴近本人五官的 Q 版形象：大头小身，脸型较长且收窄，保留短发与黑色 Polo。本人提供的真人照用于提高五官与脸型相似度。
 
 | 资产 | 当前用途 | 表述边界 |
 |---|---|---|
-| `assets/portfolio/erduo-avatar.webp` | 真人比例头像 | 基于本人提供的黑色 Polo 肖像生成，不称真实摄影 |
-| `assets/portfolio/erduo-workstation.webp` | 完整工作台场景 | 同一角色方向的生成场景，不当作真实现场记录 |
+| `assets/portfolio/erduo-avatar.webp` | Q 版头像 | 基于本人提供的黑色 Polo 肖像提高相似度，采用大头小身的生成形象，不称真实摄影 |
+| `assets/portfolio/erduo-workstation.webp` | Q 版坐姿与完整工作台 | 保持同一角色的五官、短发与黑色 Polo，不当作真实现场记录 |
 | `assets/portfolio/erduo-look-atlas.webp` | 头像左右看 | 从生成视频提取的二维姿态图集，不是可自由旋转的 3D 人物模型 |
 | `assets/portfolio/erduo-idle.mp4` 与坐姿短循环 | 人物静音轻动态 | VidMuse 生成媒体，坐姿使用静音短循环，保留静态 fallback |
 | `assets/portfolio/director-is-me.mp4` 及封面 | 个人创作片段 | 不宣称客户验收或商业效果 |
