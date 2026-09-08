@@ -186,6 +186,7 @@
   }
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', event => {
+      if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
       const id = anchor.getAttribute('href').slice(1);
       const top = anchorY(id);
       if (top === null) return;
@@ -276,6 +277,9 @@
 
   applyMotion();
   document.fonts.ready.then(measure);
+  // Expanded manual previews can move the horizontal work section below them.
+  const offers = document.querySelector('.offers');
+  if (offers && 'ResizeObserver' in window) new ResizeObserver(measure).observe(offers);
   window.addEventListener('load', () => {
     measure();
     if (location.hash) {

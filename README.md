@@ -8,7 +8,7 @@
 
 | 路径 | 用途 | 当前代码入口 |
 |---|---|---|
-| `/` | 个人介绍、服务、经历、作品展、知识资产与项目 | `index.html`、`portfolio.css`、`portfolio.js`、`motion.css` / `motion.js`、`toolbox-scene.css` / `toolbox-scene.js` |
+| `/` | 个人介绍、会员群与业务服务、经历、作品与产品、知识资产与开源项目 | `index.html`、`portfolio.css`、`portfolio.js`、`motion.css` / `motion.js`、`toolbox-scene.css` / `toolbox-scene.js` |
 | `/reachsurge/` | ReachSurge B2B 获客产品介绍；Alpha / 本地 MCP 技术底座 | `reachsurge/index.html`、`styles.css`、`product.css`、`site.js` |
 | `/knowledge/` | 创始人知识资产激活计划与申请 | `knowledge/index.html`、`styles.css`、`knowledge/knowledge.css`、`site.js`、`knowledge/knowledge.js` |
 
@@ -125,3 +125,7 @@ python3 -m http.server 4173
 Vercel 从原 GitHub 仓库发布根目录静态文件，不需要构建命令。`vercel.json` 保留尾斜杠规则，将裸域 `erduo.art` 永久重定向到 `https://www.erduo.art/`，并配置静态资源缓存与基础安全响应头。域名绑定和实际部署状态以 Vercel 项目设置为准。
 
 发布前完成上述检查；通过回退对应 Git 提交可恢复上一版。不要将访问令牌、账号会话或私人工作路径写入仓库。
+
+### 首页业务区（2026-09-08）
+
+`business.css` / `business.js` 是业务模块与微信咨询弹窗。内容事实及更新规则见 `brand-spec.md`。首批会员人数是人工维护的带日期快照；原开源工具与产品页面继续保留。手册预览只公开封面/首张操作页，来源说明见 `assets/business/README.md`。
