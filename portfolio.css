@@ -1,6 +1,6 @@
 @font-face{font-family:Geist;src:url('/assets/fonts/geist-variable.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap}
 @font-face{font-family:ClashDisplay;src:url('https://cdn.fontshare.com/wf/DK2FOA46SRWJ5HXWWU5TK4N4CMHYD236/FPEAXZZSH5L2K5MTJFRIWD2MC32IJMN3/THOOS4VOCKT7H2XEB27NQDYM2NYS4AAR.woff2') format('woff2');font-weight:200 700;font-style:normal;font-display:swap}
-@font-face{font-family:Noto;src:url('/assets/fonts/noto-sans-sc-100-900-subset.woff2?v=20260908-2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap}
+@font-face{font-family:Noto;src:url('/assets/fonts/noto-sans-sc-100-900-subset.woff2?v=20260908-4') format('woff2');font-weight:100 900;font-style:normal;font-display:swap}
 :root{--bg:#000000;--text:#e9e5ed;--muted:#99939f;--accent:#b496ed;--line:#29262e;--gutter:clamp(24px,4.5vw,84px);--ease:cubic-bezier(.22,.68,0,1.02);color-scheme:dark}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:100px}
@@ -478,3 +478,9 @@ h1,h2,h3,h4{font-family:var(--display)}
 }
 
 @media(min-width:1401px) and (max-height:900px){.work-heading h2{font-size:60px}html.motion-enabled .work.enhanced .work-card{height:calc(100svh - 265px)}}
+
+/* Keep product film titles and demo disclosures inside the visible frame. */
+.work-media.project-film img{object-fit:contain}
+.work-media.project-film:hover img{transform:none}
+
+.work-media.project-film .play-button{opacity:1;transform:none}

@@ -36,6 +36,13 @@
 
 开源项目：[erduo-broll-loop-engineering](https://github.com/erduo1998-cell/erduo-broll-loop-engineering)。
 
+## 第 05、06 项的产品影片（2026-09-08）
+
+- `ip-strategist-demo.mp4` / `ip-strategist-demo.webp`：复用 [IP Strategist 公开 README](https://github.com/erduo1998-cell/ip-strategist) 已链接的 15 秒产品演示。源片由 Remotion 制作，画面为虚构数据演示，不代表真实账号或业绩；网页保留全画幅与相关标签，视频为原 H.264 流的 faststart 封装，1400×788、30 fps、无音轨，封面取自 14 秒真实帧。
+- `video-script-builder-promo.mp4` / `video-script-builder-promo.webp`：使用 [Video Script Builder 项目](https://github.com/erduo1998-cell/video-script-builder) 的官方宣传图作为参考，经本地 VidMuse 项目调用 MiniMax H3 生成。原件 1344×768、24 fps、12.25 秒；网页版本取 12 秒并整理为 1280×720、30 fps、H.264、静音、faststart，添加清晰的产品标题，封面取自成片第 11 秒。画面是创意演绎，不是软件界面录像；产品实际交付是框架绑定的 Markdown 分镜规格，不直接渲染 MP4。
+
+本次只新生成一条视频，请求 12 秒、768p；提交时实时单价为 6 积分/秒，预计 72 积分，不代表已核实最终扣费。生成原件与请求记录保留在本地 VidMuse 项目。两项均保留独立的产品仓库入口。
+
 ## 首页复用的既有公开媒体
 
 | 站内文件 | 公开用途与来源 |
